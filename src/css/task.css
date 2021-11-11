@@ -1,0 +1,32 @@
+.task-text {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+
+
+.task-item:hover{
+    background: #f7f0ef;
+}
+
+.task-item {
+    display: flex;
+    padding: 10px;
+    justify-content: left;
+}
+
+
+.checkbox {
+    width: 2em;
+    height: 2em;
+}
+
+.task-item input[type="text"] {
+    font-size: 1em;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}

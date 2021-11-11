@@ -1,0 +1,10 @@
+
+.link-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.link-container a {
+    font-size: 2em;
+}

@@ -1,0 +1,43 @@
+.bar {
+    display: flex;
+    justify-content: left;
+    padding: 5px;
+    height: 6.25vh;
+    background: yellow;
+}
+
+.drop-down {
+    height: 2em;
+    width: 2em;
+    font-size: 1.5em;
+    background: transparent;
+    border-radius: 100%;
+    color: #796555;
+    outline: none;
+    border: none;
+}
+
+
+.selected {
+    width: 80px;
+    height: 80px;
+    background: #8b000042;
+;
+}
+
+
+.bar-title {
+    margin-left: 20px;
+    font-size: 2em;
+}
+
+.drop-down i {
+    font-size: 4vh;
+    margin-top: 10px;
+    margin-left: -5px;
+
+}
+
+.collapse {
+    transform: rotate(-90deg);
+}
