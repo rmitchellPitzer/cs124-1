@@ -39,6 +39,18 @@ class TaskDataController {
         .tasks.filter(task => task.isCompleted === true)
     }
 
+    // new function to return general tasks, not finished yet
+
+    static getTasks(identifier) {
+        return store.getState().sections.filter(section => section.identifier === identifier)
+    }
+
+    // new function to get sections
+
+    static getSections() {
+        return store.getState().sections
+    }
+
 
     static createSection() {
         const action = createSectionAction()
@@ -51,7 +63,7 @@ class TaskDataController {
     }
 
     static updateSectionText(sectionIdentifier,text) {
-        console.log(sectionIdentifier)
+        console.log("AAAAAA1")
         const action = updateSectionTextAction(sectionIdentifier,text)
         store.dispatch(action)
     }

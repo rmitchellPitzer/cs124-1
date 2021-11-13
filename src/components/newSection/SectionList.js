@@ -1,5 +1,6 @@
 import SectionContainer from "./SectionContainer";
-import Task from "../Tasks/Task";
+import TaskDataController from "../../modules/dataController/TaskDataController"
+import SectionBar from "./SectionBar"
 
 /*
 props:{
@@ -10,19 +11,17 @@ props:{
 
 
 export default function SectionList(props){
+    console.log(props.lists)
     return(
         <div class='container'>
             {
-                props.sections.map(section => {
-                    return <section
+                props.lists.map(section => {
+                    return <SectionContainer
                         {...section}
                         key={section.identifier}
                     />
                 })
             }
-
-
-
         </div>
     )
 }

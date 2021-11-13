@@ -4,12 +4,7 @@ import "../../css/completed.css"
 import SectionButton from "./SectionButton"
 import TaskDataController from "../../modules/dataController/TaskDataController";
 
-
-
-
-
-
-export default function SectionBar(props) {
+export default function AddTasksToSection(props) {
     const classes = `bar ${props.className}`
     return (
         <div class={classes}>
@@ -23,11 +18,7 @@ export default function SectionBar(props) {
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.sectionTitle}
             />
-        </div>  
+        </div>
     )
 }
 
-function handleTextEvent(id,event) {
-    const text = event.currentTarget.value
-    TaskDataController.updateSectionText(id,text)
-}

@@ -21,17 +21,13 @@ import {
 } from './actions';
 
 const initialState = {
-    tasks: [],
     stack:[],
-    sections: [{text:"To Do", isToggled:false, identifier:"toDo"}, {text:"Completed", isToggled:false, identifier:"completed"}],
+    sections: [{text:"To Do", isToggled:false, identifier:"toDo", tasks: []}, {text:"Completed", isToggled:false, identifier:"completed", tasks:[]}],
     showUndo: false,
-    showCompleted: false,
-    showTodo: true,
     showMenu: false 
 }
 
 function createTask(state, sectionIdentifier) {
-    console.log("createTask", sectionIdentifier)
     const id = uuidv4()
     const sectionID = sectionIdentifier
     const task = {text:"",isCompleted:false,id, sectionID}
@@ -146,7 +142,7 @@ function hideUndo(state) {
 
 function createSection(state) {
     const identifier = uuidv4()
-    const section = {text:"",isToggled:false, identifier}
+    const section = {text:"",isToggled:false, identifier: identifier, tasks: []}
     const newState = state.sections.map(x => x)
     newState.push(section)
     return {
@@ -164,7 +160,8 @@ function deleteSection(state, sectionIdentifier) {
 }
 
 function updateSectionText(state,{sectionIdentifier,text}){
-    console.log(state.sections)
+    console.log(text)
+    console.log(sectionIdentifier)
     const newSections = state.sections.map(x => x)
     const section = newSections.find(section => section.identifier === sectionIdentifier)
     if (!section) return state

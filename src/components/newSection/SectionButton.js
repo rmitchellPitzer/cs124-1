@@ -12,6 +12,16 @@ function SectionButton(props) {
     )
 }   
 
+
+// a function to add tasks to a section's tasks list.
+
+function addTask(props) {
+
+
+}
+
+
+
 function handleOnClick(isToDo) {
     if (isToDo) {
         AppDataController.toggleTodoList()

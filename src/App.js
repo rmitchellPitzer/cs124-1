@@ -7,22 +7,30 @@ import SectionContainer from "./components/newSection/SectionContainer.js"
 import ActionMenu from "./components/Action Commands/ActionMenu";
 import { connect } from "react-redux";
 import UndoButton from "./components/Undo/UndoButton";
+import SectionList from "./components/newSection/SectionList";
+import initialState from "./modules/dataController/TaskDataController"
+import store from "./modules/dataController/store";
+import TaskDataController from "./modules/dataController/TaskDataController";
 
 function App({menuIsActive,showUndo}) {
 
   return (
     <div class='container'>
       <Header/>
-      <SectionContainer 
-        className='todo-bar' 
-        sectionTitle="To Do"
-        identifier="toDo"
-      />
-      <SectionContainer 
-        className='completed-bar' 
-        sectionTitle="Completed"
-        identifier="completed"
-      />
+
+        <SectionList
+            lists = {TaskDataController.getSections()}/>
+
+      {/*<SectionContainer */}
+      {/*  className='todo-bar' */}
+      {/*  sectionTitle="To Do"*/}
+      {/*  identifier="toDo"*/}
+      {/*/>*/}
+      {/*<SectionContainer */}
+      {/*  className='completed-bar' */}
+      {/*  sectionTitle="Completed"*/}
+      {/*  identifier="completed"*/}
+      {/*/>*/}
       { menuIsActive && <ActionMenu/> }
       <ActionButton/>
       { showUndo && <UndoButton/> }
