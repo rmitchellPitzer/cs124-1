@@ -26,7 +26,6 @@ function deleteAll() {
 
 
 const menuItems = [
-    {text:"Add Task", command: ()=> TaskDataController.createTask("toDo"), icon: faPlus},
     {text: "Add New Section", command: TaskDataController.createSection, icon: faPlus},
     {text: "Clear Completed Tasks", command:deleteAll, icon: faMinus},
 ]

@@ -12,6 +12,7 @@ import SectionAddTaskButton from "./sectionAddTask";
 
 export default function SectionBar(props) {
     const classes = `bar ${props.className}`
+    const checkIfTypeIsCompleted = props.identifier !== "completed"
     return (
         <div class={classes}>
             <SectionButton identifier = {props.identifier}
@@ -25,8 +26,8 @@ export default function SectionBar(props) {
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.sectionTitle}
             />
-            <SectionAddTaskButton
-                identifier = {props.identifier}/>
+            {checkIfTypeIsCompleted && <SectionAddTaskButton
+                identifier = {props.identifier}/>}
         </div>  
     )
 }

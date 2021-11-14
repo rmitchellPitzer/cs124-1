@@ -5,8 +5,6 @@ import AppDataController from "../../modules/dataController/AppDataController"
 import TaskDataController from "../../modules/dataController/TaskDataController";
 
 function SectionButton(props) {
-    console.log("HIIIIIIII!")
-    console.log(props.toggledState)
     const icon = props.toggledState ? faAngleDown : faAngleRight
     return (
         <button class="drop-down" onClick={(e) => handleOnClick(props.identifier)}>
@@ -19,7 +17,6 @@ function SectionButton(props) {
 
 
 function handleOnClick(identifier) {
-    console.log(identifier)
     TaskDataController.toggleSection(identifier)
 }
 

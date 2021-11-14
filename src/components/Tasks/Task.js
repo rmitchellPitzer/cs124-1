@@ -16,14 +16,14 @@ export default function Task(props) {
                 class='checkbox' 
                 type="checkbox"
                 value={ props.isCompleted}
-                onChange= {(e) => handleCheckBoxEvent(props.id)}
+                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionID)}
                 checked= {props.isCompleted}
             />
             <input 
                 class='task-text' 
                 type='text' 
                 alt='task text' 
-                onChange= { (e) => handleTextEvent(props.id,e)}
+                onChange= { (e) => handleTextEvent(props.id, props.sectionID,e)}
                 value={props.text}
             />
         </div>
@@ -31,11 +31,11 @@ export default function Task(props) {
 
 }
 
-function handleTextEvent(id,event) {
+function handleTextEvent(id, identifier, event) {
     const text = event.currentTarget.value
-    TaskDataController.updateTaskText(id,text)
+    TaskDataController.updateTaskText(id, identifier, text)
 }
 
-function handleCheckBoxEvent(id) {
-    TaskDataController.toggleTaskCompletion(id)
+function handleCheckBoxEvent(id, identifier) {
+    TaskDataController.toggleTaskCompletion(id, identifier)
 }

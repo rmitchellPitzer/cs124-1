@@ -23,7 +23,6 @@ function SectionAddTaskButton(props) {
 }
 
 function handleOnClick(props) {
-    console.log(props)
     TaskDataController.createTask(props)
 }
 

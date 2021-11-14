@@ -32,7 +32,6 @@ function createTask(state, sectionIdentifier) {
     const sectionID = sectionIdentifier
     const task = {text:"",isCompleted:false,id, sectionID}
     const newSections = state.sections.map(x => x)
-    console.log(sectionIdentifier)
     const sectionToChange = newSections.find(section => section.identifier === sectionIdentifier)
 
     const newSection = sectionToChange.tasks.push(task)
@@ -47,55 +46,83 @@ function deleteTask(state,id) {
     const tasks = state.tasks.filter(task => task.id !== id)
     return {
         ...state,
-        tasks 
+        tasks
     }
 }
 
-function updateTaskText(state,{id,text}) {
-    const newTasks = state.tasks.map(x => x)
-    const task = newTasks.find(task => task.id === id)
-    if (!task) return state
 
-    task.text = text 
+
+
+
+
+
+
+function updateTaskText(state,{id, identifier,text}) {
+    const returnedSections = state.sections.map(x => x)
+    const sectionWithTask = returnedSections.find(section => section.identifier === identifier)
+    const newTasks = sectionWithTask.tasks.map(x => x)
+    const taskToChange = newTasks.find(task => task.id === id)
+    if (!taskToChange) return state
+
+    taskToChange.text = text
 
 
     return {
         ...state,
-        tasks: newTasks
+        sections: returnedSections
     }
 }
 
-function toggleTaskCompletion(state,id) {
-    const newTasks = state.tasks.map(x => x)
-    const task = newTasks.find(task => task.id === id)
-    task.isCompleted = !task.isCompleted
+function toggleTaskCompletion(state,{id, identifier}) {
+    const returnedSections = state.sections.map(x => x)
+    const sectionWithTask = returnedSections.find(section => section.identifier === identifier)
+    const taskToChange = sectionWithTask.tasks.find(task => task.id === id)
+    if (!taskToChange){
+        const completedSection = returnedSections.find(section => section.identifier === "completed")
+        const completedTask = completedSection.tasks.find(task => task.id === id)
+        let taskIndex = completedSection.tasks.indexOf(completedTask)
+        completedTask.isCompleted = !completedTask.isCompleted
+        returnedSections.find(section => section.identifier === identifier).tasks.push(completedTask)
+        returnedSections.find(section => section.identifier === "completed").tasks.splice(taskIndex, 1)
+    }
+    else{
+        let taskIndex = sectionWithTask.tasks.indexOf(taskToChange)
+        taskToChange.isCompleted = !taskToChange.isCompleted
+        returnedSections.find(section => section.identifier === "completed").tasks.push(taskToChange)
+        returnedSections.find(section => section.identifier === identifier).tasks.splice(taskIndex, 1)
+    }
 
     return {
         ...state,
-        tasks:newTasks 
+        sections:returnedSections
     }
 
 }
 
 function deleteAllCompletedTasks(state) {
     const stack = state.stack.map(x => x)
-    stack.push(state.tasks)
+    stack.push(state.sections.find(section => section.identifier === "completed").tasks)
 
-   const newTasks = state.tasks.filter(task => task.isCompleted !== true)
+    const newSections = state.sections.map(x => x)
+    newSections.find(section => section.identifier === "completed").tasks = []
+
    return {
        ...state,
        stack,
-       tasks:newTasks 
+       sections:newSections
    }
 }
 
 
 function undoTask(state) {
     const stack = state.stack.map(x => x)
+    const newSections = state.sections.map(x => x)
+    const completedSection = newSections.find(section => section.identifier === "completed")
+    completedSection.tasks = stack.pop()
 
     return {
         ...state,
-        tasks: stack.pop(),
+        sections: newSections,
         stack 
     }
 }
@@ -145,11 +172,19 @@ function hideUndo(state) {
 function createSection(state) {
     const identifier = uuidv4()
     const section = {text:"",isToggled:false, identifier: identifier, tasks: []}
-    const newState = state.sections.map(x => x)
-    newState.push(section)
+    const newSections = state.sections.map(x => x)
+    newSections.push(section)
+    console.log("Hello!")
+    const completedSection = newSections.find(section => section.identifier === "completed")
+    let completedSectionIndex = newSections.indexOf(completedSection)
+    console.log(completedSection)
+    console.log(completedSectionIndex)
+    console.log(newSections)
+    newSections.splice(completedSectionIndex, 1)
+    newSections.push(completedSection)
     return {
         ...state,
-        sections:newState
+        sections:newSections
     }
 }
 
@@ -162,8 +197,6 @@ function deleteSection(state, sectionIdentifier) {
 }
 
 function updateSectionText(state,{sectionIdentifier,text}){
-    console.log(text)
-    console.log(sectionIdentifier)
     const newSections = state.sections.map(x => x)
     const section = newSections.find(section => section.identifier === sectionIdentifier)
     if (!section) return state
@@ -196,7 +229,7 @@ export default function toDoReducer(state = initialState, action){
         case CREATE_TASK: return createTask(state, action.payload.sectionIdentifier)
         case DELETE_TASK: return deleteTask(state,action.payload.id)
         case UPDATE_TASK_TEXT: return updateTaskText(state,action.payload)
-        case TOGGLE_TASK_COMPLETION: return toggleTaskCompletion(state,action.payload.id)
+        case TOGGLE_TASK_COMPLETION: return toggleTaskCompletion(state,action.payload)
         case DELETE_ALL_COMPLETED_TASK: return deleteAllCompletedTasks(state)
         case TOGGLE_TODO_LIST: return toggleToDoList(state)
         case TOGGLE_COMPLETED_LIST: return toggleCompletedList(state)

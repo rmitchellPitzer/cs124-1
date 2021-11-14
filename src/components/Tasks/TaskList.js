@@ -11,8 +11,6 @@ props:{
 }
 */
 export default function TaskList(props) {
-    console.log(props)
-
     return (
         <div class='container'>
             {

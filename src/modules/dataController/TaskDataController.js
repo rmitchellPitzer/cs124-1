@@ -1,21 +1,18 @@
 import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction } from "./actions"
 import store from "./store.js"
 class TaskDataController {
-    static updateTaskText(id,text) {
-            const action = updateTaskTextAction(id,text)
+    static updateTaskText(id, identifier, text) {
+            const action = updateTaskTextAction(id, identifier ,text)
             store.dispatch(action)
     }
 
-    static toggleTaskCompletion(id) {
-        const action = toggleTaskCompletionAction(id)
-        console.log("Task complete Action: ", action)
+    static toggleTaskCompletion(id, identifier) {
+        const action = toggleTaskCompletionAction(id, identifier)
         store.dispatch(action)
     }
 
     static createTask(sectionIdentifier) {
-        console.log("TaskDataController.CreateTask", sectionIdentifier)
         const action = createTaskAction(sectionIdentifier)
-        console.log("Action: ", action)
         store.dispatch(action)
     }
 
@@ -48,7 +45,6 @@ class TaskDataController {
     // new function to get sections
 
     static getSections() {
-        console.log("Updated!")
         return store.getState().sections
     }
 
