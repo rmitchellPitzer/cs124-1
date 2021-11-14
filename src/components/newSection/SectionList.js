@@ -1,7 +1,7 @@
 import SectionContainer from "./SectionContainer";
 import TaskDataController from "../../modules/dataController/TaskDataController"
 import SectionBar from "./SectionBar"
-
+import { connect } from "react-redux"
 /*
 props:{
     sections: Section
@@ -10,12 +10,11 @@ props:{
 
 
 
-export default function SectionList(props){
-    console.log(props.lists)
+function SectionList(props){
     return(
         <div class='container'>
             {
-                props.lists.map(section => {
+                props.sections.map(section => {
                     return <SectionContainer
                         {...section}
                         key={section.identifier}
@@ -25,3 +24,10 @@ export default function SectionList(props){
         </div>
     )
 }
+
+function mapStateToProps(state, ownProps){
+    return{
+        sections: TaskDataController.getSections()}
+}
+
+export default connect(mapStateToProps)(SectionList)

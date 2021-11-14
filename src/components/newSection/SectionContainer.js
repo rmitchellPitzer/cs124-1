@@ -34,6 +34,7 @@ function SectionContainer(props) {
                 sectionTitle = {props.text}
                 className={props.identifier}
                 identifier ={props.identifier}
+                isToggled = {props.isToggled}
                 />
             { props.isToggled && <TaskList tasks={props.tasks} />}
         </div>

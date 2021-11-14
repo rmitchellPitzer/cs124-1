@@ -31,13 +31,15 @@ function createTask(state, sectionIdentifier) {
     const id = uuidv4()
     const sectionID = sectionIdentifier
     const task = {text:"",isCompleted:false,id, sectionID}
-    const newState = state.tasks.map(x => x)
-    newState.push(task)
+    const newSections = state.sections.map(x => x)
+    console.log(sectionIdentifier)
+    const sectionToChange = newSections.find(section => section.identifier === sectionIdentifier)
 
+    const newSection = sectionToChange.tasks.push(task)
 
     return {
         ...state,
-        tasks:newState
+        sections:newSections
     }
 }
 
@@ -175,12 +177,12 @@ function updateSectionText(state,{sectionIdentifier,text}){
     }
 }
 
-function toggleSelection(state, sectionIdentifier) {
+function toggleSection(state, sectionIdentifier) {
     const newSections = state.sections.map(x => x)
-    const section = newSections.find(section => section.identifier === sectionIdentifier)
-    if (!section) return state
+    const sectionToToggle = newSections.find(section => section.identifier === sectionIdentifier)
+    if (!sectionToToggle) return state
 
-    section.isToggled = !section.isToggled
+    sectionToToggle.isToggled = !sectionToToggle.isToggled
     return {
         ...state,
         sections: newSections
@@ -206,7 +208,7 @@ export default function toDoReducer(state = initialState, action){
         case CREATE_SECTION: return createSection(state)
         case DELETE_SECTION: return deleteSection(state,action.payload.sectionIdentifier)
         case UPDATE_SECTION_TEXT: return updateSectionText(state, action.payload)
-        case TOGGLE_SECTION: return toggleSelection(state, action.payload.sectionIdentifier)
+        case TOGGLE_SECTION: return toggleSection(state, action.payload.sectionIdentifier)
         default:
             return state 
     }

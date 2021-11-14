@@ -16,6 +16,7 @@ export const DELETE_SECTION = "deleteSection"
 export const UPDATE_SECTION_TEXT = "updateSectionText"
 export const TOGGLE_SECTION = "toggleSection"
 
+
 export const showUndoAction = () => ({type:SHOW_UNDO})
 export const hideUndoAction = () => ({type:HIDE_UNDO})
 export const undoTaskAction = () => ({type:UNDO_TASK})
@@ -29,7 +30,14 @@ export const deleteAllCompletedTasksAction = () => ({type: DELETE_ALL_COMPLETED_
 export const toggleCompletedListAction = () => ({type:TOGGLE_COMPLETED_LIST})
 export const toggleToDoListAction = () => ({type:TOGGLE_TODO_LIST})
 
+// functions for creating/deleting/editing section properties
+
 export const createSectionAction = () => ({type: CREATE_SECTION})
 export const deleteSectionAction = (sectionIdentifier) => ({type: DELETE_SECTION, payload: {sectionIdentifier}})
 export const updateSectionTextAction = (sectionIdentifier,text) => ({type: UPDATE_SECTION_TEXT,payload: {sectionIdentifier, text}})
+
+// function for toggling a section by just taking in id
+
 export const toggleSectionAction = (sectionIdentifier) => ({type: TOGGLE_SECTION, payload: {sectionIdentifier}})
+
+

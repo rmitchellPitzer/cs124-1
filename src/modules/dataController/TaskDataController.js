@@ -48,6 +48,7 @@ class TaskDataController {
     // new function to get sections
 
     static getSections() {
+        console.log("Updated!")
         return store.getState().sections
     }
 
@@ -63,7 +64,6 @@ class TaskDataController {
     }
 
     static updateSectionText(sectionIdentifier,text) {
-        console.log("AAAAAA1")
         const action = updateSectionTextAction(sectionIdentifier,text)
         store.dispatch(action)
     }

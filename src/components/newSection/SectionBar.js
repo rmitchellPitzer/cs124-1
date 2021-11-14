@@ -3,7 +3,8 @@ import "../../css/todo.css"
 import "../../css/completed.css"
 import SectionButton from "./SectionButton"
 import TaskDataController from "../../modules/dataController/TaskDataController";
-
+import sectionAddTask from "./sectionAddTask";
+import SectionAddTaskButton from "./sectionAddTask";
 
 
 
@@ -13,7 +14,8 @@ export default function SectionBar(props) {
     const classes = `bar ${props.className}`
     return (
         <div class={classes}>
-            <SectionButton isToDo = { props.className === "completed-bar" }/>
+            <SectionButton identifier = {props.identifier}
+                           toggledState = {props.isToggled}/>
             <input
                 class="task-text"
                 // class="bar-title"
@@ -23,6 +25,8 @@ export default function SectionBar(props) {
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.sectionTitle}
             />
+            <SectionAddTaskButton
+                identifier = {props.identifier}/>
         </div>  
     )
 }

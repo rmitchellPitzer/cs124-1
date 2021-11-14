@@ -13,13 +13,11 @@ import store from "./modules/dataController/store";
 import TaskDataController from "./modules/dataController/TaskDataController";
 
 function App({menuIsActive,showUndo}) {
-
   return (
     <div class='container'>
       <Header/>
 
-        <SectionList
-            lists = {TaskDataController.getSections()}/>
+        <SectionList/>
 
       {/*<SectionContainer */}
       {/*  className='todo-bar' */}
