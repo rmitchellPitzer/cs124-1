@@ -7,6 +7,9 @@
     height: 10vh;
     padding-bottom: 15px;
     color: lightblue;
+    position: fixed;
+    margin-top: -12vh;
+    z-index: 120;
 }
 
 .title {

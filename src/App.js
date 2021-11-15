@@ -16,19 +16,7 @@ function App({menuIsActive,showUndo}) {
   return (
     <div class='container'>
       <Header/>
-
         <SectionList/>
-
-      {/*<SectionContainer */}
-      {/*  className='todo-bar' */}
-      {/*  sectionTitle="To Do"*/}
-      {/*  identifier="toDo"*/}
-      {/*/>*/}
-      {/*<SectionContainer */}
-      {/*  className='completed-bar' */}
-      {/*  sectionTitle="Completed"*/}
-      {/*  identifier="completed"*/}
-      {/*/>*/}
       { menuIsActive && <ActionMenu/> }
       <ActionButton/>
       { showUndo && <UndoButton/> }
