@@ -22,18 +22,18 @@
 }
 
 .undo {
-    font-size: 1.5em;
     position: fixed;
-    top:55%;
-    display: flex;
-    z-index: 2;
-    width: 100%;
-    flex-direction: column;
-    background: grey;
+    width: 130px;
+    height: fit-content;
+    top: 77%;
+    left: 50%;
+    background: #e1e1e1;
     padding: 20px;
+    z-index: 20;
+    border-radius: 25px;
     text-align: center;
-    font-family: "Roboto";
-    justify-content: center;
+    font-family: Arial;
+    font-size: 1.2em;
 
 }
 
@@ -41,9 +41,8 @@
     width: fit-content;
     font-size: 1.5em;
 
-    padding: 10px 40px 10px 40px;
-    margin-top: 10px;
-    margin: auto;
+    padding: 5px 20px 5px 20px;
+    text-align: center;
     border-radius: 20px;
     outline: none;
     border: none;

@@ -9,7 +9,7 @@ function undoTask() {
 export default function UndoButton() {
     return (
         <div class="undo">
-            <p> Completed tasks cleared</p>
+            <p> Items cleared</p>
             <button alt="undo task clear" onClick={undoTask}> Undo </button>
         </div >
     )

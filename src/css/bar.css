@@ -3,9 +3,34 @@
     justify-content: left;
     padding: 5px;
     height: 6.25vh;
-    background: yellow;
+    background: #bbe0bd;
 }
 
+.bar-title{
+    margin-left: -5px;
+    font-size: 2em;
+    width: 65vw;
+    outline: none;
+    border: none;
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 1.85em;
+}
+
+#toDo{
+    background: #FEC89A;
+    color: #796555;
+}
+
+#completed {
+    background: #FEC5BB;
+    color: #654e4a;
+}
+
+#otherSections{
+    background: #bbe0bd;
+    color: #4d624e;
+}
 .drop-down {
     height: 2em;
     width: 2em;
@@ -26,10 +51,6 @@
 }
 
 
-.bar-title {
-    margin-left: 20px;
-    font-size: 2em;
-}
 
 .drop-down i {
     font-size: 4vh;
@@ -40,4 +61,8 @@
 
 .collapse {
     transform: rotate(-90deg);
+}
+
+.completed {
+    background: #FEC5BB;
 }

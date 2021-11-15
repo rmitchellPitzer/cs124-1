@@ -11,11 +11,13 @@ export const UNDO_TASK = "undoTask"
 export const SHOW_UNDO = "showUndo"
 export const HIDE_UNDO = "hideUndo"
 
+
 export const CREATE_SECTION = "createSection"
 export const DELETE_SECTION = "deleteSection"
 export const UPDATE_SECTION_TEXT = "updateSectionText"
 export const TOGGLE_SECTION = "toggleSection"
 
+export const CLEAR_ALL = "clearAllSectionsAndTasks"
 
 export const showUndoAction = () => ({type:SHOW_UNDO})
 export const hideUndoAction = () => ({type:HIDE_UNDO})
@@ -40,4 +42,6 @@ export const updateSectionTextAction = (sectionIdentifier,text) => ({type: UPDAT
 
 export const toggleSectionAction = (sectionIdentifier) => ({type: TOGGLE_SECTION, payload: {sectionIdentifier}})
 
+// function for clearing all sections and resetting all
 
+export const clearAllSectionsAndTasksAction = () => ({type: CLEAR_ALL})

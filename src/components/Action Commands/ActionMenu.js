@@ -24,10 +24,19 @@ function deleteAll() {
     },3000)
 }
 
+function ClearAll() {
+    TaskDataController.clearAllSectionsAndTasks()
+    AppDataController.showUndo()
+    setTimeout( () => {
+        AppDataController.hideUndo()
+    },3000)
+}
+
 
 const menuItems = [
     {text: "Add New Section", command: TaskDataController.createSection, icon: faPlus},
     {text: "Clear Completed Tasks", command:deleteAll, icon: faMinus},
+    {text: "Clear All Sections And Tasks", command: ClearAll, icon: faMinus}
 ]
 
 export default function ActionMenu(props) {

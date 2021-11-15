@@ -1,4 +1,4 @@
-import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction } from "./actions"
+import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction, clearAllSectionsAndTasksAction } from "./actions"
 import store from "./store.js"
 class TaskDataController {
     static updateTaskText(id, identifier, text) {
@@ -21,7 +21,16 @@ class TaskDataController {
         store.dispatch(action)
     }
 
+    // static deleteAllCompleted() {
+    //     console.log("This is the state at the beginning of deleteAllCompletedTasks")
+    //     console.log(store.getState())
+    //     const action = deleteAllCompletedTasksAction()
+    //     store.dispatch(action)
+    // }
+
     static deleteAllCompleted() {
+        console.log("This is the state at the beginning of deleteAllCompletedTasks")
+        console.log(store.getState())
         const action = deleteAllCompletedTasksAction()
         store.dispatch(action)
     }
@@ -66,6 +75,12 @@ class TaskDataController {
 
     static toggleSection(sectionIdentifier) {
         const action = toggleSectionAction(sectionIdentifier)
+        store.dispatch(action)
+    }
+
+    static clearAllSectionsAndTasks() {
+        console.log(store.getState())
+        const action = clearAllSectionsAndTasksAction()
         store.dispatch(action)
     }
 

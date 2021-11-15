@@ -17,7 +17,8 @@ import {
     CREATE_SECTION,
     DELETE_SECTION,
     UPDATE_SECTION_TEXT,
-    TOGGLE_SECTION
+    TOGGLE_SECTION,
+    CLEAR_ALL
 } from './actions';
 
 const initialState = {
@@ -100,10 +101,12 @@ function toggleTaskCompletion(state,{id, identifier}) {
 }
 
 function deleteAllCompletedTasks(state) {
+    console.log(state)
     const stack = state.stack.map(x => x)
-    stack.push(state.sections.find(section => section.identifier === "completed").tasks)
-
+    stack.push(state.sections)
     const newSections = state.sections.map(x => x)
+    console.log(newSections)
+    console.log(stack)
     newSections.find(section => section.identifier === "completed").tasks = []
 
    return {
@@ -116,10 +119,7 @@ function deleteAllCompletedTasks(state) {
 
 function undoTask(state) {
     const stack = state.stack.map(x => x)
-    const newSections = state.sections.map(x => x)
-    const completedSection = newSections.find(section => section.identifier === "completed")
-    completedSection.tasks = stack.pop()
-
+    const newSections = stack.pop()
     return {
         ...state,
         sections: newSections,
@@ -222,6 +222,18 @@ function toggleSection(state, sectionIdentifier) {
     }
 }
 
+function clearAll(state){
+    console.log("clear all sections")
+    console.log(state.sections)
+    const stack = state.stack.map(x => x)
+    stack.push(state.sections)
+    const newSections = [{text:"To Do", isToggled:false, identifier:"toDo", tasks: []}, {text:"Completed", isToggled:false, identifier:"completed", tasks:[]}]
+    return{
+        ...state,
+        stack,
+        sections:newSections
+    }
+}
 
 
 export default function toDoReducer(state = initialState, action){
@@ -242,6 +254,7 @@ export default function toDoReducer(state = initialState, action){
         case DELETE_SECTION: return deleteSection(state,action.payload.sectionIdentifier)
         case UPDATE_SECTION_TEXT: return updateSectionText(state, action.payload)
         case TOGGLE_SECTION: return toggleSection(state, action.payload.sectionIdentifier)
+        case CLEAR_ALL: return clearAll(state)
         default:
             return state 
     }

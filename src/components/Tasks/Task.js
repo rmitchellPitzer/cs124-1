@@ -8,7 +8,8 @@ props: {
 }
 */
 export default function Task(props) {
-    const classes = `task-item ${props.isCompleted ? 'completed' : ''}`
+    const classes = `task-item`
+    const cssID = props.isCompleted ? 'completedTask' : ''
     return (
         <div class={classes}>
             <input 
@@ -22,7 +23,8 @@ export default function Task(props) {
             <input 
                 class='task-text' 
                 type='text' 
-                alt='task text' 
+                alt='task text'
+                id ={cssID}
                 onChange= { (e) => handleTextEvent(props.id, props.sectionID,e)}
                 value={props.text}
             />

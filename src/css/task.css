@@ -2,9 +2,13 @@
     outline: none;
     border: none;
     background: transparent;
+    font-family: Arial;
+    font-weight: 400;
 }
 
-
+#completedTask{
+    text-decoration: line-through;
+}
 
 .task-item:hover{
     background: #f7f0ef;
@@ -23,7 +27,7 @@
 }
 
 .task-item input[type="text"] {
-    font-size: 1em;
+    font-size: 1.5em;
     width: 100%;
 }
 
