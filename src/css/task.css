@@ -1,36 +1,55 @@
 .task-text {
-    outline: none;
-    border: none;
-    background: transparent;
-    font-family: Arial;
-    font-weight: 400;
+    visibility: hidden;
+    content-visibility: hidden;
 }
 
-#completedTask{
-    text-decoration: line-through;
-}
-
-.task-item:hover{
-    background: #f7f0ef;
-}
-
-.task-item {
-    display: flex;
-    padding: 10px;
-    justify-content: left;
+.task-item{
+    visibility: hidden;
+    content-visibility: hidden;
 }
 
 
-.checkbox {
-    width: 2em;
-    height: 2em;
-}
+@media screen and (max-width: 600px) and (max-height: 1000px) {
+    .task-text {
+        position: initial;
+        outline: none;
+        border: none;
+        background: transparent;
+        font-family: Arial;
+        font-weight: 400;
+        visibility: visible;
+        content-visibility: visible;
+    }
 
-.task-item input[type="text"] {
-    font-size: 1.5em;
-    width: 100%;
-}
+    #completedTask {
+        text-decoration: line-through;
+    }
 
-.hidden {
-    display: none;
+    .task-item:hover {
+        background: #f7f0ef;
+    }
+
+    .task-item {
+        position: relative;
+        display: flex;
+        padding: 10px;
+        justify-content: left;
+        visibility: visible;
+        content-visibility: visible;
+    }
+
+
+    .checkbox {
+        width: 2em;
+        height: 2em;
+    }
+
+    .task-item input[type="text"] {
+        font-size: 1.5em;
+        width: 100%;
+    }
+
+    .hidden {
+        display: none;
+    }
 }

@@ -18,10 +18,7 @@ menuItem {
 
 function deleteAll() {
     TaskDataController.deleteAllCompleted()
-    AppDataController.showUndo()
-    setTimeout( () => {
-        AppDataController.hideUndo()
-    },3000)
+
 }
 
 function ClearAll() {

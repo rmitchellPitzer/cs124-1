@@ -19,7 +19,7 @@ export default function SectionBar(props) {
     }
     const checkIfTypeIsCompleted = props.identifier !== "completed"
     return (
-        <div class={classes}>
+        <div class={classes} id={"bar" + props.identifier}>
             <SectionButton identifier = {props.identifier}
                            toggledState = {props.isToggled}/>
             <input

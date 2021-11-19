@@ -12,11 +12,21 @@ import initialState from "./modules/dataController/TaskDataController"
 import store from "./modules/dataController/store";
 import TaskDataController from "./modules/dataController/TaskDataController";
 
+import SectionBar from "./components/newSection/SectionBar";
+
+import Sidebar from "./components/otherDisplays/sideBarList";
+import SideList from "./components/otherDisplays/sideList";
+import SideListElement from "./components/otherDisplays/sideListElement";
+import SideBarBackground from "./components/SideBarBackground";
+
 function App({menuIsActive,showUndo}) {
   return (
     <div class='container'>
       <Header/>
-        <SectionList/>
+      <SideBarBackground/>
+        <SectionList className = "phone"/>
+        <Sidebar/>
+        <SideList/>
       { menuIsActive && <ActionMenu/> }
       <ActionButton/>
       { showUndo && <UndoButton/> }

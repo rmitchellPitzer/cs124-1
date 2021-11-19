@@ -4,15 +4,6 @@ import TaskDataController from "../../modules/dataController/TaskDataController.
 import TaskList from "../Tasks/TaskList.js"
 import SectionBar from "./SectionBar.js"
 
-/*
-@props: {
-    className: "todo-bar| completed-bar";
-    sectionTitle: string;
-    tasks: TaskItem[]
-    showContainer: boolean
-}
-*/
-
 
 /*
 new props:
@@ -39,6 +30,11 @@ function SectionContainer(props) {
             { props.isToggled &&
                 <TaskList tasks={props.tasks}
                     identifier={props.identifier}/>}
+            { props.isToggled &&
+            <TaskList
+                className=""
+                tasks={props.tasks}
+                identifier={props.identifier}/>}
         </div>
     )
 }
