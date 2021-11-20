@@ -9,10 +9,10 @@ export default function SideBarElement(props) {
     console.log(props)
     let cssID;
     if (props.identifier !== 'toDo' && props.identifier !== 'completed'){
-        cssID = "otherSections";
+        cssID = "otherSectionssideBar";
     }
     else{
-        cssID = props.identifier;
+        cssID = props.identifier + "sideBar";
     }
 
     return(

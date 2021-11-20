@@ -1,81 +1,100 @@
 
-    #bartoDo{
-        margin-top: -1vh;
-        margin-bottom: 7vh;
-    }
+#bartoDo{
+    margin-top: -1vh;
+    margin-bottom: 7vh;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
-    .bar {
-        margin-top: 1vh;
-        margin-bottom: 1vh;
-        display: flex;
-        justify-content: left;
-        height: 5vh;
-        background: #bbe0bd;
-        width: 37vw;
-        visibility: hidden;
-        content-visibility: hidden;
-        display: none;
-    }
+.bar {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    display: flex;
+    justify-content: left;
+    height: 5vh;
+    background: #bbe0bd;
+    width: 37vw;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
-    .bar-title {
-        margin-left: -.2vw;
-        font-size: 4vh;
-        width: 25vw;
-        outline: none;
-        border: none;
-        font-family: Roboto;
-        font-weight: 400;
-        font-size: 1.85em;
-    }
+.bar-title {
+    margin-left: -.2vw;
+    font-size: 4vh;
+    width: 25vw;
+    outline: none;
+    border: none;
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 1.85em;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
-    #toDo {
-        background: #FEC89A;
-        color: #796555;
-    }
+#toDo {
+    background: #FEC89A;
+    color: #796555;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
-    #completed {
-        background: #FEC5BB;
-        color: #654e4a;
-    }
+#completed {
+    background: #FEC5BB;
+    color: #654e4a;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
-    #otherSections {
-        background: #bbe0bd;
-        color: #4d624e;
-    }
+#otherSections {
+    background: #bbe0bd;
+    color: #4d624e;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
-    .drop-down {
-        height: 2em;
-        width: 2em;
-        font-size: 1.5em;
-        background: transparent;
-        border-radius: 100%;
-        color: #796555;
-        outline: none;
-        border: none;
-    }
-
-
-    .selected {
-        width: 80px;
-        height: 80px;
-        background: #8b000042;;
-    }
+.drop-down {
+    height: 2em;
+    width: 2em;
+    font-size: 1.5em;
+    background: transparent;
+    border-radius: 100%;
+    color: #796555;
+    outline: none;
+    border: none;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
 
-    .drop-down i {
-        font-size: 4vh;
-        margin-top: 10px;
-        margin-left: -5px;
+.selected {
+    width: 80px;
+    height: 80px;
+    background: #8b000042;;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
-    }
 
-    .collapse {
-        transform: rotate(-90deg);
-    }
+.drop-down i {
+    font-size: 4vh;
+    margin-top: 10px;
+    margin-left: -5px;
+    visibility: hidden;
+    content-visibility: hidden;
 
-    .completed {
-        background: #FEC5BB;
-    }
+}
+
+.collapse {
+    transform: rotate(-90deg);
+    visibility: hidden;
+    content-visibility: hidden;
+}
+
+.completed {
+    background: #FEC5BB;
+    visibility: hidden;
+    content-visibility: hidden;
+}
 
 
 
@@ -86,6 +105,8 @@
     #bartoDo {
         margin-top: 0vh;
         margin-bottom: 0vh;
+        visibility: visible;
+        content-visibility: visible;
     }
 
 
@@ -110,21 +131,29 @@
         font-family: Roboto;
         font-weight: 400;
         font-size: 1.85em;
+        visibility: visible;
+        content-visibility: visible;
     }
 
     #toDo {
         background: #FEC89A;
         color: #796555;
+        visibility: visible;
+        content-visibility: visible;
     }
 
     #completed {
         background: #FEC5BB;
         color: #654e4a;
+        visibility: visible;
+        content-visibility: visible;
     }
 
     #otherSections {
         background: #bbe0bd;
         color: #4d624e;
+        visibility: visible;
+        content-visibility: visible;
     }
 
     .drop-down {
@@ -136,6 +165,8 @@
         color: #796555;
         outline: none;
         border: none;
+        visibility: visible;
+        content-visibility: visible;
     }
 
 
@@ -143,6 +174,8 @@
         width: 80px;
         height: 80px;
         background: #8b000042;;
+        visibility: visible;
+        content-visibility: visible;
     }
 
 
@@ -150,14 +183,20 @@
         font-size: 4vh;
         margin-top: 10px;
         margin-left: -5px;
+        visibility: visible;
+        content-visibility: visible;
 
     }
 
     .collapse {
         transform: rotate(-90deg);
+        visibility: visible;
+        content-visibility: visible;
     }
 
     .completed {
         background: #FEC5BB;
+        visibility: visible;
+        content-visibility: visible;
     }
 }

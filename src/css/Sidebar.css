@@ -24,47 +24,46 @@
     content-visibility: visible;
 }
 
-#toDo {
+#toDosideBar {
     background: #FEC89A;
     color: #796555;
     visibility: visible;
     content-visibility: visible;
 }
 
-#completed {
+#completedsideBar {
     background: #FEC5BB;
     color: #654e4a;
     visibility: visible;
     content-visibility: visible;
 }
 
-#otherSections {
+#otherSectionssideBar {
     background: #bbe0bd;
     color: #4d624e;
     visibility: visible;
     content-visibility: visible;
 }
 
+.SideBarcontainer{
+    width: 37vw;
+}
+
 @media screen and (max-width: 600px) and (max-height: 1000px) {
     .sideBar{
-        visibility: hidden;
-        content-visibility: hidden;
+        display: none;
     }
     .sideBarElement{
-        visibility: hidden;
-        content-visibility: hidden;
+        display: none;
     }
-    #toDo {
-        visibility: hidden;
-        content-visibility: hidden;
+    #toDosideBar {
+        display: none;
     }
-    #completed {
-        visibility: hidden;
-        content-visibility: hidden;
+    #completedsideBar {
+        display: none;
     }
 
-    #otherSections {
-        visibility: hidden;
-        content-visibility: hidden;
+    #otherSectionssideBar {
+        display: none;
     }
 }

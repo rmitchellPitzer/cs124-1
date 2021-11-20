@@ -21,12 +21,15 @@ import SideBarBackground from "./components/SideBarBackground";
 
 function App({menuIsActive,showUndo}) {
   return (
-    <div class='container'>
+    <div class='hello'>
       <Header/>
       <SideBarBackground/>
-        <SectionList className = "phone"/>
-        <Sidebar/>
-        <SideList/>
+        <div className="wideScreenDisplay">
+            <div className="Sidebar"><Sidebar/></div>
+            <div className="Sidelist"><SideList/></div>
+
+        </div>
+        <SectionList/>
       { menuIsActive && <ActionMenu/> }
       <ActionButton/>
       { showUndo && <UndoButton/> }

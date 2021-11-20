@@ -23,7 +23,7 @@ export default function SideListElement(props) {
                 onChange={(e) => handleTextEvent(props.identifier, e)}
                 value={props.text}
             />
-            <div class='container'>{
+            <div class='sideListTask'>{
                 props.tasks.map(task => {
                     return <SideListElementTask
                         {...task}
