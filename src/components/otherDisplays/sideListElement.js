@@ -13,7 +13,8 @@ export default function SideListElement(props) {
     console.log(props)
     return(
         <div
-            class="SideListElement">
+            class="SideListElement"
+            id = {props.identifier+"list"}>
             <input
                 className="sideListTitle"
                 // class="bar-title"

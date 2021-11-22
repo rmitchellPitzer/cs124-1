@@ -30,11 +30,7 @@ function SectionContainer(props) {
             { props.isToggled &&
                 <TaskList tasks={props.tasks}
                     identifier={props.identifier}/>}
-            { props.isToggled &&
-            <TaskList
-                className=""
-                tasks={props.tasks}
-                identifier={props.identifier}/>}
+
         </div>
     )
 }

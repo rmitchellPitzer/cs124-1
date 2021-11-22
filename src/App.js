@@ -19,6 +19,11 @@ import SideList from "./components/otherDisplays/sideList";
 import SideListElement from "./components/otherDisplays/sideListElement";
 import SideBarBackground from "./components/SideBarBackground";
 
+
+import { Link, animateScroll as scroll } from "react-scroll";
+
+
+
 function App({menuIsActive,showUndo}) {
   return (
     <div class='hello'>

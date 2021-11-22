@@ -5,12 +5,14 @@ import { connect } from "react-redux"
 import AppDataController from "../../modules/dataController/AppDataController"
 import TaskDataController from "../../modules/dataController/TaskDataController";
 
+
 function SideBarButton(props) {
-    const icon = faAngleDown
+    let sectionToScrollTo = document.getElementById(props.identifier+"list");
+    const icon = faAngleRight
     return (
-        <button class="SideBarButton" onClick={(e) => handleOnClick(props.identifier)}>
+        <div class="SideBarButton" onClick={(e) => handleOnClick(props.identifier)}>
             <FontAwesomeIcon icon={icon} />
-        </button>
+        </div>
     )
 }
 
@@ -18,7 +20,8 @@ function SideBarButton(props) {
 
 
 function handleOnClick(identifier) {
-    console.log(identifier)
+    let sectionToScrollTo = document.getElementById(identifier+"list");
+    sectionToScrollTo.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
 }
 
 

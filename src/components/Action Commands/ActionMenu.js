@@ -3,6 +3,10 @@ import "../../css/action_list.css"
 import TaskDataController from "../../modules/dataController/TaskDataController.js"
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
 import AppDataController from "../../modules/dataController/AppDataController.js"
+import {animateScroll as scroll} from "react-scroll";
+import sideList from "../otherDisplays/sideList";
+import SideList from "../otherDisplays/sideList";
+import App from "../../App";
 /*
 props: {
     menuItems: MenuItem[]
@@ -18,7 +22,6 @@ menuItem {
 
 function deleteAll() {
     TaskDataController.deleteAllCompleted()
-
 }
 
 function ClearAll() {
