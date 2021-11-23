@@ -19,11 +19,11 @@ function SideBarButton(props) {
     const icon = faAngleRight
 
     return (
-        <button class="SideBarButton" onClick={(e) => handleOnClick(props.identifier)}
+        <div class="SideBarButton" onClick={(e) => handleOnClick(props.identifier)}
         aria-label={currentSectionText ? "Press to scroll to " + currentSectionText : "Press to scroll to a section without a title"}
         aria-hidden="false">
             <FontAwesomeIcon icon={icon} />
-        </button>
+        </div>
     )
 }
 

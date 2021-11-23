@@ -19,19 +19,19 @@
     height: 20px;
     font-size: 1.2em;
     margin-top: -2px;
-    opacity: 50%;
+    opacity: .5;
     border: none;
     outline: none;
     background: none;
 }
 
 .SideBarButton:hover{
-    opacity: 100%;
+    opacity: 1;
 }
 
 
 .SideBarButton:focus{
-    opacity: 100%;
+    opacity: 1;
 }
 
 .sideBarElement{
