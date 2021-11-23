@@ -197,6 +197,7 @@ function createSection(state) {
     const identifier = uuidv4()
     const section = {text:"",isToggled:false, identifier: identifier, tasks: []}
     const newSections = state.sections.map(x => x)
+    newSections.push(section)
     console.log("Hello!")
     const completedSection = newSections.find(section => section.identifier === "completed")
     let completedSectionIndex = newSections.indexOf(completedSection)
