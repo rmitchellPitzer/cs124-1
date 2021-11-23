@@ -1,4 +1,4 @@
-﻿
+
 # your design decisions, including their rationale (include images)
 
 -   We first designed our web app in Figma for it's ease of use and because it allowed us to examine our iterative changes. Once we were confident in our final design, we then started creating our html pages using our Figma frames as reference.
@@ -49,14 +49,6 @@
 - **Lab 2 Update:** During lab2 we discussed changing the completed tasks cleared option, but opted for the first choice above. While the second option seems more consistent with the action button, we liked the functionality of the first option much more.
 In terms of design decisions in our React webapp, we opted to use React Redux to better manage our different states. 
 
-- **Lab 4 update:** I saw lab 4 as a chance to learn a lot more and I was really excited to be able to implement my own designs from mockup to eventually into a webapp. Below show the initial planning stages for lab4.![lab 4's mockups](https://i.imgur.com/E9twxgB.png)
-
-I liked the idea of having multiple sections easily viewable through swiping up or down. I didn't like the idea of having to press a button to toggle between different separate sections, because at that point the different sections and tasks feel physically separated, which some users might prefer but I would not want that.
-The undo button was moved to the corner, and I am so happy it's there instead of a bar in the middle of the screen. Feels more consistent with the rest of the design and, while working on lab 4, I felt a relief from not having to move my mouse to the middle of the screen when I needed to test the undo button.
-I initially wanted window sizes that weren't constrained to portrait phone sizes to have two different sections: A scrollable div on two sides, with one listing the sections and the other the tasks. I wanted the plus button in the corner to only add tasks, with options for adding folders or clearing them elsewhere. While I was able to implement separate scrollable divs, determining the scroll position to determine which section was being viewed and then being able to add a task to that was very very difficult, and would most likely have removed compatibility with some browsers. I was determined to get it working, but I simply did not have enough time to explore all the libraries that could possibly work and try to get them to work. I went for consistency instead, adding a add task button for each section in the sidebar, and getting rid of the added folders button under the To Do.
-The final thing I wanted to add in wider viewports was a third div on the right side to see completed tasks. However, I ultimately abandoned this as I thought the added space for text would be worth more than constantly seeing completed tasks take up half the screen.
-
-
 # any user testing you did
 
 -   We performed a round of user testing during the design process. The feedback we received was very helpful in helping us improve our application. Some of the improvements made using this feedback were…
@@ -71,8 +63,6 @@ The final thing I wanted to add in wider viewports was a third div on the right 
 -   Making further improvements to the plus menu.
 
 - **Lab 2 Update:** While we performed user testing once again, the results were largely the same as our design hadn't changed much. Thus, we decided to follow lab1's outline. 
-
-- **Lab 4 Update:** I would like to say that while some user testing was done, a bulk of the feedback was obtained through Professor Rhodes, which was greatly appreciated in getting the design back on track. User testing from others showed the design to largely be accepted, with some changes to elements' sizes and font size.
 
 
 # the final design, including screen images and the flow for each task.
@@ -116,8 +106,6 @@ The final thing I wanted to add in wider viewports was a third div on the right 
 - **Lab 2 Update:** The final design can be viewed at our github pages link
 [here](asdfghjkl.zxcvnmn)
 
-- **Lab 4 update:** a github pages link can be found here: [github Pages link](https://rmitchellpitzer.github.io/cs124-1/), and the video for showing it being used with a screenreader and keyboard can be viewed here: [youtube video link](https://youtu.be/IwgU1hz7_Fc). There's also an image linked here to view the design in landscape mode: ![the app!](https://i.imgur.com/PDqmLJ0.png)
-
 # Challenges you faced
 
 -   Some challenges we faced includes everything described above in alternative designs, but also setting up the html webapp. Originally we wanted to create the html pages using a React application, but React would not work. When designing the webapp we also found ourselves getting into the, as described in don’t make me think, “religious debates” about which design choice was better. When this would occur, we’d generally fallback on what convention says, and this helped us greatly.
@@ -129,10 +117,6 @@ The final thing I wanted to add in wider viewports was a third div on the right 
 	
 	we also faced many problems implementing the different features. Some of these included making sure states updated when tasks were renamed, compiling errors resulting from learning React Redux, many Css problems transferring Lab 1's source to a React app, and more. 
 
-- **lab 4 update** Oh my goodness the challenges I faced during this lab. It was incredibly difficult to pick up something I didn't really know before, and to learn it on my own, and then to understand code almost entirely written by someone else and make changes to it.  I probably have spent at least 40 hours on this lab, and almost the entire first week was spent trying to understand React better, learning javascript more, and trying to understand how React redux worked so I could implement anything I needed to. 
-But it completely paid off. I am much more comfortable with React and I've really warmed up to javascript, I've learned about more packages and feel way more comfortable with designing a webpage and then creating it.
-Beyond catching up, some of the challenges faced were trying to determine when sections were visible on screen (this was immensely difficult and I had to forgoe this), altering css already written to fit into my design, understanding redux and how state changes work, making sure the design of the mobile view was consistent with the view of the portrait and desktop view, and finally, right before I was set to submit my project, I had to troubleshoot github pages for hours, and once that was done, figure out why items had vanished on github pages, but not on the local copy.
-
 # Parts of the design you're most proud of
 
 
@@ -140,7 +124,3 @@ Beyond catching up, some of the challenges faced were trying to determine when s
     
 -   The plus button I think was a great way to chunk together the actions the user can take as well as preventing the user from accidentally making incorrect decisions.
 - **Lab 2 update** I think the parts of the design we're most proud of is the undo button we implemented. While  we didn't necessarily need an undo button and the app worked fine without it, it does add user forgiveness. This meant implementing a stack to keep track of our cleared tasks which could be re added to our taskList. I'm also very happy it just works, and I think I'm most proud of that as well. 
-
-- **Lab 4 update** Honestly, there's so much more I wish I could have put into this and wish I could have learned how to do. I wish I could have figured out how to tell when things are on screen, and to add more styling to the sidebar in a way that didn't conflict with flexboxes, but I have spent so much time on this lab that I am so proud to finally turn this in. This has been so much work, and while I know there will be so much more work in getting firebase and user log in working, I can not wait to finally get that finished as well. 
-also I'm very proud of the way it looks in landscape mode. it just seems to fill the viewport way more, and I'm also very proud of the customizability of it. I feel that being able to add sections and change all section names makes it more versatile in what it can be used for instead of just a tasks app. 
-
