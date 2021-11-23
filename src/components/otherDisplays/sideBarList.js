@@ -1,13 +1,13 @@
 import { connect} from "react-redux";
 import TaskDataController from "../../modules/dataController/TaskDataController";
 import "../../css/Sidebar.css"
-import SectionBar from "../newSection/SectionBar"
-import SectionContainer from "../newSection/SectionContainer";
 import SideBarElement from "./sideBarElement";
 
 
+// Creates the sidebar on the left side of the viewport in desktop/portrait view.
+// contains a list of sidebar elements from sideBarElement.
+
 function Sidebar(props){
-    console.log(props.sections)
     return(
             <div class= "SideBarcontainer">
                 {

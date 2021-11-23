@@ -21,16 +21,8 @@ class TaskDataController {
         store.dispatch(action)
     }
 
-    // static deleteAllCompleted() {
-    //     console.log("This is the state at the beginning of deleteAllCompletedTasks")
-    //     console.log(store.getState())
-    //     const action = deleteAllCompletedTasksAction()
-    //     store.dispatch(action)
-    // }
 
     static deleteAllCompleted() {
-        console.log("This is the state at the beginning of deleteAllCompletedTasks")
-        console.log(store.getState())
         const action = deleteAllCompletedTasksAction()
         store.dispatch(action)
     }
@@ -79,7 +71,6 @@ class TaskDataController {
     }
 
     static clearAllSectionsAndTasks() {
-        console.log(store.getState())
         const action = clearAllSectionsAndTasksAction()
         store.dispatch(action)
     }

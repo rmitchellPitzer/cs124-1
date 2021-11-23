@@ -1,12 +1,15 @@
 import { connect } from "react-redux"
 import TaskDataController from "../../modules/dataController/TaskDataController"
-import SectionContainer from "../newSection/SectionContainer";
 import SideListElement from "./sideListElement";
+import React, { useEffect, useState } from 'react';
 
 
+
+// Creates the scrollable list on the right side of the viewport made up of sideListElements
 function SideList(props){
+
     return(
-        <div class='SideListContainer'>
+        <div class='SideListContainer' id="theSideListContainer">
             {
                 props.sections.map(section => {
                     return <SideListElement

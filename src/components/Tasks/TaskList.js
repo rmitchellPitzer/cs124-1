@@ -10,6 +10,9 @@ props:{
 
 }
 */
+
+// creates the list of tasks within each section visible in mobile view.
+
 export default function TaskList(props) {
     return (
         <div class='container'>

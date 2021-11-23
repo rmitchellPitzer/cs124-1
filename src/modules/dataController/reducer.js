@@ -28,6 +28,10 @@ const initialState = {
     showMenu: false 
 }
 
+
+// Gets the sectionID from the section it's called on, creates a new task containing that sectionID, then appends it
+// to the section's tasks list in initialState.
+
 function createTask(state, sectionIdentifier) {
     const id = uuidv4()
     const sectionID = sectionIdentifier
@@ -43,6 +47,8 @@ function createTask(state, sectionIdentifier) {
     }
 }
 
+// Deletes a task with the given id.
+
 function deleteTask(state,id) {
     const tasks = state.tasks.filter(task => task.id !== id)
     return {
@@ -56,7 +62,8 @@ function deleteTask(state,id) {
 
 
 
-
+// Updates a task's text given it's id, section identifier, and text to update it to.
+// identifier is needed to find which section the task will be located in.
 
 function updateTaskText(state,{id, identifier,text}) {
     const returnedSections = state.sections.map(x => x)
@@ -74,11 +81,20 @@ function updateTaskText(state,{id, identifier,text}) {
     }
 }
 
+// oh boy this is a doozy.
+// The reason why this function is so big is that it needs to account for when the task that's being checked is not
+// present in the same section as it's section Identifier. While it might have a sectionIdentifier, it might be in
+// the completed section, which means we can not locate the task with it's section identifier.
+
 function toggleTaskCompletion(state,{id, identifier}) {
     const returnedSections = state.sections.map(x => x)
     const sectionWithTask = returnedSections.find(section => section.identifier === identifier)
     const taskToChange = sectionWithTask.tasks.find(task => task.id === id)
+    // create a copy of sections, find the section with the task and then get the task from the section.
+
     if (!taskToChange){
+        // if it's null, the task is not present there, meaning it must be in completed, meaning it's being moved
+        // from completed to another section and removed from completed, which happens here.
         const completedSection = returnedSections.find(section => section.identifier === "completed")
         const completedTask = completedSection.tasks.find(task => task.id === id)
         let taskIndex = completedSection.tasks.indexOf(completedTask)
@@ -87,6 +103,8 @@ function toggleTaskCompletion(state,{id, identifier}) {
         returnedSections.find(section => section.identifier === "completed").tasks.splice(taskIndex, 1)
     }
     else{
+        // here it's located the task, and is now moving it to the completed section and removing it from it's origin
+        // section.
         let taskIndex = sectionWithTask.tasks.indexOf(taskToChange)
         taskToChange.isCompleted = !taskToChange.isCompleted
         returnedSections.find(section => section.identifier === "completed").tasks.push(taskToChange)
@@ -100,13 +118,14 @@ function toggleTaskCompletion(state,{id, identifier}) {
 
 }
 
+// deletes all tasks from the completed tasks section.
+// stack.push is also here to implement an undo functionality, but this was very broken and eventually settled
+// on not having it work.
+
 function deleteAllCompletedTasks(state) {
-    console.log(state)
     const stack = state.stack.map(x => x)
     stack.push(state.sections)
     const newSections = state.sections.map(x => x)
-    console.log(newSections)
-    console.log(stack)
     newSections.find(section => section.identifier === "completed").tasks = []
 
    return {
@@ -116,6 +135,7 @@ function deleteAllCompletedTasks(state) {
    }
 }
 
+// in the event of an undo button, the sections stored on the stack will be popped and returned to sections.
 
 function undoTask(state) {
     const stack = state.stack.map(x => x)
@@ -126,6 +146,7 @@ function undoTask(state) {
         stack 
     }
 }
+
 
 function toggleCompletedList(state) {
     return {
@@ -169,17 +190,16 @@ function hideUndo(state) {
     }
 }
 
+
+// function for creating a section, this will push a new empty section onto the state's sections.
+
 function createSection(state) {
     const identifier = uuidv4()
     const section = {text:"",isToggled:false, identifier: identifier, tasks: []}
     const newSections = state.sections.map(x => x)
-    newSections.push(section)
     console.log("Hello!")
     const completedSection = newSections.find(section => section.identifier === "completed")
     let completedSectionIndex = newSections.indexOf(completedSection)
-    console.log(completedSection)
-    console.log(completedSectionIndex)
-    console.log(newSections)
     newSections.splice(completedSectionIndex, 1)
     newSections.push(completedSection)
     return {
@@ -187,6 +207,8 @@ function createSection(state) {
         sections:newSections
     }
 }
+
+// finds a section via it's sectionIdentifier and uses filter to remove it.
 
 function deleteSection(state, sectionIdentifier) {
     const sections = state.sections.filter(sections => sections.identifier !== sectionIdentifier)
@@ -196,19 +218,23 @@ function deleteSection(state, sectionIdentifier) {
     }
 }
 
+
+// Similar to updating a task's text, updates a section's text with help from it's sectionIdentifier.
+
 function updateSectionText(state,{sectionIdentifier,text}){
     const newSections = state.sections.map(x => x)
     const section = newSections.find(section => section.identifier === sectionIdentifier)
     if (!section) return state
-
     section.text = text
-
 
     return {
         ...state,
         sections: newSections
     }
 }
+
+// This will toggle whether the section's button is pressed or not, and will show the tasklist or hide it
+// depending on whether it's toggled or not.
 
 function toggleSection(state, sectionIdentifier) {
     const newSections = state.sections.map(x => x)
@@ -221,6 +247,10 @@ function toggleSection(state, sectionIdentifier) {
         sections: newSections
     }
 }
+
+// Clears all tasks and sections, and resets them to the default value when loading the page. It also pushes
+// the sections onto the stack because undo functionality works with this but doesn't work with the other one,
+// and I have no idea why.
 
 function clearAll(state){
     console.log("clear all sections")

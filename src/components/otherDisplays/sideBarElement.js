@@ -1,12 +1,17 @@
-import { connect } from "react-redux"
 import "../../css/Sidebar.css"
-import sideBarButton from "./sideBarButton"
-import Sidebar from "./sideBarList";
 import SideBarButton from "./sideBarButton";
 import TaskDataController from "../../modules/dataController/TaskDataController";
+import SectionAddTaskButton from "../newSection/sectionAddTask";
+
+
+
+// Will create the Individual elements inside the sideBarlist.
+// contains a sideBarButton, an input field for the section title, and a add task button for the section
 
 export default function SideBarElement(props) {
-    console.log(props)
+
+    // cssID determines whether the sidebar is todo, completed, or a added section.
+
     let cssID;
     if (props.identifier !== 'toDo' && props.identifier !== 'completed'){
         cssID = "otherSectionssideBar";
@@ -15,6 +20,11 @@ export default function SideBarElement(props) {
         cssID = props.identifier + "sideBar";
     }
 
+    const checkIfTypeIsCompleted = props.identifier !== "completed"
+
+
+
+
     return(
         <div
             class="sideBarElement"
@@ -22,6 +32,7 @@ export default function SideBarElement(props) {
             <SideBarButton
                 identifier = {props.identifier}/>
             <input
+                aria-label={props.text ? "edit the title for the section " + props.text : "edit the title for a section with an empty title"}
                 class="bar-title"
                 id={cssID}
                 // class="bar-title"
@@ -30,6 +41,9 @@ export default function SideBarElement(props) {
                 // alt='Section text'
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.text}/>
+            {checkIfTypeIsCompleted && <SectionAddTaskButton
+                identifier = {props.identifier}/>}
+
         </div>
     )
 }

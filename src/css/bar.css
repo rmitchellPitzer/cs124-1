@@ -20,13 +20,12 @@
 
 .bar-title {
     margin-left: -.2vw;
-    font-size: 4vh;
-    width: 25vw;
+    font-size: 30px;
+    width: 23vw;
     outline: none;
     border: none;
     font-family: Roboto;
     font-weight: 400;
-    font-size: 1.85em;
     visibility: hidden;
     content-visibility: hidden;
 }
@@ -43,6 +42,7 @@
     color: #654e4a;
     visibility: hidden;
     content-visibility: hidden;
+    text-align: left;
 }
 
 #otherSections {
