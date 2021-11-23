@@ -1,6 +1,6 @@
-import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons"
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import "../../css/Sidebar.css"
+import "../../css/sidebar.css"
 
 import store from "../../modules/dataController/store";
 
@@ -20,7 +20,8 @@ function SideBarButton(props) {
 
     return (
         <button class="SideBarButton" onClick={(e) => handleOnClick(props.identifier)}
-        aria-label={currentSectionText ? "Press to scroll to " + currentSectionText : "Press to scroll to a section without a title"}>
+        aria-label={currentSectionText ? "Press to scroll to " + currentSectionText : "Press to scroll to a section without a title"}
+        aria-hidden="false">
             <FontAwesomeIcon icon={icon} />
         </button>
     )

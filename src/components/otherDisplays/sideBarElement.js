@@ -1,4 +1,4 @@
-import "../../css/Sidebar.css"
+import "../../css/sidebar.css"
 import SideBarButton from "./sideBarButton";
 import TaskDataController from "../../modules/dataController/TaskDataController";
 import SectionAddTaskButton from "../newSection/sectionAddTask";

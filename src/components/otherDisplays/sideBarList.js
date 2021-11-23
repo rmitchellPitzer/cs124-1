@@ -1,6 +1,6 @@
 import { connect} from "react-redux";
 import TaskDataController from "../../modules/dataController/TaskDataController";
-import "../../css/Sidebar.css"
+import "../../css/sidebar.css"
 import SideBarElement from "./sideBarElement";
 
 
