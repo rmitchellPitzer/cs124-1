@@ -19,11 +19,11 @@ function SideBarButton(props) {
     const icon = faAngleRight
 
     return (
-        <div class="SideBarButton" onClick={(e) => handleOnClick(props.identifier)}
+        <button class="SideBarButton" onClick={(e) => handleOnClick(props.identifier)}
         aria-label={currentSectionText ? "Press to scroll to " + currentSectionText : "Press to scroll to a section without a title"}
         aria-hidden="false">
             <FontAwesomeIcon icon={icon} />
-        </div>
+        </button>
     )
 }
 
@@ -36,7 +36,7 @@ function handleOnClick(identifier) {
     // safari won't support the options like smooth, block, and inline.
 
     let sectionToScrollTo = document.getElementById(identifier+"list");
-    sectionToScrollTo.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+    sectionToScrollTo.scrollIntoView({behavior: "smooth", block: "start", inline: "start"})
 }
 
 
