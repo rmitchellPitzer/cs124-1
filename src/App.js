@@ -15,6 +15,20 @@ import SideList from "./components/otherDisplays/sideList";
 
 import SideBarBackground from "./components/SideBarBackground";
 
+// Here's lab3 + lab5 work... lab 3.5... lab 3/5... 5.3? lab ((3+5)/2)... 4?
+// just going to do lab 3 and lab 5 concurrently.
+
+
+import firebase from "firebase/compat";
+import {  useCollection } from "react-firebase-hooks/firestore";
+import {
+    useAuthState,
+    useCreateUserWithEmailAndPassword,
+    useSignInWithEmailAndPassword
+} from 'react-firebase-hooks/auth';
+
+
+
 
 
 function App({menuIsActive,showUndo}) {
