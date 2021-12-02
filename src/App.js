@@ -15,36 +15,42 @@ import SideList from "./components/otherDisplays/sideList";
 
 import SideBarBackground from "./components/SideBarBackground";
 
-// Here's lab3 + lab5 work... lab 3.5... lab 3/5... 5.3? lab ((3+5)/2)... 4?
-// just going to do lab 3 and lab 5 concurrently.
-
 
 import firebase from "firebase/compat";
-import {  useCollection } from "react-firebase-hooks/firestore";
-import {
-    useAuthState,
-    useCreateUserWithEmailAndPassword,
-    useSignInWithEmailAndPassword
-} from 'react-firebase-hooks/auth';
-
-
-
+import {useCollection} from "react-firebase-hooks/firestore";
+import {database} from "./modules/dataController/firestore"
+import {collectionName} from "./modules/dataController/firestore";
 
 
 function App({menuIsActive,showUndo}) {
     // contains a header, a background for the sidebar,and a div for displaying the
     // sidebar and sidelist in desktop view next to eachother.
 
+    const query = database.collection(collectionName);
+    const [value, loading, error] = useCollection(query);
+
+
+    let fireStoreList = null;
+    if (value) {
+        fireStoreList = value.docs.map((doc) => {
+            return {...doc.data()}});
+    }
+    console.log(fireStoreList)
+    console.log(Date.now())
+    let d = new Date()
+    console.log(d.toString())
+
+
   return (
     <div class='hello'>
       <Header/>
       <SideBarBackground/>
-        <div className="wideScreenDisplay">
-            <div className="Sidebar"><Sidebar/></div>
-            <div className="Sidelist"><SideList/></div>
+        {/*<div className="wideScreenDisplay">*/}
+        {/*    <div className="Sidebar"><Sidebar/></div>*/}
+        {/*    <div className="Sidelist"><SideList/></div>*/}
 
-        </div>
-        <SectionList/>
+        {/*</div>*/}
+        <SectionList sections = {fireStoreList}/>
       { menuIsActive && <ActionMenu/> }
         { showUndo && <UndoButton/> }
       <ActionButton/>

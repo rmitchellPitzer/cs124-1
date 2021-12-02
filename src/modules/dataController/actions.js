@@ -19,6 +19,9 @@ export const TOGGLE_SECTION = "toggleSection"
 
 export const CLEAR_ALL = "clearAllSectionsAndTasks"
 
+export const GET_TOGGLED = "getToggledStatus"
+
+
 export const showUndoAction = () => ({type:SHOW_UNDO})
 export const hideUndoAction = () => ({type:HIDE_UNDO})
 export const undoTaskAction = () => ({type:UNDO_TASK})
@@ -45,3 +48,7 @@ export const toggleSectionAction = (sectionIdentifier) => ({type: TOGGLE_SECTION
 // function for clearing all sections and resetting all
 
 export const clearAllSectionsAndTasksAction = () => ({type: CLEAR_ALL})
+
+// function for showing tasks stored in firestore
+
+export const getToggledStatusAction = (sectionIdentifier) => ({type: GET_TOGGLED, payload: {sectionIdentifier}})

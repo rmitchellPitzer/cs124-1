@@ -18,15 +18,46 @@ import {
     DELETE_SECTION,
     UPDATE_SECTION_TEXT,
     TOGGLE_SECTION,
-    CLEAR_ALL
+    CLEAR_ALL,
+    GET_TOGGLED
 } from './actions';
+
+import {database} from "./firestore";
+import {collectionName} from "./firestore";
+
+
+// import firebase from "firebase/compat";
+// import {useCollection} from "react-firebase-hooks/firestore";
+//
+// // lab 3 work:
+//
+// const firebaseConfig = {
+//     apiKey: "AIzaSyD8bEScFINGaDttxHPcnMbjIPmW64m-4SI",
+//     authDomain: "rmitchellpitzer-hmc-tasks.firebaseapp.com",
+//     projectId: "rmitchellpitzer-hmc-tasks",
+//     storageBucket: "rmitchellpitzer-hmc-tasks.appspot.com",
+//     messagingSenderId: "670939286123",
+//     appId: "1:670939286123:web:3dd28bb7e5badcce873f2e"
+// };
+//
+// firebase.initializeApp(firebaseConfig);
+// const db = firebase.firestore();
+
+
+// const initialState = {
+//     stack:[],
+//     sections: [{text:"To Do", isToggled:false, identifier:"toDo", tasks: []}, {text:"Completed", isToggled:false, identifier:"completed", tasks:[]}],
+//     showUndo: false,
+//     showMenu: false
+// }
 
 const initialState = {
     stack:[],
-    sections: [{text:"To Do", isToggled:false, identifier:"toDo", tasks: []}, {text:"Completed", isToggled:false, identifier:"completed", tasks:[]}],
+    sections: [],
     showUndo: false,
-    showMenu: false 
+    showMenu: false
 }
+
 
 
 // Gets the sectionID from the section it's called on, creates a new task containing that sectionID, then appends it
@@ -35,16 +66,14 @@ const initialState = {
 function createTask(state, sectionIdentifier) {
     const id = uuidv4()
     const sectionID = sectionIdentifier
-    const task = {text:"",isCompleted:false,id, sectionID}
-    const newSections = state.sections.map(x => x)
-    const sectionToChange = newSections.find(section => section.identifier === sectionIdentifier)
-
-    const newSection = sectionToChange.tasks.push(task)
-
-    return {
-        ...state,
-        sections:newSections
-    }
+    database.collection(collectionName).doc(sectionIdentifier).collection("tasks").doc(id).set({
+        id: id,
+        sectionIdentifier: sectionIdentifier,
+        isCompleted: false,
+        text: "",
+        timeMade: new Date(),
+        priority: 0
+    })
 }
 
 // Deletes a task with the given id.
@@ -195,19 +224,73 @@ function hideUndo(state) {
 
 function createSection(state) {
     const identifier = uuidv4()
-    const section = {text:"",isToggled:false, identifier: identifier, tasks: []}
-    const newSections = state.sections.map(x => x)
-    newSections.push(section)
-    console.log("Hello!")
-    const completedSection = newSections.find(section => section.identifier === "completed")
-    let completedSectionIndex = newSections.indexOf(completedSection)
-    newSections.splice(completedSectionIndex, 1)
-    newSections.push(completedSection)
-    return {
-        ...state,
-        sections:newSections
-    }
+
+    const sectionRef = database.collection(collectionName).doc(identifier)
+
+    sectionRef.set({
+        identifier: identifier,
+        title: ""})
+
+    taskRef.start({})
+
+    // taskRef.doc(identifier).set({})
+
+    // sectionRef
+    //     .doc(identifier)
+    //     .set({})
+        // .then(function () {
+        //     console.log('Document Added ');
+        // })
+        // .catch(function (error) {
+        //     console.error('Error adding document: ', error);
+        // });
 }
+
+
+
+    // database.collection(collectionName).doc(identifier).collection("tasks").doc(identifier).set({
+    //     identifier: identifier,
+    //     title: ""})
+    //
+    // database.collection(collectionName).doc(identifier).set({
+    //     identifier: identifier,
+    //     title: ""})
+
+
+    // const taskId = uuidv4()
+    // const sectionsDoc = database.collection(collectionName).doc(identifier);
+    //
+    // sectionsDoc.collection("tasks").doc(identifier).set({
+    //     id: taskId,
+    //     sectionIdentifier: identifier,
+    //     isCompleted: false,
+    //     text: "This is to test if a task is made!",
+    //     timeMade: new Date(),
+    //     priority: 0
+    // })
+
+
+
+    // const section = {text:"",isToggled:false, identifier: identifier, tasks: []}
+    // const newSections = state.sections.map(x => x)
+    // newSections.push(section)
+    // console.log("Hello!")
+    // const completedSection = newSections.find(section => section.identifier === "completed")
+    // let completedSectionIndex = newSections.indexOf(completedSection)
+    // newSections.splice(completedSectionIndex, 1)
+    // newSections.push(completedSection)
+//     const newSections = state.sections.map(x => x)
+//     const section = {identifier: identifier, isToggled: false}
+//     newSections.push(section)
+//     const completedSection = newSections.find(section => section.identifier === "completed")
+//     let completedSectionIndex = newSections.indexOf(completedSection)
+//     newSections.splice(completedSectionIndex, 1)
+//     newSections.push(completedSection)
+//     return {
+//          ...state,
+//          sections:newSections
+//      }
+// }
 
 // finds a section via it's sectionIdentifier and uses filter to remove it.
 
@@ -266,6 +349,15 @@ function clearAll(state){
     }
 }
 
+function getToggledStatus(state, sectionIdentifier){
+    const newSections = state.sections.map(x => x)
+    const sectionWithId = newSections.find(section => section.identifier === sectionIdentifier)
+    if (!sectionWithId){
+        return null
+    }
+    return sectionWithId.isToggled
+}
+
 
 export default function toDoReducer(state = initialState, action){
     switch (action.type){
@@ -286,6 +378,7 @@ export default function toDoReducer(state = initialState, action){
         case UPDATE_SECTION_TEXT: return updateSectionText(state, action.payload)
         case TOGGLE_SECTION: return toggleSection(state, action.payload.sectionIdentifier)
         case CLEAR_ALL: return clearAll(state)
+        case GET_TOGGLED: return getToggledStatus(state, action.payload.sectionIdentifier)
         default:
             return state 
     }

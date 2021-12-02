@@ -1,5 +1,9 @@
 import TaskList from "../Tasks/TaskList.js"
 import SectionBar from "./SectionBar.js"
+import AppDataController from "../../modules/dataController/AppDataController";
+import {connect} from "react-redux";
+import TaskDataController from "../../modules/dataController/TaskDataController";
+
 
 
 /*
@@ -15,13 +19,14 @@ props:
 
 
 function SectionContainer(props) {
+
     return (
         <div>
             <SectionBar
-                sectionTitle = {props.text}
+                sectionTitle = {props.title}
                 className={props.identifier}
                 identifier ={props.identifier}
-                isToggled = {props.isToggled}
+                isToggled ={false}
                 />
             { props.isToggled &&
                 <TaskList tasks={props.tasks}
@@ -31,6 +36,12 @@ function SectionContainer(props) {
     )
 }
 
+function mapToState(state, ownProps) {
+    console.log("Calling get toggled status")
+    return {
+        isToggled: TaskDataController.getToggledStatus(ownProps.identifier)
+    }
+}
 
+export default connect(mapToState)(SectionContainer)
 
-export default (SectionContainer)
