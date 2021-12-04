@@ -27,7 +27,7 @@ export default class AppDataController {
     }
 
     static menuIsActive() {
-        return store.getState().showMenu 
+        return store.getState().showMenu
     }
 
     static toggleCompletedList() {

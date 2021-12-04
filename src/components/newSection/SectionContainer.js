@@ -3,6 +3,10 @@ import SectionBar from "./SectionBar.js"
 import AppDataController from "../../modules/dataController/AppDataController";
 import {connect} from "react-redux";
 import TaskDataController from "../../modules/dataController/TaskDataController";
+import {collectionName, database} from "../../modules/dataController/firestore";
+import {useCollection} from "react-firebase-hooks/firestore";
+import store from "../../modules/dataController/store";
+import CompletedSection from "./completedSection";
 
 
 
@@ -19,29 +23,95 @@ props:
 
 
 function SectionContainer(props) {
+    console.log("Hello section containers!")
 
+    console.log(props.isToggledList)
+    console.log(props.identifier)
+    const isToggled = (props.isToggledList.includes(props.identifier))
+
+
+
+    const taskRef = database.collection(collectionName).doc(props.identifier).collection('tasks')
+    const [value, loading, error] = useCollection(taskRef);
+    let fireStoreList = null;
+    if (value) {
+        fireStoreList = value.docs.map((doc) => {
+            return {...doc.data()}});
+    }
     return (
         <div>
-            <SectionBar
+            {fireStoreList && <SectionBar
                 sectionTitle = {props.title}
                 className={props.identifier}
                 identifier ={props.identifier}
-                isToggled ={false}
-                />
-            { props.isToggled &&
-                <TaskList tasks={props.tasks}
-                    identifier={props.identifier}/>}
+                isToggled ={isToggled}
+                />}
+            { isToggled && fireStoreList &&
+                <TaskList tasks={fireStoreList}/>}
+        <CompletedSection
 
+            />
         </div>
     )
 }
 
 function mapToState(state, ownProps) {
-    console.log("Calling get toggled status")
-    return {
-        isToggled: TaskDataController.getToggledStatus(ownProps.identifier)
-    }
-}
-
+     console.log("Calling get toggled status")
+    console.log(store.getState().sectionsToggled)
+     return {
+         isToggledList: store.getState().sectionsToggled
+     }
+ }
+//
 export default connect(mapToState)(SectionContainer)
+
+// const getPromise = taskRef.get()
+// const snapshot = await getPromise;
+// console.log(snapshot)
+
+
+// console.log(props)
+// const sectionRef = database.collection(collectionName)
+// const [value, loading, error] = useCollection(sectionRef);
+// console.log(sectionRef.onSnapshot())
+//
+// console.log(loading)
+// console.log(error)
+//
+// console.log("Hello gamers,")
+// console.log(value)
+// let fireStoreTaskList = null;
+// if (value) {
+//     fireStoreTaskList = sectionRef.docs.map((doc) => {
+//         return {...doc.data()}});
+// }
+// console.log("Figuring stuff out ")
+// console.log(fireStoreTaskList)
+//
+//
+//
+// const queryTasks = database.collection(collectionName).doc(props.identifier).collection('tasks');
+// const [value, loading, error] = useCollection(queryTasks);
+//
+// console.log(value)
+//
+//
+// let fireStoreTaskList = null;
+// if (value) {
+//     fireStoreTaskList = value.docs.map((doc) => {
+//         return {...doc.data()}});
+// }
+//
+//
+// console.log(fireStoreTaskList)
+// console.log("Trying to see somethign")
+
+
+
+
+
+
+
+
+// export default SectionContainer
 

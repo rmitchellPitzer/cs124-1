@@ -24,6 +24,7 @@ function SectionList(props){
                         />
                     })
                 }
+
             </div>
         )
     }

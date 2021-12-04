@@ -20,6 +20,7 @@ import firebase from "firebase/compat";
 import {useCollection} from "react-firebase-hooks/firestore";
 import {database} from "./modules/dataController/firestore"
 import {collectionName} from "./modules/dataController/firestore";
+import store from "./modules/dataController/store";
 
 
 function App({menuIsActive,showUndo}) {
@@ -28,8 +29,8 @@ function App({menuIsActive,showUndo}) {
 
     const query = database.collection(collectionName);
     const [value, loading, error] = useCollection(query);
-
-
+    console.log("beginning of query")
+    console.log(value)
     let fireStoreList = null;
     if (value) {
         fireStoreList = value.docs.map((doc) => {
@@ -60,10 +61,11 @@ function App({menuIsActive,showUndo}) {
 
 
 function mapToState(state) {
-  return {
-    menuIsActive: AppDataController.menuIsActive(),
-    showUndo: AppDataController.undoIsActive()
-  }
+        console.log(store.getState())
+        return {
+            menuIsActive: AppDataController.menuIsActive(),
+            showUndo: AppDataController.undoIsActive()
+        }
 }
 
 export default connect(mapToState)(App)

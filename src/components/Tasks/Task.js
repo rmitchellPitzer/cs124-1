@@ -21,7 +21,7 @@ export default function Task(props) {
     // left to turn this in so there it is!
 
     function getAriaCheckbox(){
-        const currentSectionText = store.getState().sections.find(section => section.identifier === props.sectionID).text
+        const currentSectionText = props.text
         if (currentSectionText){
             if (props.text){
                 if (props.isCompleted){
@@ -61,7 +61,7 @@ export default function Task(props) {
         }
 
     function getAriaTask(){
-        const currentSectionText = store.getState().sections.find(section => section.identifier === props.sectionID).text
+        const currentSectionText = props.text
         if (currentSectionText){
             if (props.text){
                 if (props.isCompleted){
@@ -109,7 +109,7 @@ export default function Task(props) {
                 class='checkbox' 
                 type="checkbox"
                 value={ props.isCompleted}
-                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionID)}
+                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
                 checked= {props.isCompleted}
             />
             <input
@@ -118,7 +118,7 @@ export default function Task(props) {
                 type='text' 
                 alt='task text'
                 id ={cssID}
-                onChange= { (e) => handleTextEvent(props.id, props.sectionID,e)}
+                onChange= { (e) => handleTextEvent(props.id, props.sectionIdentifier,e)}
                 value={props.text}
             />
         </div>
@@ -127,8 +127,12 @@ export default function Task(props) {
 }
 
 function handleTextEvent(id, identifier, event) {
-    const text = event.currentTarget.value
-    TaskDataController.updateTaskText(id, identifier, text)
+    console.log(id)
+    console.log(identifier)
+    const newText = event.currentTarget.value
+    console.log("Here's the text event!")
+    console.log(newText)
+    TaskDataController.updateTaskText(id, identifier, newText)
 }
 
 function handleCheckBoxEvent(id, identifier) {

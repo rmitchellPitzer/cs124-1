@@ -1,8 +1,10 @@
 import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction, clearAllSectionsAndTasksAction, getToggledStatusAction } from "./actions"
 import store from "./store.js"
 class TaskDataController {
-    static updateTaskText(id, identifier, text) {
-            const action = updateTaskTextAction(id, identifier ,text)
+    static updateTaskText(id, identifier, newText) {
+            console.log("This should be in taskDataController")
+            console.log(newText)
+            const action = updateTaskTextAction(id, identifier ,newText)
             store.dispatch(action)
     }
 

@@ -24,13 +24,11 @@ export default function SectionBar(props) {
         cssID = props.identifier; // props.identifier contains either "toDo", "completed", or some uuid string.
     }
 
-    const checkIfTypeIsCompleted = props.identifier !== "completed"
-
-
     return (
         <div class={classes} id={"bar" + props.identifier}>
             <SectionButton identifier = {props.identifier}
-                           toggledState = {props.isToggled}/>
+                           toggledState = {props.isToggled}
+                            text = {props.sectionTitle}/>
             <input
                 aria-label={props.sectionTitle ? "Edit the section title of" + props.sectionTitle : "Edit the title of an empty section"}
                 class="bar-title"
@@ -41,8 +39,9 @@ export default function SectionBar(props) {
                 value={props.sectionTitle}
             />
             {/*The code below determines whether the section is completed, and will hide the addTaskButton if it is.*/}
-            {checkIfTypeIsCompleted && <SectionAddTaskButton
-                identifier = {props.identifier}/>}
+            {<SectionAddTaskButton
+                identifier = {props.identifier}
+                sectionTitle = {props.sectionTitle}/>}
         </div>  
     )
 }

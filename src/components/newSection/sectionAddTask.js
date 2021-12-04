@@ -16,7 +16,7 @@ function SectionAddTaskButton(props) {
     // sectionText gets the text of the section, needed because sections are identified by a uuid.
     // this is used to determine whether the sectionText is empty, because the screenreader needs to know
     // if a section title is empty instead of just skipping over it.
-    const sectionText = store.getState().sections.find(section => section.identifier === props.identifier).text
+    const sectionText = props.sectionTitle
 
         return (
         <button

@@ -53,7 +53,7 @@ import {collectionName} from "./firestore";
 
 const initialState = {
     stack:[],
-    sections: [],
+    sectionsToggled: [],
     showUndo: false,
     showMenu: false
 }
@@ -64,16 +64,23 @@ const initialState = {
 // to the section's tasks list in initialState.
 
 function createTask(state, sectionIdentifier) {
-    const id = uuidv4()
-    const sectionID = sectionIdentifier
-    database.collection(collectionName).doc(sectionIdentifier).collection("tasks").doc(id).set({
-        id: id,
+    console.log("Hi everyone! This is when Create Task is ran")
+    console.log(state)
+    console.log(sectionIdentifier)
+    const identifier = uuidv4()
+    const taskRef = database.collection(collectionName).doc(sectionIdentifier).collection('tasks').doc(identifier)
+
+    taskRef.set({
+        id: identifier,
         sectionIdentifier: sectionIdentifier,
         isCompleted: false,
         text: "",
         timeMade: new Date(),
         priority: 0
     })
+    return{
+        ...state
+    }
 }
 
 // Deletes a task with the given id.
@@ -95,18 +102,13 @@ function deleteTask(state,id) {
 // identifier is needed to find which section the task will be located in.
 
 function updateTaskText(state,{id, identifier,text}) {
-    const returnedSections = state.sections.map(x => x)
-    const sectionWithTask = returnedSections.find(section => section.identifier === identifier)
-    const newTasks = sectionWithTask.tasks.map(x => x)
-    const taskToChange = newTasks.find(task => task.id === id)
-    if (!taskToChange) return state
-
-    taskToChange.text = text
-
-
-    return {
-        ...state,
-        sections: returnedSections
+    const taskRef = database.collection(collectionName).doc(identifier).collection('tasks').doc(id)
+    taskRef.update({
+        text: text
+        }
+    )
+    return{
+        ...state
     }
 }
 
@@ -223,74 +225,42 @@ function hideUndo(state) {
 // function for creating a section, this will push a new empty section onto the state's sections.
 
 function createSection(state) {
+    // first part creates a new section in firestore, section part creates a section in redux to enable toggled states.
     const identifier = uuidv4()
-
     const sectionRef = database.collection(collectionName).doc(identifier)
-
     sectionRef.set({
         identifier: identifier,
-        title: ""})
+        title: "",
+    })
 
-    taskRef.start({})
+    const newToggledSections = state.sectionsToggled.map(x => x)
+    newToggledSections.push(identifier)
 
-    // taskRef.doc(identifier).set({})
+    return{
+        ...state,
+        sectionsToggled: newToggledSections
+    }
 
-    // sectionRef
-    //     .doc(identifier)
-    //     .set({})
-        // .then(function () {
-        //     console.log('Document Added ');
-        // })
-        // .catch(function (error) {
-        //     console.error('Error adding document: ', error);
-        // });
+
+    // by default, istoggled true by default.
+    // Don't want to have users add tasks, and then it's not visible.
+    // decided to scrap code for redux: Figured that if a user changes something on
+    // a device, it should also be visible on another device, which would require
+    // tracking isToggled in firestore.
+
+    // const returnedSectionsToggle = state.sectionsToggled.map(x => x)
+    // returnedSectionsToggle.push({
+    //     identifier: identifier,
+    //     isToggled: true
+    // })
+    // return {
+    //     ... state,
+    //     sectionsToggled: returnedSectionsToggle
+    //
+    // }
 }
 
 
-
-    // database.collection(collectionName).doc(identifier).collection("tasks").doc(identifier).set({
-    //     identifier: identifier,
-    //     title: ""})
-    //
-    // database.collection(collectionName).doc(identifier).set({
-    //     identifier: identifier,
-    //     title: ""})
-
-
-    // const taskId = uuidv4()
-    // const sectionsDoc = database.collection(collectionName).doc(identifier);
-    //
-    // sectionsDoc.collection("tasks").doc(identifier).set({
-    //     id: taskId,
-    //     sectionIdentifier: identifier,
-    //     isCompleted: false,
-    //     text: "This is to test if a task is made!",
-    //     timeMade: new Date(),
-    //     priority: 0
-    // })
-
-
-
-    // const section = {text:"",isToggled:false, identifier: identifier, tasks: []}
-    // const newSections = state.sections.map(x => x)
-    // newSections.push(section)
-    // console.log("Hello!")
-    // const completedSection = newSections.find(section => section.identifier === "completed")
-    // let completedSectionIndex = newSections.indexOf(completedSection)
-    // newSections.splice(completedSectionIndex, 1)
-    // newSections.push(completedSection)
-//     const newSections = state.sections.map(x => x)
-//     const section = {identifier: identifier, isToggled: false}
-//     newSections.push(section)
-//     const completedSection = newSections.find(section => section.identifier === "completed")
-//     let completedSectionIndex = newSections.indexOf(completedSection)
-//     newSections.splice(completedSectionIndex, 1)
-//     newSections.push(completedSection)
-//     return {
-//          ...state,
-//          sections:newSections
-//      }
-// }
 
 // finds a section via it's sectionIdentifier and uses filter to remove it.
 
@@ -306,14 +276,13 @@ function deleteSection(state, sectionIdentifier) {
 // Similar to updating a task's text, updates a section's text with help from it's sectionIdentifier.
 
 function updateSectionText(state,{sectionIdentifier,text}){
-    const newSections = state.sections.map(x => x)
-    const section = newSections.find(section => section.identifier === sectionIdentifier)
-    if (!section) return state
-    section.text = text
+    const sectionToUpdate = database.collection(collectionName).doc(sectionIdentifier);
+    sectionToUpdate.update({
+        title: text
 
-    return {
-        ...state,
-        sections: newSections
+    })
+    return{
+        ...state
     }
 }
 
@@ -321,14 +290,24 @@ function updateSectionText(state,{sectionIdentifier,text}){
 // depending on whether it's toggled or not.
 
 function toggleSection(state, sectionIdentifier) {
-    const newSections = state.sections.map(x => x)
-    const sectionToToggle = newSections.find(section => section.identifier === sectionIdentifier)
-    if (!sectionToToggle) return state
 
-    sectionToToggle.isToggled = !sectionToToggle.isToggled
+
+    const newToggledSections = state.sectionsToggled.map(x => x)
+    if(newToggledSections.includes(sectionIdentifier)){
+        let taskIndex = newToggledSections.indexOf(sectionIdentifier)
+        newToggledSections.splice(taskIndex, 1)
+
+
+
+    }
+    else{
+        console.log("HEY THIS SHOULDNT BE HAPPENING")
+        newToggledSections.push(sectionIdentifier)
+    }
+
     return {
         ...state,
-        sections: newSections
+        sectionsToggled: newToggledSections
     }
 }
 
