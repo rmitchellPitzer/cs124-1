@@ -19,7 +19,9 @@ import {
     UPDATE_SECTION_TEXT,
     TOGGLE_SECTION,
     CLEAR_ALL,
-    GET_TOGGLED
+    GET_TOGGLED,
+    PUSH_COMPLETED_TASK,
+    TOGGLE_COMPLETED_SECTION_BUTTON
 } from './actions';
 
 import {database} from "./firestore";
@@ -54,8 +56,10 @@ import {collectionName} from "./firestore";
 const initialState = {
     stack:[],
     sectionsToggled: [],
+    completedTasks: [],
     showUndo: false,
-    showMenu: false
+    showMenu: false,
+    showCompletedTasks: false
 }
 
 
@@ -118,34 +122,50 @@ function updateTaskText(state,{id, identifier,text}) {
 // the completed section, which means we can not locate the task with it's section identifier.
 
 function toggleTaskCompletion(state,{id, identifier}) {
-    const returnedSections = state.sections.map(x => x)
-    const sectionWithTask = returnedSections.find(section => section.identifier === identifier)
-    const taskToChange = sectionWithTask.tasks.find(task => task.id === id)
-    // create a copy of sections, find the section with the task and then get the task from the section.
-
-    if (!taskToChange){
-        // if it's null, the task is not present there, meaning it must be in completed, meaning it's being moved
-        // from completed to another section and removed from completed, which happens here.
-        const completedSection = returnedSections.find(section => section.identifier === "completed")
-        const completedTask = completedSection.tasks.find(task => task.id === id)
-        let taskIndex = completedSection.tasks.indexOf(completedTask)
-        completedTask.isCompleted = !completedTask.isCompleted
-        returnedSections.find(section => section.identifier === identifier).tasks.push(completedTask)
-        returnedSections.find(section => section.identifier === "completed").tasks.splice(taskIndex, 1)
-    }
-    else{
-        // here it's located the task, and is now moving it to the completed section and removing it from it's origin
-        // section.
-        let taskIndex = sectionWithTask.tasks.indexOf(taskToChange)
-        taskToChange.isCompleted = !taskToChange.isCompleted
-        returnedSections.find(section => section.identifier === "completed").tasks.push(taskToChange)
-        returnedSections.find(section => section.identifier === identifier).tasks.splice(taskIndex, 1)
+    console.log(id)
+    console.log(identifier)
+    const taskRef = database.collection(collectionName).doc(identifier).collection('tasks').doc(id)
+    const toggledValue = database.collection(collectionName).doc(identifier).collection('tasks').doc(id).get('isCompleted')
+    console.log("This is the what the value of isCompleted Should be once this is pressed:")
+    console.log(toggledValue.)
+    taskRef.update({
+        isCompleted: !(toggledValue.isCompleted)
+    })
+    return{
+        ...state
     }
 
-    return {
-        ...state,
-        sections:returnedSections
-    }
+
+
+
+    // const returnedSections = state.sections.map(x => x)
+    // const sectionWithTask = returnedSections.find(section => section.identifier === identifier)
+    // const taskToChange = sectionWithTask.tasks.find(task => task.id === id)
+    // // create a copy of sections, find the section with the task and then get the task from the section.
+    //
+    // if (!taskToChange){
+    //     // if it's null, the task is not present there, meaning it must be in completed, meaning it's being moved
+    //     // from completed to another section and removed from completed, which happens here.
+    //     const completedSection = returnedSections.find(section => section.identifier === "completed")
+    //     const completedTask = completedSection.tasks.find(task => task.id === id)
+    //     let taskIndex = completedSection.tasks.indexOf(completedTask)
+    //     completedTask.isCompleted = !completedTask.isCompleted
+    //     returnedSections.find(section => section.identifier === identifier).tasks.push(completedTask)
+    //     returnedSections.find(section => section.identifier === "completed").tasks.splice(taskIndex, 1)
+    // }
+    // else{
+    //     // here it's located the task, and is now moving it to the completed section and removing it from it's origin
+    //     // section.
+    //     let taskIndex = sectionWithTask.tasks.indexOf(taskToChange)
+    //     taskToChange.isCompleted = !taskToChange.isCompleted
+    //     returnedSections.find(section => section.identifier === "completed").tasks.push(taskToChange)
+    //     returnedSections.find(section => section.identifier === identifier).tasks.splice(taskIndex, 1)
+    // }
+    //
+    // return {
+    //     ...state,
+    //     sections:returnedSections
+    // }
 
 }
 
@@ -337,6 +357,48 @@ function getToggledStatus(state, sectionIdentifier){
     return sectionWithId.isToggled
 }
 
+function pushCompletedTask(state, task){
+    const currentTask = task.Task
+    console.log("This is the task!")
+    console.log(currentTask)
+    if (currentTask.isCompleted){
+        console.log("Task is completed")
+        if (state.completedTasks.includes(currentTask)){
+            console.log("Task is in the currentTask")
+            return{
+                ...state
+            }
+        }
+    else{
+            console.log("Task is not in currentTask, is completed")
+            const newSections = state.completedTasks
+            console.log(newSections)
+            newSections.push(currentTask)
+            console.log(newSections)
+            return{
+                ...state,
+                completedTasks: newSections
+            }
+        }
+    }
+    else{
+        console.log("Task is uncompleted.")
+        return{
+            ...state
+        }
+    }
+}
+
+function toggleCompletedSection(state){
+    const newToggledStatus = (!state.showCompletedTasks)
+    return{
+        ...state,
+        showCompletedTasks: newToggledStatus
+    }
+}
+
+
+
 
 export default function toDoReducer(state = initialState, action){
     switch (action.type){
@@ -358,6 +420,8 @@ export default function toDoReducer(state = initialState, action){
         case TOGGLE_SECTION: return toggleSection(state, action.payload.sectionIdentifier)
         case CLEAR_ALL: return clearAll(state)
         case GET_TOGGLED: return getToggledStatus(state, action.payload.sectionIdentifier)
+        case PUSH_COMPLETED_TASK: return pushCompletedTask(state, action.payload)
+        case TOGGLE_COMPLETED_SECTION_BUTTON: return toggleCompletedSection(state)
         default:
             return state 
     }

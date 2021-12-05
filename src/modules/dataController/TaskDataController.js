@@ -1,4 +1,4 @@
-import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction, clearAllSectionsAndTasksAction, getToggledStatusAction } from "./actions"
+import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction, clearAllSectionsAndTasksAction, getToggledStatusAction, pushCompletedTaskAction } from "./actions"
 import store from "./store.js"
 class TaskDataController {
     static updateTaskText(id, identifier, newText) {
@@ -79,6 +79,13 @@ class TaskDataController {
 
     static getToggledStatus(sectionIdentifier){
         const action = getToggledStatusAction(sectionIdentifier)
+        store.dispatch(action)
+    }
+
+    static pushCompletedTask(Task) {
+        console.log("Pushing the task!")
+        console.log(Task)
+        const action = pushCompletedTaskAction(Task)
         store.dispatch(action)
     }
 

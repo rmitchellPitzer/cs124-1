@@ -2,6 +2,12 @@ import SectionContainer from "./SectionContainer";
 import TaskDataController from "../../modules/dataController/TaskDataController"
 import { connect } from "react-redux"
 import React, { useEffect, useState } from 'react';
+import {collectionName, database} from "../../modules/dataController/firestore";
+import {useCollection} from "react-firebase-hooks/firestore";
+import CompletedSection from "./completedSection";
+import TaskList from "../Tasks/TaskList";
+import store from "../../modules/dataController/store";
+import CompletedSectionsTaskList from "./completedSectionsTaskList";
 
 /*
 props:{
@@ -10,9 +16,8 @@ props:{
  */
 
 function SectionList(props){
-    // Creates the container for displaying sections in a mobile display
-    console.log(props.sections)
-    console.log("Hello console!")
+    console.log("And here's the completed Tasks")
+    console.log(props.completedTasks)
     if (props.sections){
         return(
             <div class='container'>
@@ -24,7 +29,9 @@ function SectionList(props){
                         />
                     })
                 }
-
+            <CompletedSection/>
+            { props.isToggled &&
+            <CompletedSectionsTaskList tasks={props.completedTasks}/>}
             </div>
         )
     }
@@ -33,13 +40,15 @@ function SectionList(props){
     }
 }
 
-export default SectionList
+// export default SectionList
 
 
-// function mapStateToProps(state, ownProps){
-//     // Used to get the sections for sectionList
-//     return{
-//         sections: TaskDataController.getSections()}
-// }
-//
-// export default connect(mapStateToProps)(SectionList)
+function mapStateToProps(state){
+    console.log("Here's the tasks being passed in!")
+    console.log(store.getState().completedTasks)
+    return{
+        isToggled: store.getState().showCompletedTasks,
+        completedTasks: store.getState().completedTasks}
+}
+
+export default connect(mapStateToProps)(SectionList)

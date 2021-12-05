@@ -37,7 +37,17 @@ function SectionContainer(props) {
     if (value) {
         fireStoreList = value.docs.map((doc) => {
             return {...doc.data()}});
+
+        // fireStoreList.forEach(task => task.isCompleted ? TaskDataController.pushCompletedTask(task) : console.log(task))
     }
+    if (value){
+        fireStoreList.forEach(task => TaskDataController.pushCompletedTask(task))
+    }
+    console.log("Here's the firestore list")
+    console.log(fireStoreList)
+
+
+
     return (
         <div>
             {fireStoreList && <SectionBar
@@ -48,9 +58,7 @@ function SectionContainer(props) {
                 />}
             { isToggled && fireStoreList &&
                 <TaskList tasks={fireStoreList}/>}
-        <CompletedSection
 
-            />
         </div>
     )
 }
@@ -59,7 +67,7 @@ function mapToState(state, ownProps) {
      console.log("Calling get toggled status")
     console.log(store.getState().sectionsToggled)
      return {
-         isToggledList: store.getState().sectionsToggled
+         isToggledList: store.getState().sectionsToggled,
      }
  }
 //

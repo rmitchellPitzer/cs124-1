@@ -1,4 +1,3 @@
-import "../../css/task.css"
 import TaskDataController from "../../modules/dataController/TaskDataController"
 import store from "../../modules/dataController/store";
 
@@ -6,13 +5,13 @@ import store from "../../modules/dataController/store";
 props: {
     text:string;
     isCompleted:boolean
-    id:string 
+    id:string
 }
 */
 
 // This creates the individual task for use on mobile displays. It contains a checkbox, and a input text
 
-export default function Task(props) {
+export default function CompletedSectionTask(props) {
     console.log("Properties of a task item")
     console.log(props)
     const classes = `task-item`
@@ -62,7 +61,7 @@ export default function Task(props) {
                 }
             }
         }
-        }
+    }
 
     function getAriaTask(){
         const currentSectionText = props.text
@@ -106,11 +105,11 @@ export default function Task(props) {
 
 
     return (
-        <div class={classes} id = {cssID+"markedCompleted"}>
+        <div class={classes} id = {"markedCompleted"}>
             <input
                 aria-label= {getAriaCheckbox()}
-                alt='task completion status' 
-                class='checkbox' 
+                alt='task completion status'
+                class='checkbox'
                 type="checkbox"
                 value={ props.isCompleted}
                 onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
@@ -118,10 +117,9 @@ export default function Task(props) {
             />
             <input
                 aria-label={getAriaTask()}
-                class='task-text' 
-                type='text' 
+                class='task-text'
+                type='text'
                 alt='task text'
-                id ={cssID}
                 onChange= { (e) => handleTextEvent(props.id, props.sectionIdentifier,e)}
                 value={props.text}
             />
