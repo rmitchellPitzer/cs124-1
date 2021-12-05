@@ -1,8 +1,9 @@
-.todo-bar {
+.toDo {
     background: #FEC89A;
 }
 
 
-.todo-bar .bar-title, .todo-bar i {
+.todo-bar{
     color: #796555;
+
 }

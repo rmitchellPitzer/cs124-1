@@ -7,9 +7,13 @@ function handleOnClick() {
     AppDataController.showMenu()
 }
 
+// Action button in the bottom right corner, allows access to adding sections, clearing completed tasks, or
+    // resetting the sections and tasks.
+
 export default function ActionButton() {
     return (
-        <button 
+        <button
+            aria-label="Click here to hear more options."
             class="action-button"
             onClick={handleOnClick}
         >

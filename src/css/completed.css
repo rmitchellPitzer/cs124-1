@@ -1,12 +1,13 @@
-.completed {
-    text-decoration: line-through;
-}
+/*.completed {*/
+/*    text-decoration: line-through;*/
+/*}*/
 
-.completed-bar {
+.completed {
     background: #FEC5BB;
 
 }
 
 .completed-bar i, .completed-bar .bar-title {
     color: #654e4a;
+
 }

@@ -1,0 +1,119 @@
+.SideListContainer{
+    margin-left: 1vw;
+    visibility: visible;
+    content-visibility: visible;
+    display: block;
+}
+
+.SideListElement{
+    min-height: 92vh;
+    visibility: visible;
+    content-visibility: visible;
+    display: block;
+}
+
+.sideListTitle{
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #282c34;
+    text-align: left;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 50px;
+    width: 57vw;
+    visibility: visible;
+    content-visibility: visible;
+    display: block;
+    border-radius: 10px;
+}
+
+.sideListTitle:focus{
+    background-color: #FBE2DD;
+}
+
+
+.SideListElementTask{
+    display: flex;
+    flex-direction: row;
+    padding: .5vh;
+}
+
+.SideListElementTaskText:focus{
+    background-color: #FBE2DD;
+    font-size: 36px;
+}
+
+.SideListElementTaskText{
+    color: #000000;
+    outline: none;
+    border: none;
+    background: transparent;
+    font-family: Arial;
+    font-weight: 400;
+    font-size: 35px;
+    visibility: visible;
+    content-visibility: visible;
+    display: block;
+    width: 50vw;
+    border-radius: 10px;
+}
+
+.sideListCheckbox:focus{
+    width: 40px;
+    height: 40px;
+}
+
+.sideListCheckbox{
+    width: 35px;
+    height: 35px;
+    visibility: visible;
+    content-visibility: visible;
+    display: block;
+}
+
+.sideListTask{
+    font-size: 10vh;
+    visibility: visible;
+    content-visibility: visible;
+    display: block;
+}
+
+@media screen and (max-width: 600px) and (max-height: 1000px) {
+    .SideListContainer{
+        visibility: hidden;
+        content-visibility: hidden;
+        display: none;
+    }
+
+    .SideListElement{
+        visibility: hidden;
+        content-visibility: hidden;
+        display: none;
+    }
+
+    .sideListTitle{
+        visibility: hidden;
+        content-visibility: hidden;
+        display: none;
+    }
+
+    .SideListElementTaskText{
+        visibility: hidden;
+        content-visibility: hidden;
+        display: none;
+    }
+
+    .sideListCheckbox{
+        visibility: hidden;
+        content-visibility: hidden;
+        display: none;
+    }
+
+    .sideListTask{
+        visibility: hidden;
+        content-visibility: hidden;
+        display: none;
+    }
+
+}

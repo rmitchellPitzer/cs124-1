@@ -7,7 +7,7 @@ h1,h2,h3,h4,label,p {
 
 html, body {
     margin:0;
-    padding:0;
+    padding-top: 6vh;
 
 }
 
@@ -18,5 +18,48 @@ body,.task-text {
     width: 100%;
     height: 100%;
     z-index: 100;
+    visibility: hidden;
+    display: none;
 
+}
+
+.Sidebar{
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    width: 39vw;
+    overflow: auto;
+    visibility: visible;
+}
+
+.Sidelist{
+    height: 92vh;
+    width: 60vw;
+    overflow: auto;
+    visibility: visible;
+}
+
+.wideScreenDisplay{
+    margin-top: -4vh;
+    flex-grow: 1;
+    display: flex;
+    height: 92vh;
+    position: relative;
+    top: 0;
+    overflow-y: auto;
+    visibility: visible;
+}
+
+@media screen and (max-width: 600px) and (max-height: 1000px) {
+    .wideScreenDisplay{
+        display: none;}
+    .Sidelist{
+        display: none;
+    }
+    .Sidebar{
+        display: none;
+    }
+    .container {
+        display: block;
+    }
 }

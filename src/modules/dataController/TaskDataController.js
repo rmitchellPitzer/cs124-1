@@ -1,21 +1,18 @@
-import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction } from "./actions"
+import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction, clearAllSectionsAndTasksAction } from "./actions"
 import store from "./store.js"
 class TaskDataController {
-    static updateTaskText(id,text) {
-            const action = updateTaskTextAction(id,text)
+    static updateTaskText(id, identifier, text) {
+            const action = updateTaskTextAction(id, identifier ,text)
             store.dispatch(action)
     }
 
-    static toggleTaskCompletion(id) {
-        const action = toggleTaskCompletionAction(id)
-        console.log("Task complete Action: ", action)
+    static toggleTaskCompletion(id, identifier) {
+        const action = toggleTaskCompletionAction(id, identifier)
         store.dispatch(action)
     }
 
     static createTask(sectionIdentifier) {
-        console.log("TaskDataController.CreateTask", sectionIdentifier)
         const action = createTaskAction(sectionIdentifier)
-        console.log("Action: ", action)
         store.dispatch(action)
     }
 
@@ -23,6 +20,7 @@ class TaskDataController {
         const action = deleteTaskAction(id)
         store.dispatch(action)
     }
+
 
     static deleteAllCompleted() {
         const action = deleteAllCompletedTasksAction()
@@ -39,6 +37,18 @@ class TaskDataController {
         .tasks.filter(task => task.isCompleted === true)
     }
 
+    // new function to return general tasks, not finished yet
+
+    static getTasks(identifier) {
+        return store.getState().sections.filter(section => section.identifier === identifier)
+    }
+
+    // new function to get sections
+
+    static getSections() {
+        return store.getState().sections
+    }
+
 
     static createSection() {
         const action = createSectionAction()
@@ -51,13 +61,17 @@ class TaskDataController {
     }
 
     static updateSectionText(sectionIdentifier,text) {
-        console.log(sectionIdentifier)
         const action = updateSectionTextAction(sectionIdentifier,text)
         store.dispatch(action)
     }
 
     static toggleSection(sectionIdentifier) {
         const action = toggleSectionAction(sectionIdentifier)
+        store.dispatch(action)
+    }
+
+    static clearAllSectionsAndTasks() {
+        const action = clearAllSectionsAndTasksAction()
         store.dispatch(action)
     }
 

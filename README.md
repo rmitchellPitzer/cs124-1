@@ -1,6 +1,8 @@
-# Lab 2 Project
+# Lab 4 Project
 
 
-Welcome to our React app called Todoiz.IO!
-It is an amazing todo app that you can find here: https://rmitchellpitzer.github.io/cs124/
+Welcome to the React app called Todoiz.IO!
 
+You can use it for many things on many different devices at the link here:
+
+https://rmitchellpitzer.github.io/cs124-1/

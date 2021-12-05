@@ -1,6 +1,8 @@
 import "../css/banner.css"
 
 
+
+// Just a silly banner for the top of the page that shows a play on "toDos"
 export default function Header(props) {
 
     return (

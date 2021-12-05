@@ -1,50 +1,36 @@
-import { connect } from "react-redux"
-import AppDataController from "../../modules/dataController/AppDataController.js"
-import TaskDataController from "../../modules/dataController/TaskDataController.js"
 import TaskList from "../Tasks/TaskList.js"
 import SectionBar from "./SectionBar.js"
 
-/*
-@props: {
-    className: "todo-bar| completed-bar";
-    sectionTitle: string;
-    tasks: TaskItem[]
-    showContainer: boolean
-}
-*/
 
-// export default function Section(props) {}
+/*
+props:
+    This will take in:
+    - identifier: A random uuidv4 for added sections, for To do it's 'toDo', for completed: 'completed'
+    - text: A title, by default it's null, for to do and completed... yeah.
+    - isToggled: false or true, will toggle viewing the tasks
+    - tasks: The list of tasks assigned to each section.
+ */
+
 
 
 
 function SectionContainer(props) {
     return (
         <div>
-            <SectionBar sectionTitle = {props.sectionTitle} className={props.className} identifier ={props.identifier}/>
-            { props.showContainer && <TaskList tasks={props.tasks} />}
+            <SectionBar
+                sectionTitle = {props.text}
+                className={props.identifier}
+                identifier ={props.identifier}
+                isToggled = {props.isToggled}
+                />
+            { props.isToggled &&
+                <TaskList tasks={props.tasks}
+                    identifier={props.identifier}/>}
+
         </div>
     )
 }
 
 
 
-function mapStateToProps(state,ownProps) {
-    const isToDo = ownProps.sectionTitle === "To Do"
-    const isCompleted = ownProps.sectionTitle === "Completed"
-
-    if (isToDo) return { 
-        tasks: TaskDataController.todo(),
-        showContainer: AppDataController.showToDo()
-    }
-    else if (isCompleted) return {
-        tasks: TaskDataController.completed(),
-        showContainer: AppDataController.showCompleted()
-    }
-
-    else return {
-        tasks: TaskDataController.completed(),
-        showContainer: AppDataController.showCompleted()
-    }
-}
-
-export default connect(mapStateToProps)(SectionContainer)
+export default (SectionContainer)

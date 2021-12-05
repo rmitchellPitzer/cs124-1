@@ -1,5 +1,7 @@
 import SectionContainer from "./SectionContainer";
-import Task from "../Tasks/Task";
+import TaskDataController from "../../modules/dataController/TaskDataController"
+import { connect } from "react-redux"
+import React, { useEffect, useState } from 'react';
 
 /*
 props:{
@@ -7,22 +9,26 @@ props:{
 
  */
 
-
-
-export default function SectionList(props){
+function SectionList(props){
+    // Creates the container for displaying sections in a mobile display
     return(
         <div class='container'>
             {
                 props.sections.map(section => {
-                    return <section
+                    return <SectionContainer
                         {...section}
                         key={section.identifier}
                     />
                 })
             }
-
-
-
         </div>
     )
 }
+
+function mapStateToProps(state, ownProps){
+    // Used to get the sections for sectionList
+    return{
+        sections: TaskDataController.getSections()}
+}
+
+export default connect(mapStateToProps)(SectionList)
