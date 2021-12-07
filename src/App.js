@@ -29,17 +29,12 @@ function App({menuIsActive,showUndo}) {
 
     const query = database.collection(collectionName);
     const [value, loading, error] = useCollection(query);
-    console.log("beginning of query")
-    console.log(value)
     let fireStoreList = null;
     if (value) {
         fireStoreList = value.docs.map((doc) => {
             return {...doc.data()}});
     }
-    console.log(fireStoreList)
-    console.log(Date.now())
-    let d = new Date()
-    console.log(d.toString())
+
 
 
   return (
@@ -61,7 +56,7 @@ function App({menuIsActive,showUndo}) {
 
 
 function mapToState(state) {
-        console.log(store.getState())
+
         return {
             menuIsActive: AppDataController.menuIsActive(),
             showUndo: AppDataController.undoIsActive()

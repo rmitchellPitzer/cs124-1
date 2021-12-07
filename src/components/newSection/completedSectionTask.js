@@ -12,8 +12,6 @@ props: {
 // This creates the individual task for use on mobile displays. It contains a checkbox, and a input text
 
 export default function CompletedSectionTask(props) {
-    console.log("Properties of a task item")
-    console.log(props)
     const classes = `task-item`
     const cssID = props.isCompleted ? 'completedTask' : ''
 
@@ -112,7 +110,7 @@ export default function CompletedSectionTask(props) {
                 class='checkbox'
                 type="checkbox"
                 value={ props.isCompleted}
-                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
+                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier, props.isCompleted)}
                 checked= {props.isCompleted}
             />
             <input
@@ -129,14 +127,15 @@ export default function CompletedSectionTask(props) {
 }
 
 function handleTextEvent(id, identifier, event) {
-    console.log(id)
-    console.log(identifier)
+
     const newText = event.currentTarget.value
-    console.log("Here's the text event!")
-    console.log(newText)
+
     TaskDataController.updateTaskText(id, identifier, newText)
 }
 
-function handleCheckBoxEvent(id, identifier) {
-    TaskDataController.toggleTaskCompletion(id, identifier)
+function handleCheckBoxEvent(id, identifier, isToggled) {
+    console.log("Checkbox has been pressed.")
+    console.log(id)
+    console.log(identifier)
+    TaskDataController.toggleTaskCompletion(id, identifier, isToggled)
 }

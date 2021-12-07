@@ -23,28 +23,85 @@ props:
 
 
 function SectionContainer(props) {
-    console.log("Hello section containers!")
 
-    console.log(props.isToggledList)
-    console.log(props.identifier)
     const isToggled = (props.isToggledList.includes(props.identifier))
-
-
 
     const taskRef = database.collection(collectionName).doc(props.identifier).collection('tasks')
     const [value, loading, error] = useCollection(taskRef);
     let fireStoreList = null;
+    let fireStoreCompletedList = null;
+    let stateCompletedList = null;
+
     if (value) {
         fireStoreList = value.docs.map((doc) => {
-            return {...doc.data()}});
+            return {...doc.data()}
+        });
+        const fireStoreCompletedList = fireStoreList.map(x => x).filter(task => task.isCompleted === true)
+        console.log("These should be the section's completed tasks")
+        console.log(fireStoreCompletedList)
+        stateCompletedList = store.getState().completedTasks.map(x => x).filter(task => task.sectionIdentifier !== props.identifier).concat(fireStoreCompletedList)
+        console.log('This should be the states completed task list')
+        console.log(stateCompletedList)
+        console.log("These should be all completed tasks!")
+        console.log(stateCompletedList)
+        TaskDataController.pushCompletedTask(stateCompletedList)
+    }
 
-        // fireStoreList.forEach(task => task.isCompleted ? TaskDataController.pushCompletedTask(task) : console.log(task))
-    }
-    if (value){
-        fireStoreList.forEach(task => TaskDataController.pushCompletedTask(task))
-    }
-    console.log("Here's the firestore list")
-    console.log(fireStoreList)
+
+        // kill me.
+
+        // let completedTaskList = [];
+        // for (let index = 0; index < fireStoreList.length; index++) {
+        //     console.log("Here's all the section tasks")
+        //     console.log(fireStoreList[index])
+        //     if (fireStoreList[index].isCompleted) {
+        //         completedTaskList.push(fireStoreList[index])}}
+        // let stateTasks = store.getState().completedTasks
+        //
+        // for (let Taskindex = 0; Taskindex < completedTaskList.length; Taskindex++) {
+        //     console.log(stateTasks)
+        //     if (stateTasks.length === 0){
+        //         console.log("Pushed 1")
+        //         console.log(completedTaskList[Taskindex])
+        //         TaskDataController.pushCompletedTask(completedTaskList[Taskindex])
+        //     }
+        //     else{
+        //         console.log("pushed 2")
+        //         for (let stateIndex = 0; stateIndex < stateTasks.length; stateIndex++) {
+        //             console.log("Pushed 3")
+        //             if (!(stateTasks[stateIndex].id === completedTaskList[Taskindex].id)){
+        //                 console.log("Pushed 4")
+        //                 TaskDataController.pushCompletedTask(completedTaskList[Taskindex])
+        //             }
+        //         }
+        //     }
+        //
+        //
+        //         console.log("Here's all the completed tasks")
+        //
+        //         console.log(stateTasks)
+
+
+
+                // for (let stateIndex = 0; stateIndex < stateTasks.length; stateIndex++) {
+                //     if (!(stateTasks[stateIndex].id === fireStoreList[index].id)) {
+                //         TaskDataController.pushCompletedTask(fireStoreList[index])
+                //     }
+                // }
+                // if(!store.getState().completedTasks.includes(fireStoreList[index])){
+                //     console.log((!store.getState().completedTasks.includes(fireStoreList[index])))
+                //     console.log("This is the state.")
+                //     console.log(store.getState().completedTasks)
+                //     console.log("This is the task.")
+                //     console.log(fireStoreList[index])
+                //     TaskDataController.pushCompletedTask(fireStoreList[index])
+
+
+    //
+    //
+    // console.log("Here's the completed tasks!")
+    // console.log(store.getState().completedTasks)
+
 
 
 
@@ -64,8 +121,6 @@ function SectionContainer(props) {
 }
 
 function mapToState(state, ownProps) {
-     console.log("Calling get toggled status")
-    console.log(store.getState().sectionsToggled)
      return {
          isToggledList: store.getState().sectionsToggled,
      }

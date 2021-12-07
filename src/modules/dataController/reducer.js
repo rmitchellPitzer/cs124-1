@@ -68,9 +68,6 @@ const initialState = {
 // to the section's tasks list in initialState.
 
 function createTask(state, sectionIdentifier) {
-    console.log("Hi everyone! This is when Create Task is ran")
-    console.log(state)
-    console.log(sectionIdentifier)
     const identifier = uuidv4()
     const taskRef = database.collection(collectionName).doc(sectionIdentifier).collection('tasks').doc(identifier)
 
@@ -121,16 +118,13 @@ function updateTaskText(state,{id, identifier,text}) {
 // present in the same section as it's section Identifier. While it might have a sectionIdentifier, it might be in
 // the completed section, which means we can not locate the task with it's section identifier.
 
-function toggleTaskCompletion(state,{id, identifier}) {
-    console.log(id)
-    console.log(identifier)
+function toggleTaskCompletion(state,{id, identifier, isToggled}) {
+    console.log(isToggled)
     const taskRef = database.collection(collectionName).doc(identifier).collection('tasks').doc(id)
-    const toggledValue = database.collection(collectionName).doc(identifier).collection('tasks').doc(id).get('isCompleted')
-    console.log("This is the what the value of isCompleted Should be once this is pressed:")
-    console.log(toggledValue.)
     taskRef.update({
-        isCompleted: !(toggledValue.isCompleted)
+        isCompleted: (!isToggled)
     })
+    console.log(isToggled)
     return{
         ...state
     }
@@ -321,7 +315,6 @@ function toggleSection(state, sectionIdentifier) {
 
     }
     else{
-        console.log("HEY THIS SHOULDNT BE HAPPENING")
         newToggledSections.push(sectionIdentifier)
     }
 
@@ -336,8 +329,7 @@ function toggleSection(state, sectionIdentifier) {
 // and I have no idea why.
 
 function clearAll(state){
-    console.log("clear all sections")
-    console.log(state.sections)
+
     const stack = state.stack.map(x => x)
     stack.push(state.sections)
     const newSections = [{text:"To Do", isToggled:false, identifier:"toDo", tasks: []}, {text:"Completed", isToggled:false, identifier:"completed", tasks:[]}]
@@ -357,36 +349,70 @@ function getToggledStatus(state, sectionIdentifier){
     return sectionWithId.isToggled
 }
 
-function pushCompletedTask(state, task){
-    const currentTask = task.Task
-    console.log("This is the task!")
-    console.log(currentTask)
-    if (currentTask.isCompleted){
-        console.log("Task is completed")
-        if (state.completedTasks.includes(currentTask)){
-            console.log("Task is in the currentTask")
-            return{
-                ...state
-            }
-        }
-    else{
-            console.log("Task is not in currentTask, is completed")
-            const newSections = state.completedTasks
-            console.log(newSections)
-            newSections.push(currentTask)
-            console.log(newSections)
-            return{
-                ...state,
-                completedTasks: newSections
-            }
-        }
+function pushCompletedTask(state, contents){
+    console.log("This should be the completed tasks in the state")
+    console.log(contents.Task)
+    return{
+        ...state,
+        completedTasks: contents.Task
     }
-    else{
-        console.log("Task is uncompleted.")
-        return{
-            ...state
-        }
-    }
+    // const currentTask = task.Task
+    // const currentCompletedTasks = state.completedTasks.map(x => x)
+    //
+    // if (currentCompletedTasks.length === 0){
+    //     if (currentTask.isCompleted){
+    //
+    //         currentCompletedTasks.push(currentTask)
+    //
+    //         return{
+    //             ...state
+    //         }
+    //     }
+    // }
+    // else if (currentCompletedTasks.filter(completedTask => completedTask.id === currentTask.id).length > 0) {
+    //     console.log("The Task was not in the list")
+    //     if (currentTask.isCompleted){
+    //         console.log("The Task is completed")
+    //         currentCompletedTasks.push(currentTask)
+    //         return{
+    //             ...state,
+    //             completedTasks: currentCompletedTasks
+    //         }
+    //     }
+    // }
+    // console.log("The Task was pushed out :/")
+    // return{
+    //     ...state
+    // }
+    //
+    // // console.log("This is the task!")
+    // // console.log(currentTask)
+    // // if (currentTask.isCompleted){
+    // //     console.log("Task is completed")
+    // //     if (state.completedTasks.includes(currentTask)){
+    // //         console.log("Task is in the currentTask")
+    // //         return{
+    // //             ...state
+    // //         }
+    // //     }
+    // // else{
+    // //         console.log("Task is not in currentTask, is completed")
+    // //         const newSections = state.completedTasks
+    // //         console.log(newSections)
+    // //         newSections.push(currentTask)
+    // //         console.log(newSections)
+    // //         return{
+    // //             ...state,
+    // //             completedTasks: newSections
+    // //         }
+    // //     }
+    // // }
+    // // else{
+    // //     console.log("Task is uncompleted.")
+    // //     return{
+    // //         ...state
+    // //     }
+    // // }
 }
 
 function toggleCompletedSection(state){

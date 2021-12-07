@@ -2,14 +2,12 @@ import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, togg
 import store from "./store.js"
 class TaskDataController {
     static updateTaskText(id, identifier, newText) {
-            console.log("This should be in taskDataController")
-            console.log(newText)
             const action = updateTaskTextAction(id, identifier ,newText)
             store.dispatch(action)
     }
 
-    static toggleTaskCompletion(id, identifier) {
-        const action = toggleTaskCompletionAction(id, identifier)
+    static toggleTaskCompletion(id, identifier, isToggled) {
+        const action = toggleTaskCompletionAction(id, identifier, isToggled)
         store.dispatch(action)
     }
 
@@ -83,8 +81,7 @@ class TaskDataController {
     }
 
     static pushCompletedTask(Task) {
-        console.log("Pushing the task!")
-        console.log(Task)
+
         const action = pushCompletedTaskAction(Task)
         store.dispatch(action)
     }

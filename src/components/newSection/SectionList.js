@@ -16,8 +16,6 @@ props:{
  */
 
 function SectionList(props){
-    console.log("And here's the completed Tasks")
-    console.log(props.completedTasks)
     if (props.sections){
         return(
             <div class='container'>
@@ -30,7 +28,7 @@ function SectionList(props){
                     })
                 }
             <CompletedSection/>
-            { props.isToggled &&
+            { props.isCompletedTasksToggled &&
             <CompletedSectionsTaskList tasks={props.completedTasks}/>}
             </div>
         )
@@ -44,10 +42,8 @@ function SectionList(props){
 
 
 function mapStateToProps(state){
-    console.log("Here's the tasks being passed in!")
-    console.log(store.getState().completedTasks)
     return{
-        isToggled: store.getState().showCompletedTasks,
+        isCompletedTasksToggled: store.getState().showCompletedTasks,
         completedTasks: store.getState().completedTasks}
 }
 
