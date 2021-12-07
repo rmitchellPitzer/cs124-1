@@ -21,11 +21,14 @@ import {
     CLEAR_ALL,
     GET_TOGGLED,
     PUSH_COMPLETED_TASK,
-    TOGGLE_COMPLETED_SECTION_BUTTON
+    TOGGLE_COMPLETED_SECTION_BUTTON,
+    SET_SECTION_TO_STACK,
+    SET_TASKS_TO_STACK
 } from './actions';
 
 import {database} from "./firestore";
 import {collectionName} from "./firestore";
+import TaskDataController from "./TaskDataController";
 
 
 // import firebase from "firebase/compat";
@@ -54,7 +57,8 @@ import {collectionName} from "./firestore";
 // }
 
 const initialState = {
-    stack:[],
+    sectionStack:[],
+    taskStack: [],
     sectionsToggled: [],
     completedTasks: [],
     showUndo: false,
@@ -168,15 +172,15 @@ function toggleTaskCompletion(state,{id, identifier, isToggled}) {
 // on not having it work.
 
 function deleteAllCompletedTasks(state) {
-    const stack = state.stack.map(x => x)
-    stack.push(state.sections)
-    const newSections = state.sections.map(x => x)
-    newSections.find(section => section.identifier === "completed").tasks = []
+    const completedTasks = state.completedTasks.map(x => x)
+    for (const index in completedTasks){
+        console.log(completedTasks[index])
+        const taskToDelete = database.collection(collectionName).doc(completedTasks[index].sectionIdentifier).collection('tasks').doc(completedTasks[index].id);
+        taskToDelete.delete()
 
-   return {
-       ...state,
-       stack,
-       sections:newSections
+    }
+        return {
+       ...state
    }
 }
 
@@ -188,7 +192,7 @@ function undoTask(state) {
     return {
         ...state,
         sections: newSections,
-        stack 
+        stack
     }
 }
 
@@ -251,8 +255,7 @@ function createSection(state) {
     newToggledSections.push(identifier)
 
     return{
-        ...state,
-        sectionsToggled: newToggledSections
+        ...state
     }
 
 
@@ -329,16 +332,45 @@ function toggleSection(state, sectionIdentifier) {
 // and I have no idea why.
 
 function clearAll(state){
+    const stackList = state.sectionStack
+    const taskList = state.taskStack
+    for (const index in taskList){
+        const taskToDelete = database.collection(collectionName).doc(taskList[index].sectionIdentifier).collection('tasks').doc(taskList[index].id)
+        taskToDelete.delete()
+    }
+    for (const index in stackList){
+        if(index == (stackList.length - 1)){
 
-    const stack = state.stack.map(x => x)
-    stack.push(state.sections)
-    const newSections = [{text:"To Do", isToggled:false, identifier:"toDo", tasks: []}, {text:"Completed", isToggled:false, identifier:"completed", tasks:[]}]
+            const sectionToModify = database.collection(collectionName).doc(stackList[index].identifier)
+            sectionToModify.update({
+
+                title: ""}
+            )
+        }
+        else{
+            const sectionToDelete = database.collection(collectionName).doc(stackList[index].identifier)
+            sectionToDelete.delete()
+        }
+    }
+
+    // stackList is a little redundant, and could probably be done with just taskList and when finding a new sectionIdentifier,
+    // add it to the stack.
+    // However, that feels like it'd be very jank, and  this just works albiet with another state variable to be updated.
+
+    // creating a new section so it doesn't look entirely empty with just a completed section.
+    // You're going to add a section at some point anyways
+
+    // oh I did it cool!
+    // Now, tasks are deleted as well as sections, except for one, which gets basically reset to nothing
+    // to prevent a section from popping in again after it's beeb deleted.
+
     return{
         ...state,
-        stack,
-        sections:newSections
+        sectionsToggled: []
     }
 }
+
+
 
 function getToggledStatus(state, sectionIdentifier){
     const newSections = state.sections.map(x => x)
@@ -423,6 +455,22 @@ function toggleCompletedSection(state){
     }
 }
 
+function setSectionToStack(state, stackList){
+    console.log(stackList)
+    return{
+        ...state,
+        sectionStack: stackList
+    }
+}
+
+function setTasksToStack(state, taskList){
+    console.log(taskList)
+    return{
+        ...state,
+        taskStack: taskList
+    }
+}
+
 
 
 
@@ -448,6 +496,8 @@ export default function toDoReducer(state = initialState, action){
         case GET_TOGGLED: return getToggledStatus(state, action.payload.sectionIdentifier)
         case PUSH_COMPLETED_TASK: return pushCompletedTask(state, action.payload)
         case TOGGLE_COMPLETED_SECTION_BUTTON: return toggleCompletedSection(state)
+        case SET_SECTION_TO_STACK: return setSectionToStack(state, action.payload.stackList)
+        case SET_TASKS_TO_STACK: return setTasksToStack(state, action.payload.taskList)
         default:
             return state 
     }

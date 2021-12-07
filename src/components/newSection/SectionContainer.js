@@ -36,14 +36,12 @@ function SectionContainer(props) {
         fireStoreList = value.docs.map((doc) => {
             return {...doc.data()}
         });
+
+        const allTasks = store.getState().taskStack.map(x => x).filter(task => task.sectionIdentifier !== props.identifier).concat(fireStoreList)
+        TaskDataController.setTasksToStack(allTasks)
+
         const fireStoreCompletedList = fireStoreList.map(x => x).filter(task => task.isCompleted === true)
-        console.log("These should be the section's completed tasks")
-        console.log(fireStoreCompletedList)
         stateCompletedList = store.getState().completedTasks.map(x => x).filter(task => task.sectionIdentifier !== props.identifier).concat(fireStoreCompletedList)
-        console.log('This should be the states completed task list')
-        console.log(stateCompletedList)
-        console.log("These should be all completed tasks!")
-        console.log(stateCompletedList)
         TaskDataController.pushCompletedTask(stateCompletedList)
     }
 

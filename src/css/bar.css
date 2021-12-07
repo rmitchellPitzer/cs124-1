@@ -6,6 +6,20 @@
     content-visibility: hidden;
 }
 
+. barCompleted{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    display: flex;
+    justify-content: left;
+    height: 5vh;
+    background: #FEC5BB;
+    width: 37vw;
+    visibility: hidden;
+    content-visibility: hidden;
+}
+
+
+
 .bar {
     margin-top: 1vh;
     margin-bottom: 1vh;
@@ -105,6 +119,20 @@
     #bartoDo {
         margin-top: 0vh;
         margin-bottom: 0vh;
+        visibility: visible;
+        content-visibility: visible;
+    }
+
+
+
+    .barCompleted {
+        margin-top: 0;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: left;
+        height: 6.25vh;
+        background: #FEC5BB;
+        width: 100vw;
         visibility: visible;
         content-visibility: visible;
     }

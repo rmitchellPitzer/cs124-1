@@ -12,7 +12,7 @@ import CompletedSectionButton from "./completedSectionButton";
 function CompletedSection(props) {
     let cssID = "completed";
     return (
-        <div class={"bar"} id={"bar" + cssID}>
+        <div class={"barCompleted"} id={"bar" + cssID}>
             <CompletedSectionButton text = {props.sectionTitle}/>
             <div
                 aria-label={props.sectionTitle ? "Edit the section title of" + props.sectionTitle : "Edit the title of an empty section"}

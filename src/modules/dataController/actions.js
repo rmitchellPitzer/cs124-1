@@ -26,6 +26,10 @@ export const PUSH_COMPLETED_TASK = "pushCompletedTask"
 
 export const TOGGLE_COMPLETED_SECTION_BUTTON = "toggleCompletedSection"
 
+export const SET_SECTION_TO_STACK = "setSectionToStack"
+
+export const SET_TASKS_TO_STACK = "setTasksToStack"
+
 export const showUndoAction = () => ({type:SHOW_UNDO})
 export const hideUndoAction = () => ({type:HIDE_UNDO})
 export const undoTaskAction = () => ({type:UNDO_TASK})
@@ -60,3 +64,7 @@ export const getToggledStatusAction = (sectionIdentifier) => ({type: GET_TOGGLED
 export const pushCompletedTaskAction = (Task) => ({type: PUSH_COMPLETED_TASK, payload:{Task}})
 
 export const toggleCompletedSectionAction = () => ({type: TOGGLE_COMPLETED_SECTION_BUTTON})
+
+export const setSectionToStackAction = (stackList) => ({type: SET_SECTION_TO_STACK, payload:{stackList}})
+
+export const setTasksToStackAction = (taskList) => ({type: SET_TASKS_TO_STACK, payload:{taskList}})
