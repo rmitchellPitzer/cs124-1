@@ -1,10 +1,8 @@
 import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import TaskDataController from "../../modules/dataController/TaskDataController";
 import store from "../../modules/dataController/store";
 import AppDataController from "../../modules/dataController/AppDataController";
 import { connect } from "react-redux"
-import completedSection from "./completedSection";
 
 
 
@@ -18,8 +16,6 @@ function CompletedSectionButton(props) {
 
     const icon = isToggled ? faAngleDown : faAngleRight
 
-
-    // const sectionText = store.getState().sections.find(section => section.identifier === props.identifier).text
     // // Once again, sectionText is used for the aria-label.
 
     const ariaText = props.text ? props.text : "an empty "
@@ -39,8 +35,6 @@ function CompletedSectionButton(props) {
 
 
 function handleOnClick() {
-    console.log("Pressed")
-    console.log(store.getState().showCompletedTasks)
     AppDataController.toggleCompletedSection()
 }
 

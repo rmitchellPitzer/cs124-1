@@ -17,9 +17,6 @@ function SectionButton(props) {
     const icon = props.toggledState ? faAngleDown : faAngleRight
 
 
-    // const sectionText = store.getState().sections.find(section => section.identifier === props.identifier).text
-    // // Once again, sectionText is used for the aria-label.
-
     const ariaText = props.text ? props.text : "an empty "
     // This was used for getting further parameters without a if else statement.
 

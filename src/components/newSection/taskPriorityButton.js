@@ -4,11 +4,10 @@ import TaskDataController from "../../modules/dataController/TaskDataController"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSort, faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons"
 import "../../css/SectionAddTaskButton.css"
-import store from "../../modules/dataController/store";
 
-
+// The button to change a task's priority level.
 function TaskPriorityButton(props) {
-    // This is a component inside a section's bar that opens a menu to sort that specific section's tasks
+    //
     const sectionText = props.sectionTitle
     let priorityIcon
     if(props.value == 1){

@@ -1,11 +1,7 @@
 import SectionContainer from "./SectionContainer";
-import TaskDataController from "../../modules/dataController/TaskDataController"
 import { connect } from "react-redux"
 import React, { useEffect, useState } from 'react';
-import {collectionName, database} from "../../modules/dataController/firestore";
-import {useCollection} from "react-firebase-hooks/firestore";
 import CompletedSection from "./completedSection";
-import TaskList from "../Tasks/TaskList";
 import store from "../../modules/dataController/store";
 import CompletedSectionsTaskList from "./completedSectionsTaskList";
 
@@ -14,7 +10,7 @@ props:{
     sections: Section
 
  */
-
+// Returns a list of sections
 function SectionList(props){
     if (props.sections){
         return(

@@ -1,7 +1,6 @@
 import TaskDataController from "../../modules/dataController/TaskDataController"
 import "../../css/sideList.css"
-import store from "../../modules/dataController/store";
-console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
 /*
 props: {
     text:string;
@@ -10,11 +9,15 @@ props: {
 }
 */
 
-// this is the sidelistelementtask, which creates the tasks inside the sidelist.
+// these are the completed tasks in the side list completed section.
+// These also need to be read by screen readers, so there's a massive
+// list of stuff to read.
+// I debated whether or not to put priority sort inside the completed tasks
+// list, but I decided against it out of worrying about messing up
+// sorting in other sections.
 
 export default function SideListCompletedSectionTask(props) {
-    console.log("PLEASE RENDER")
-    console.log(props)
+
 
 
     //I felt that, as messy as this code is, I needed to account for any variables when running a screenReader.
@@ -105,8 +108,6 @@ export default function SideListCompletedSectionTask(props) {
             }
         }
     }
-    console.log("This is a completed section's task")
-    console.log(props)
     return (
         <div class="SideListElementTask">
             <input

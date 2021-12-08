@@ -1,5 +1,4 @@
 import TaskDataController from "../../modules/dataController/TaskDataController"
-import store from "../../modules/dataController/store";
 
 /*
 props: {
@@ -9,7 +8,9 @@ props: {
 }
 */
 
-// This creates the individual task for use on mobile displays. It contains a checkbox, and a input text
+// This creates the individual completed task for mobile view.
+// much of this is duplicate code that needs to be separate from
+// the default task type, due to being a special completed task.
 
 export default function CompletedSectionTask(props) {
     const classes = `task-item`
@@ -134,8 +135,5 @@ function handleTextEvent(id, identifier, event) {
 }
 
 function handleCheckBoxEvent(id, identifier, isToggled) {
-    console.log("Checkbox has been pressed.")
-    console.log(id)
-    console.log(identifier)
     TaskDataController.toggleTaskCompletion(id, identifier, isToggled)
 }

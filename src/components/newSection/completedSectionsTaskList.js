@@ -1,4 +1,3 @@
-import CompletedSection from "../newSection/completedSection";
 import CompletedSectionTask from "./completedSectionTask";
 
 
@@ -12,7 +11,7 @@ props:{
 }
 */
 
-// creates the list of tasks within each section visible in mobile view.
+// creates the list of completed Tasks for the completed tasks list
 
 export default function CompletedSectionsTaskList(props) {
 

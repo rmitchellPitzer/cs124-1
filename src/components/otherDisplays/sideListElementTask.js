@@ -106,7 +106,6 @@ export default function SideListElementTask(props) {
         }
     }
 
-    console.log(props)
     return (
         <div class="SideListElementTask" id = {cssID+"markedCompleted"}>
             <input

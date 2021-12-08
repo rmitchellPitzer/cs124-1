@@ -6,7 +6,6 @@ import Header from './components/Header';
 
 import ActionMenu from "./components/Action Commands/ActionMenu";
 import { connect } from "react-redux";
-import UndoButton from "./components/Undo/UndoButton";
 import SectionList from "./components/newSection/SectionList";
 
 
@@ -16,11 +15,9 @@ import SideList from "./components/otherDisplays/sideList";
 import SideBarBackground from "./components/SideBarBackground";
 
 
-import firebase from "firebase/compat";
 import {useCollection} from "react-firebase-hooks/firestore";
 import {database} from "./modules/dataController/firestore"
 import {collectionName} from "./modules/dataController/firestore";
-import store from "./modules/dataController/store";
 import PriorityMenu from "./components/newSection/priorityMenu";
 
 
@@ -36,6 +33,7 @@ function App({menuIsActive, priorityMenuIsActive}) {
     if (value) {
         fireStoreList = value.docs.map((doc) => {
             return {...doc.data()}});
+
     }
 
 

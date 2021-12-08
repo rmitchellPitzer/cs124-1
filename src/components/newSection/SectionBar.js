@@ -16,6 +16,8 @@ export default function SectionBar(props) {
     let cssID;
 
     // cssID determines if the section is the To do section, completed section, or an added section.
+    // lab3 update: There is so much redundant code here and I have 2 days to finish lab5 and I am
+    // Worried I will not have time to clean this up later so, whatever!
 
     const classes = `bar ${props.identifier}`
     if (props.identifier !== 'toDo' && props.identifier !== 'completed'){
@@ -25,6 +27,11 @@ export default function SectionBar(props) {
         cssID = props.identifier; // props.identifier contains either "toDo", "completed", or some uuid string.
     }
 
+
+    // This will return a section bar, containing a button to open and close the tasks,
+    // the section's input box itself.
+    // The priority sort button to sort tasks by priority
+    // the add task button to add tasks to the section
     return (
         <div class={classes} id={"bar" + props.identifier}>
             <SectionButton identifier = {props.identifier}

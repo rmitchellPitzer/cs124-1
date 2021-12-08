@@ -10,8 +10,6 @@ import SideBarCompletedSection from "./sideBarCompletedSection";
 
 function Sidebar(props) {
     if (props.sections) {
-        console.log("These are the sections")
-        console.log(props.sections)
         return (
             <div class="SideBarcontainer">
                 {
@@ -31,11 +29,4 @@ function Sidebar(props) {
     }
 }
 
-// function mapStateToProps(state, ownProps){
-//     return{
-//         sections: TaskDataController.getSections()}
-// }
-//
-//
-// export default connect(mapStateToProps)(Sidebar);
 export default Sidebar

@@ -33,31 +33,16 @@ import {collectionName} from "./firestore";
 import TaskDataController from "./TaskDataController";
 
 
-// import firebase from "firebase/compat";
-// import {useCollection} from "react-firebase-hooks/firestore";
-//
-// // lab 3 work:
-//
-// const firebaseConfig = {
-//     apiKey: "AIzaSyD8bEScFINGaDttxHPcnMbjIPmW64m-4SI",
-//     authDomain: "rmitchellpitzer-hmc-tasks.firebaseapp.com",
-//     projectId: "rmitchellpitzer-hmc-tasks",
-//     storageBucket: "rmitchellpitzer-hmc-tasks.appspot.com",
-//     messagingSenderId: "670939286123",
-//     appId: "1:670939286123:web:3dd28bb7e5badcce873f2e"
-// };
-//
-// firebase.initializeApp(firebaseConfig);
-// const db = firebase.firestore();
 
-
-// const initialState = {
-//     stack:[],
-//     sections: [{text:"To Do", isToggled:false, identifier:"toDo", tasks: []}, {text:"Completed", isToggled:false, identifier:"completed", tasks:[]}],
-//     showUndo: false,
-//     showMenu: false
-// }
-
+// Initial state,
+// sectionStack is used to keep track of sections
+// taskStack is used for deleting tasks instead of querying
+// sections toggled, keeps track of which sections in mobile view are
+// currently being shown
+// show undo, show menu, show... just show what their name is.
+// selectedSection: will contain a section's identifier and name when
+// the priority sort button is pressed, pushing it to the stack so it
+// can be read by other components and altered.
 const initialState = {
     sectionStack:[],
     taskStack: [],
@@ -72,9 +57,7 @@ const initialState = {
 
 
 
-// Gets the sectionID from the section it's called on, creates a new task containing that sectionID, then appends it
-// to the section's tasks list in initialState.
-
+// creates a task using firestore
 function createTask(state, sectionIdentifier) {
     const identifier = uuidv4()
     const taskRef = database.collection(collectionName).doc(sectionIdentifier).collection('tasks').doc(identifier)
@@ -92,8 +75,8 @@ function createTask(state, sectionIdentifier) {
     }
 }
 
-// Deletes a task with the given id.
-
+// Deletes a task with the given id, although I don't think this is used at all.
+// Don't want to delete it yet out of fear of messing up the reducer
 function deleteTask(state,id) {
     const tasks = state.tasks.filter(task => task.id !== id)
     return {
@@ -108,8 +91,7 @@ function deleteTask(state,id) {
 
 
 // Updates a task's text given it's id, section identifier, and text to update it to.
-// identifier is needed to find which section the task will be located in.
-
+// uses firestore.
 function updateTaskText(state,{id, identifier,text}) {
     const taskRef = database.collection(collectionName).doc(identifier).collection('tasks').doc(id)
     taskRef.update({
@@ -121,64 +103,25 @@ function updateTaskText(state,{id, identifier,text}) {
     }
 }
 
-// oh boy this is a doozy.
-// The reason why this function is so big is that it needs to account for when the task that's being checked is not
-// present in the same section as it's section Identifier. While it might have a sectionIdentifier, it might be in
-// the completed section, which means we can not locate the task with it's section identifier.
 
+// Hey this is no longer 100 lines of code!
+// Just gets the task being marked completed, sets it to the opposite of what it's completed status is.
 function toggleTaskCompletion(state,{id, identifier, isToggled}) {
-    console.log(isToggled)
     const taskRef = database.collection(collectionName).doc(identifier).collection('tasks').doc(id)
     taskRef.update({
         isCompleted: (!isToggled)
     })
-    console.log(isToggled)
     return{
         ...state
     }
-
-
-
-
-    // const returnedSections = state.sections.map(x => x)
-    // const sectionWithTask = returnedSections.find(section => section.identifier === identifier)
-    // const taskToChange = sectionWithTask.tasks.find(task => task.id === id)
-    // // create a copy of sections, find the section with the task and then get the task from the section.
-    //
-    // if (!taskToChange){
-    //     // if it's null, the task is not present there, meaning it must be in completed, meaning it's being moved
-    //     // from completed to another section and removed from completed, which happens here.
-    //     const completedSection = returnedSections.find(section => section.identifier === "completed")
-    //     const completedTask = completedSection.tasks.find(task => task.id === id)
-    //     let taskIndex = completedSection.tasks.indexOf(completedTask)
-    //     completedTask.isCompleted = !completedTask.isCompleted
-    //     returnedSections.find(section => section.identifier === identifier).tasks.push(completedTask)
-    //     returnedSections.find(section => section.identifier === "completed").tasks.splice(taskIndex, 1)
-    // }
-    // else{
-    //     // here it's located the task, and is now moving it to the completed section and removing it from it's origin
-    //     // section.
-    //     let taskIndex = sectionWithTask.tasks.indexOf(taskToChange)
-    //     taskToChange.isCompleted = !taskToChange.isCompleted
-    //     returnedSections.find(section => section.identifier === "completed").tasks.push(taskToChange)
-    //     returnedSections.find(section => section.identifier === identifier).tasks.splice(taskIndex, 1)
-    // }
-    //
-    // return {
-    //     ...state,
-    //     sections:returnedSections
-    // }
-
 }
 
-// deletes all tasks from the completed tasks section.
-// stack.push is also here to implement an undo functionality, but this was very broken and eventually settled
-// on not having it work.
+// deletes all tasks that are marked completed.
+// updates firestore
 
 function deleteAllCompletedTasks(state) {
     const completedTasks = state.completedTasks.map(x => x)
     for (const index in completedTasks){
-        console.log(completedTasks[index])
         const taskToDelete = database.collection(collectionName).doc(completedTasks[index].sectionIdentifier).collection('tasks').doc(completedTasks[index].id);
         taskToDelete.delete()
 
@@ -188,7 +131,12 @@ function deleteAllCompletedTasks(state) {
    }
 }
 
-// in the event of an undo button, the sections stored on the stack will be popped and returned to sections.
+// it do not exist.
+// We will no longer be afraid of commitment. What ever happened to
+// pressing an action button, and meaning it, knowing there was no
+// going back? Today, well tonight, well today it's 7 am I need to sleep,
+// Today, we conquer our fears of commitment that have held us back,
+// and proudly remove a requested feature from our app: The undo button.
 
 function undoTask(state) {
     const stack = state.stack.map(x => x)
@@ -247,7 +195,7 @@ function hideUndo(state) {
 // function for creating a section, this will push a new empty section onto the state's sections.
 
 function createSection(state) {
-    // first part creates a new section in firestore, section part creates a section in redux to enable toggled states.
+    // first part creates a new section in firestore.
     const identifier = uuidv4()
     const sectionRef = database.collection(collectionName).doc(identifier)
     sectionRef.set({
@@ -256,35 +204,18 @@ function createSection(state) {
         sortType: 7
     })
 
-    const newToggledSections = state.sectionsToggled.map(x => x)
-    newToggledSections.push(identifier)
 
     return{
         ...state
     }
-
-
-    // by default, istoggled true by default.
-    // Don't want to have users add tasks, and then it's not visible.
-    // decided to scrap code for redux: Figured that if a user changes something on
-    // a device, it should also be visible on another device, which would require
-    // tracking isToggled in firestore.
-
-    // const returnedSectionsToggle = state.sectionsToggled.map(x => x)
-    // returnedSectionsToggle.push({
-    //     identifier: identifier,
-    //     isToggled: true
-    // })
-    // return {
-    //     ... state,
-    //     sectionsToggled: returnedSectionsToggle
-    //
-    // }
 }
 
 
 
-// finds a section via it's sectionIdentifier and uses filter to remove it.
+// it's unneccessary code again.
+// pushing removing a lot of this to lab5 due to time constraints.
+// I would rather have a working app than an app that doesn't work, but has cleaner
+// code.
 
 function deleteSection(state, sectionIdentifier) {
     const sections = state.sections.filter(sections => sections.identifier !== sectionIdentifier)
@@ -310,6 +241,7 @@ function updateSectionText(state,{sectionIdentifier,text}){
 
 // This will toggle whether the section's button is pressed or not, and will show the tasklist or hide it
 // depending on whether it's toggled or not.
+// Also pushes that identifier to the stack if it's toggled, or removes it from it if it isn't toggled.
 
 function toggleSection(state, sectionIdentifier) {
 
@@ -332,9 +264,8 @@ function toggleSection(state, sectionIdentifier) {
     }
 }
 
-// Clears all tasks and sections, and resets them to the default value when loading the page. It also pushes
-// the sections onto the stack because undo functionality works with this but doesn't work with the other one,
-// and I have no idea why.
+// Clears all tasks and sections except one, which it will reset the text and tasks of.
+// This is to avoid a weird thing where sections show up after a short delay.
 
 function clearAll(state){
     const stackList = state.sectionStack
@@ -358,17 +289,6 @@ function clearAll(state){
         }
     }
 
-    // stackList is a little redundant, and could probably be done with just taskList and when finding a new sectionIdentifier,
-    // add it to the stack.
-    // However, that feels like it'd be very jank, and  this just works albiet with another state variable to be updated.
-
-    // creating a new section so it doesn't look entirely empty with just a completed section.
-    // You're going to add a section at some point anyways
-
-    // oh I did it cool!
-    // Now, tasks are deleted as well as sections, except for one, which gets basically reset to nothing
-    // to prevent a section from popping in again after it's beeb deleted.
-
     return{
         ...state,
         sectionsToggled: []
@@ -376,6 +296,7 @@ function clearAll(state){
 }
 
 
+// it do not matter.
 
 function getToggledStatus(state, sectionIdentifier){
     const newSections = state.sections.map(x => x)
@@ -386,72 +307,15 @@ function getToggledStatus(state, sectionIdentifier){
     return sectionWithId.isToggled
 }
 
+// Pushes a task to the state, this command will only be used if the task is marked completed.
 function pushCompletedTask(state, contents){
-    console.log("This should be the completed tasks in the state")
-    console.log(contents.Task)
     return{
         ...state,
         completedTasks: contents.Task
     }
-    // const currentTask = task.Task
-    // const currentCompletedTasks = state.completedTasks.map(x => x)
-    //
-    // if (currentCompletedTasks.length === 0){
-    //     if (currentTask.isCompleted){
-    //
-    //         currentCompletedTasks.push(currentTask)
-    //
-    //         return{
-    //             ...state
-    //         }
-    //     }
-    // }
-    // else if (currentCompletedTasks.filter(completedTask => completedTask.id === currentTask.id).length > 0) {
-    //     console.log("The Task was not in the list")
-    //     if (currentTask.isCompleted){
-    //         console.log("The Task is completed")
-    //         currentCompletedTasks.push(currentTask)
-    //         return{
-    //             ...state,
-    //             completedTasks: currentCompletedTasks
-    //         }
-    //     }
-    // }
-    // console.log("The Task was pushed out :/")
-    // return{
-    //     ...state
-    // }
-    //
-    // // console.log("This is the task!")
-    // // console.log(currentTask)
-    // // if (currentTask.isCompleted){
-    // //     console.log("Task is completed")
-    // //     if (state.completedTasks.includes(currentTask)){
-    // //         console.log("Task is in the currentTask")
-    // //         return{
-    // //             ...state
-    // //         }
-    // //     }
-    // // else{
-    // //         console.log("Task is not in currentTask, is completed")
-    // //         const newSections = state.completedTasks
-    // //         console.log(newSections)
-    // //         newSections.push(currentTask)
-    // //         console.log(newSections)
-    // //         return{
-    // //             ...state,
-    // //             completedTasks: newSections
-    // //         }
-    // //     }
-    // // }
-    // // else{
-    // //     console.log("Task is uncompleted.")
-    // //     return{
-    // //         ...state
-    // //     }
-    // // }
 }
 
+// function to set the completed section's toggle status in mobile view.
 function toggleCompletedSection(state){
     const newToggledStatus = (!state.showCompletedTasks)
     return{
@@ -460,22 +324,25 @@ function toggleCompletedSection(state){
     }
 }
 
+// function to update the stack with a list of sections.
 function setSectionToStack(state, stackList){
-    console.log(stackList)
     return{
         ...state,
         sectionStack: stackList
     }
 }
 
+//refer to line 327, but replace sections with tasks.
 function setTasksToStack(state, taskList){
-    console.log(taskList)
     return{
         ...state,
         taskStack: taskList
     }
 }
 
+// Updates the priority of a task.
+// First part is telling if the priority status is at it's limit, and then setting it to the lowest value.
+// Second part is updating the firestore db
 function updateTaskPriority(state, {id, sectionIdentifier, value}){
     let newValue = 0
     if(value > 2){
@@ -493,6 +360,7 @@ function updateTaskPriority(state, {id, sectionIdentifier, value}){
     }
 }
 
+// pushing the section whose tasks are being sorted to the stack to keep track of.
 function pushSelectedSection(state, {sectionIdentifier, sortType}){
     return{
         ...state,
@@ -500,6 +368,7 @@ function pushSelectedSection(state, {sectionIdentifier, sortType}){
     }
 }
 
+// show priority menu, (state)
 function showPriorityMenu(state){
     return {
         ...state,
@@ -507,20 +376,16 @@ function showPriorityMenu(state){
     }
 }
 
+// same thing, except this resets the selected section as none are being shown.
 function hidePriorityMenu(state){
-    console.log("This is the selected section")
-    console.log(state.selectedSection)
     return {
         ...state,
         selectedSection: [],
         showPriorityMenu: false
     }
 }
-
+// Updates the selected Section's priority sort type. Also resets selected section.
 function setSectionPriority(state, value){
-    console.log(value)
-    console.log("setting the section priority")
-    console.log(state.selectedSection)
     const sectionRef = database.collection(collectionName).doc(state.selectedSection.sectionIdentifier)
     sectionRef.update({
         sortType: value

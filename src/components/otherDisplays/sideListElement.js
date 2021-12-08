@@ -10,6 +10,12 @@ import store from "../../modules/dataController/store";
 // creates the element inside of sidelist, these will contain a section title, a task's checkbox, and a sidelistelement
 // task, which is basically a task but in desktop view.
 
+
+
+// HERES THE NIGHTMARISH SORTING AND GETTING TASKS AND PUSHING TASKS AND COMPLETED TASKS TO THE STATE AGAIN!
+// YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY YOU LOVE TO SEE DUPLICATED CODE, EXACTLY 66 LINES !
+
+// Creates the element inside sidelist that contains a section and it's tasks.
 export default function SideListElement(props) {
 
     const taskRef = database.collection(collectionName).doc(props.identifier).collection('tasks')
@@ -79,7 +85,6 @@ export default function SideListElement(props) {
 
     }
 
-    console.log(fireStoreList)
 
 
     return(

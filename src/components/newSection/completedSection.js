@@ -2,7 +2,8 @@ import "../../css/bar.css"
 import CompletedSectionButton from "./completedSectionButton";
 
 
-
+// This displays the completed section in portrait view.
+// Needs to be a separate section due to it's unique nature.
 function CompletedSection(props) {
     let cssID = "completedSectionText";
     return (

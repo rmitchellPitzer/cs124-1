@@ -3,6 +3,7 @@ import {useCollection} from "react-firebase-hooks/firestore";
 
 // lab 3 work:
 
+// stuff for the firebase config
 
 const firebaseConfig = {
     apiKey: "AIzaSyD8bEScFINGaDttxHPcnMbjIPmW64m-4SI",

@@ -10,8 +10,7 @@ import PrioritySortButton from "../newSection/priorityButton";
 // contains a sideBarButton, an input field for the section title, and a add task button for the section
 
 export default function SideBarElement(props) {
-    console.log("This is a sidebar!")
-    console.log(props)
+
     // cssID determines whether the sidebar is todo, completed, or a added section.
 
     let cssID;
@@ -22,7 +21,6 @@ export default function SideBarElement(props) {
         cssID = props.identifier + "sideBar";
     }
 
-    const checkIfTypeIsCompleted = props.identifier !== "completed"
 
 
 
@@ -50,12 +48,7 @@ export default function SideBarElement(props) {
                 sortType = {props.sortType}/>
             <SectionAddTaskButton
                 identifier = {props.identifier}/>
-            {/*{checkIfTypeIsCompleted && <PrioritySortButton*/}
-            {/*    identifier = {props.identifier}*/}
-            {/*    sectionTitle = {props.title}*/}
-            {/*    sortType = {props.sortType}/>}*/}
-            {/*{checkIfTypeIsCompleted && <SectionAddTaskButton*/}
-            {/*    identifier = {props.identifier}/>}*/}
+
 
         </div>
     )

@@ -7,6 +7,7 @@ import SideListCompletedSection from "./sideListCompletedSection";
 
 
 // Creates the scrollable list on the right side of the viewport made up of sideListElements
+// includes the completed special section as well
 function SideList(props) {
     if (props.sections) {
         return (
@@ -28,12 +29,5 @@ function SideList(props) {
     }
 }
 
-
-// function mapStateToProps(state, ownProps){
-//     return{
-//         sections: TaskDataController.getSections()}
-// }
-//
-// export default connect(mapStateToProps)(SideList)
 
 export default SideList

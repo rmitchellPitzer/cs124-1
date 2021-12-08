@@ -67,7 +67,7 @@ export const toggleSectionAction = (sectionIdentifier) => ({type: TOGGLE_SECTION
 
 export const clearAllSectionsAndTasksAction = () => ({type: CLEAR_ALL})
 
-// function for showing tasks stored in firestore
+// functions for showing tasks stored in firestore or getting section/task properties.
 
 export const getToggledStatusAction = (sectionIdentifier) => ({type: GET_TOGGLED, payload: {sectionIdentifier}})
 
@@ -75,17 +75,20 @@ export const pushCompletedTaskAction = (Task) => ({type: PUSH_COMPLETED_TASK, pa
 
 export const toggleCompletedSectionAction = () => ({type: TOGGLE_COMPLETED_SECTION_BUTTON})
 
+// functions for pushing tasks or sections to the state
+
 export const setSectionToStackAction = (stackList) => ({type: SET_SECTION_TO_STACK, payload:{stackList}})
 
 export const setTasksToStackAction = (taskList) => ({type: SET_TASKS_TO_STACK, payload:{taskList}})
 
-export const updateTaskPriorityAction = (id, sectionIdentifier, value) => ({type: UPDATE_TASK_PRIORITY, payload:{id, sectionIdentifier, value}})
-
-
-export const pushSelectedSectionAction = (sectionIdentifier, sortType ) => ({type: PUSH_SELECTED_SECTION_ACTION, payload:{sectionIdentifier, sortType}})
+// functions for showing priority menu/hiding it/setting the priority/getting the current selected section
 
 export const showPriorityMenuAction = () => ({type: SHOW_PRIORITY_MENU})
 
 export const hidePriorityMenuAction = () => ({type: HIDE_PRIORITY_MENU})
+
+export const pushSelectedSectionAction = (sectionIdentifier, sortType ) => ({type: PUSH_SELECTED_SECTION_ACTION, payload:{sectionIdentifier, sortType}})
+
+export const updateTaskPriorityAction = (id, sectionIdentifier, value) => ({type: UPDATE_TASK_PRIORITY, payload:{id, sectionIdentifier, value}})
 
 export const setSectionPriorityAction = (value) => ({type: SET_SECTION_PRIORITY, payload:{value}})

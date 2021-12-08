@@ -2,31 +2,23 @@ import "../../css/prioritySortButton.css"
 import TaskDataController from "../../modules/dataController/TaskDataController.js"
 import { faMinus, faSortAmountUpAlt, faSortAmountDownAlt } from "@fortawesome/free-solid-svg-icons"
 import AppDataController from "../../modules/dataController/AppDataController.js"
-import {collectionName, database} from "../../modules/dataController/firestore";
-import {useCollection} from "react-firebase-hooks/firestore";
 import store from "../../modules/dataController/store";
 import {connect} from "react-redux";
 import PriorityMenuItem from "./priorityMenuItem";
-import Task from "../Tasks/Task";
 
+// This file is a bit of a doozy.
+// Sort type function gets the current sort type from the state.
+// the state gets this from the current selected section
+// This is used to show how the section is being sorted.
 
-
-let fireStoreList = null;
-
-let selectedSort = null;
-
-
-// const menuItems = [
-//     // Text, commands, and icons present in the action menu.
-//     {text: "A-Z", command: TaskDataController, icon: faPlus},
-//     {text: "Priority Levels", command:deleteAll, icon: faMinus},
-//     {text: "Date Created", command: ClearAll, icon: faMinus},
-//     {text: "Reset Sort", command: ClearAll, icon: faMinus}
-// ]
 function sortType(){
     return(store.getState().selectedSection.sortType)
 }
 
+// Alphasort, and datesort and the rest, are all used to sort
+// by specific parameters. Because the options to sort
+// ascending/descending are there but only if already sorted
+// by that type, we then check if that's the option being chosen.
 
 function alphaSort() {
     let sortValue = store.getState().selectedSection.sortType
@@ -58,6 +50,8 @@ function prioritySort() {
     }
 }
 
+
+// Resets sorting, in case you do not want any sorting.
 function resetSort() {
     console.log(sortType())
     TaskDataController.setSectionPriority(7)
@@ -67,6 +61,8 @@ function resetSort() {
 
 
 
+// Creates the priority sort menu, includes a list of options to choose from
+// includes a title as well to show what sorting is being used.
 
 function PriorityMenu(props, selectedSection) {
 

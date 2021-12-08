@@ -21,10 +21,16 @@ props:
 
 
 
-
+// I am truly embarassed and deeply concerned for what this is.
+// The long list of code below sorts the tasks by whatever sortType
+// is selected. This needs to be done before the tasks are put into
+// the taskList, so below is a long list of all that.
+// Not only that, tasks as well as completed tasks are pushed to the state.
+// This is done so that in clearing all sections and tasks, instead of making
+// many queries, we already have all tasks and sections we need to clear in
+// the state.
+// And then, once that's done, this will return a given section
 function SectionContainer(props) {
-
-    console.log(props)
     const isToggled = (props.isToggledList.includes(props.identifier))
 
     const taskRef = database.collection(collectionName).doc(props.identifier).collection('tasks')
@@ -116,7 +122,7 @@ function mapToState(state, ownProps) {
          isToggledList: store.getState().sectionsToggled,
      }
  }
-//
+
 export default connect(mapToState)(SectionContainer)
 
 

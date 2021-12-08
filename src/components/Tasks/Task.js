@@ -129,9 +129,6 @@ export default function Task(props) {
                 value={props.text}
                 onFocus={(e)=>e.currentTarget.value = props.text}
             />
-            {/*<TaskPriorityButton*/}
-            {/*    sectionTitle = {props.text}*/}
-            {/*    identifier = {props.id}/>*/}
             <TaskPriorityButton
                 sectionTitle = {props.text}
                 sectionIdentifier = {props.sectionIdentifier}
