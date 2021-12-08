@@ -3,7 +3,12 @@ import "../../css/action_list.css"
 import TaskDataController from "../../modules/dataController/TaskDataController.js"
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
 import AppDataController from "../../modules/dataController/AppDataController.js"
+import {collectionName, database} from "../../modules/dataController/firestore";
+import {useCollection} from "react-firebase-hooks/firestore";
 
+
+
+let fireStoreList = null;
 
 /*
 props: {
@@ -24,12 +29,9 @@ function deleteAll() {
 }
 
 function ClearAll() {
-    // Resets the tasks and sections to default and shows the undo prompt for three seconds..
+    // Resets all sections and tasks, gives an empty section
     TaskDataController.clearAllSectionsAndTasks()
-    AppDataController.showUndo()
-    setTimeout( () => {
-        AppDataController.hideUndo()
-    },3000)
+
 }
 
 
@@ -41,6 +43,17 @@ const menuItems = [
 ]
 
 export default function ActionMenu(props) {
+
+    const query = database.collection(collectionName);
+    const [value, loading, error] = useCollection(query);
+    if (value) {
+        fireStoreList = value.docs.map((doc) => {
+            return {...doc.data()}});
+        TaskDataController.setSectionToStack(fireStoreList)
+    }
+
+
+
     // returns a component that contains the commands listed above.
     return (
         <button class='overlay'onClick= {AppDataController.closeMenu}

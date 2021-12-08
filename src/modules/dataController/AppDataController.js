@@ -1,4 +1,17 @@
-import { hideMenuAction, hideUndoAction, showMenuAction, showUndoAction, toggleCompletedListAction, toggleToDoListAction, toggleUndoAction, undoTaskAction } from "./actions.js"
+import {
+    hideMenuAction,
+    hideUndoAction,
+    showMenuAction,
+    showUndoAction,
+    toggleCompletedListAction,
+    toggleToDoListAction,
+    toggleUndoAction,
+    undoTaskAction,
+    toggleCompletedSectionAction,
+    pushSelectedSectionAction,
+    showPriorityMenuAction,
+    hidePriorityMenuAction
+} from "./actions.js"
 import store from "./store.js"
 
 export default class AppDataController {
@@ -27,7 +40,7 @@ export default class AppDataController {
     }
 
     static menuIsActive() {
-        return store.getState().showMenu 
+        return store.getState().showMenu
     }
 
     static toggleCompletedList() {
@@ -52,6 +65,30 @@ export default class AppDataController {
 
     static undoIsActive() {
         return store.getState().showUndo 
+    }
+
+    static toggleCompletedSection() {
+        const action =  toggleCompletedSectionAction()
+        store.dispatch(action)
+    }
+
+    static pushSelectedSection(sectionIdentifier, sortType){
+        const action =  pushSelectedSectionAction(sectionIdentifier, sortType)
+        store.dispatch(action)
+    }
+
+    static priorityMenuIsActive() {
+        return store.getState().showPriorityMenu
+    }
+
+    static showPriorityMenu() {
+        const action = showPriorityMenuAction()
+        store.dispatch(action)
+    }
+
+    static hidePriorityMenu() {
+        const action = hidePriorityMenuAction()
+        store.dispatch(action)
     }
 
 }

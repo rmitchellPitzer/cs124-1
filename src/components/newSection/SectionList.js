@@ -1,34 +1,46 @@
 import SectionContainer from "./SectionContainer";
-import TaskDataController from "../../modules/dataController/TaskDataController"
 import { connect } from "react-redux"
 import React, { useEffect, useState } from 'react';
+import CompletedSection from "./completedSection";
+import store from "../../modules/dataController/store";
+import CompletedSectionsTaskList from "./completedSectionsTaskList";
 
 /*
 props:{
     sections: Section
 
  */
-
+// Returns a list of sections
 function SectionList(props){
-    // Creates the container for displaying sections in a mobile display
-    return(
-        <div class='container'>
-            {
-                props.sections.map(section => {
-                    return <SectionContainer
-                        {...section}
-                        key={section.identifier}
-                    />
-                })
-            }
-        </div>
-    )
+    if (props.sections){
+        return(
+            <div class='container'>
+                {
+                    props.sections.map(section => {
+                        return <SectionContainer
+                            {...section}
+                            key={section.identifier}
+                        />
+                    })
+                }
+            <CompletedSection/>
+            { props.isCompletedTasksToggled &&
+            <CompletedSectionsTaskList tasks={props.completedTasks}/>}
+            </div>
+        )
+    }
+    else{
+        return null
+    }
 }
 
-function mapStateToProps(state, ownProps){
-    // Used to get the sections for sectionList
+// export default SectionList
+
+
+function mapStateToProps(state){
     return{
-        sections: TaskDataController.getSections()}
+        isCompletedTasksToggled: store.getState().showCompletedTasks,
+        completedTasks: store.getState().completedTasks}
 }
 
 export default connect(mapStateToProps)(SectionList)

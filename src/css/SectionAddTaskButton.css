@@ -8,7 +8,8 @@
     outline: none;
     background: #e9e9e9;
     opacity: .8;
-    margin-left: 4vw;}
+    margin-left: .5vw;
+    margin-right: -5vw}
 
 .add-task-button:focus{
     opacity: 1;
@@ -30,8 +31,8 @@
         border: none;
         outline: none;
         background: #e9e9e9;
-        margin-left: 5vh;
-        opacity: .8;
+        margin-left: .4vh;
+        opacity: .6;
     }
 
 }

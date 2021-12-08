@@ -1,13 +1,30 @@
-import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction, clearAllSectionsAndTasksAction } from "./actions"
+import {
+    createTaskAction,
+    deleteAllCompletedTasksAction,
+    deleteTaskAction,
+    toggleTaskCompletionAction,
+    updateTaskTextAction,
+    createSectionAction,
+    deleteSectionAction,
+    updateSectionTextAction,
+    toggleSectionAction,
+    clearAllSectionsAndTasksAction,
+    getToggledStatusAction,
+    pushCompletedTaskAction,
+    setSectionToStackAction,
+    setTasksToStackAction,
+    updateTaskPriorityAction,
+    setSectionPriorityAction
+} from "./actions"
 import store from "./store.js"
 class TaskDataController {
-    static updateTaskText(id, identifier, text) {
-            const action = updateTaskTextAction(id, identifier ,text)
+    static updateTaskText(id, identifier, newText) {
+            const action = updateTaskTextAction(id, identifier ,newText)
             store.dispatch(action)
     }
 
-    static toggleTaskCompletion(id, identifier) {
-        const action = toggleTaskCompletionAction(id, identifier)
+    static toggleTaskCompletion(id, identifier, isToggled) {
+        const action = toggleTaskCompletionAction(id, identifier, isToggled)
         store.dispatch(action)
     }
 
@@ -72,6 +89,37 @@ class TaskDataController {
 
     static clearAllSectionsAndTasks() {
         const action = clearAllSectionsAndTasksAction()
+        store.dispatch(action)
+    }
+
+    static getToggledStatus(sectionIdentifier){
+        const action = getToggledStatusAction(sectionIdentifier)
+        store.dispatch(action)
+    }
+
+    static pushCompletedTask(Task) {
+
+        const action = pushCompletedTaskAction(Task)
+        store.dispatch(action)
+    }
+
+    static setSectionToStack(stackList){
+        const action = setSectionToStackAction(stackList)
+        store.dispatch(action)
+    }
+
+    static setTasksToStack(taskList){
+        const action = setTasksToStackAction(taskList)
+        store.dispatch(action)
+    }
+
+    static updateTaskPriority(id, sectionIdentifier, value){
+        const action = updateTaskPriorityAction(id, sectionIdentifier, value)
+        store.dispatch(action)
+    }
+
+    static setSectionPriority(value){
+        const action = setSectionPriorityAction(value)
         store.dispatch(action)
     }
 

@@ -1,8 +1,4 @@
 import TaskDataController from "../../modules/dataController/TaskDataController"
-import "../../css/sideList.css"
-import store from "../../modules/dataController/store";
-import TaskPriorityButton from "../newSection/taskPriorityButton";
-import SelectionMaintainingInput from "../../modules/dataController/SelectionMaintainingInput";
 
 /*
 props: {
@@ -12,20 +8,21 @@ props: {
 }
 */
 
-// this is the sidelistelementtask, which creates the tasks inside the sidelist.
+// This creates the individual completed task for mobile view.
+// much of this is duplicate code that needs to be separate from
+// the default task type, due to being a special completed task.
 
-export default function SideListElementTask(props) {
+export default function CompletedSectionTask(props) {
+    const classes = `task-item`
     const cssID = props.isCompleted ? 'completedTask' : ''
 
 
-    //I felt that, as messy as this code is, I needed to account for any variables when running a screenReader.
-    // For instance, if a task was empty, was there another way to identify it? Shouldn't the section name also
-    // be returned when using a screen reader?
-    // While very ugly, this means that almost all possible cases have been accounted for.
+
+    // Why hello ugly getAria functions that are 80 lines long! I would love to make these cleaner, but currently
+    // they do what they need to with getting what needs to be returned to the screenReader, and I have one hour
+    // left to turn this in so there it is!
 
     function getAriaCheckbox(){
-        // returns what should be said in the screenReader when the checkbox is focused.
-
         const currentSectionText = props.text
         if (currentSectionText){
             if (props.text){
@@ -66,8 +63,6 @@ export default function SideListElementTask(props) {
     }
 
     function getAriaTask(){
-        // returns what should be said in the screenReader when the task input text is focused.
-
         const currentSectionText = props.text
         if (currentSectionText){
             if (props.text){
@@ -107,29 +102,23 @@ export default function SideListElementTask(props) {
         }
     }
 
+
     return (
-        <div class="SideListElementTask" id = {cssID+"markedCompleted"}>
+        <div class={classes} id = {"markedCompleted"}>
             <input
                 aria-label= {getAriaCheckbox()}
                 alt='task completion status'
-                class='sideListCheckbox'
+                class='checkbox'
                 type="checkbox"
                 value={ props.isCompleted}
-                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
+                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier, props.isCompleted)}
                 checked= {props.isCompleted}
             />
-            <TaskPriorityButton
-                sectionTitle = {props.text}
-                sectionIdentifier = {props.sectionIdentifier}
-                identifier = {props.id}
-                id = {props.id}
-                value = {props.priority}/>
-            <SelectionMaintainingInput
+            <input
                 aria-label={getAriaTask()}
-                class='SideListElementTaskText'
+                class='task-text'
                 type='text'
                 alt='task text'
-                id ={cssID}
                 onChange= { (e) => handleTextEvent(props.id, props.sectionIdentifier,e)}
                 value={props.text}
             />
@@ -139,8 +128,10 @@ export default function SideListElementTask(props) {
 }
 
 function handleTextEvent(id, identifier, event) {
-    const text = event.currentTarget.value
-    TaskDataController.updateTaskText(id, identifier, text)
+
+    const newText = event.currentTarget.value
+
+    TaskDataController.updateTaskText(id, identifier, newText)
 }
 
 function handleCheckBoxEvent(id, identifier, isToggled) {

@@ -6,17 +6,16 @@ import TaskDataController from "../../modules/dataController/TaskDataController"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import "../../css/SectionAddTaskButton.css"
-import store from "../../modules/dataController/store";
 
 
 function SectionAddTaskButton(props) {
-    // This is a component inside a section's bar that adds a task to the associated section.
+    // This is a component inside a section's bar in mobile view that adds a task to the associated section.
 
 
     // sectionText gets the text of the section, needed because sections are identified by a uuid.
     // this is used to determine whether the sectionText is empty, because the screenreader needs to know
     // if a section title is empty instead of just skipping over it.
-    const sectionText = store.getState().sections.find(section => section.identifier === props.identifier).text
+    const sectionText = props.sectionTitle
 
         return (
         <button

@@ -1,8 +1,5 @@
 import TaskDataController from "../../modules/dataController/TaskDataController"
 import "../../css/sideList.css"
-import store from "../../modules/dataController/store";
-import TaskPriorityButton from "../newSection/taskPriorityButton";
-import SelectionMaintainingInput from "../../modules/dataController/SelectionMaintainingInput";
 
 /*
 props: {
@@ -12,10 +9,15 @@ props: {
 }
 */
 
-// this is the sidelistelementtask, which creates the tasks inside the sidelist.
+// these are the completed tasks in the side list completed section.
+// These also need to be read by screen readers, so there's a massive
+// list of stuff to read.
+// I debated whether or not to put priority sort inside the completed tasks
+// list, but I decided against it out of worrying about messing up
+// sorting in other sections.
 
-export default function SideListElementTask(props) {
-    const cssID = props.isCompleted ? 'completedTask' : ''
+export default function SideListCompletedSectionTask(props) {
+
 
 
     //I felt that, as messy as this code is, I needed to account for any variables when running a screenReader.
@@ -106,30 +108,23 @@ export default function SideListElementTask(props) {
             }
         }
     }
-
     return (
-        <div class="SideListElementTask" id = {cssID+"markedCompleted"}>
+        <div class="SideListElementTask">
             <input
                 aria-label= {getAriaCheckbox()}
                 alt='task completion status'
                 class='sideListCheckbox'
                 type="checkbox"
                 value={ props.isCompleted}
-                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
+                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier, props.isCompleted)}
                 checked= {props.isCompleted}
             />
-            <TaskPriorityButton
-                sectionTitle = {props.text}
-                sectionIdentifier = {props.sectionIdentifier}
-                identifier = {props.id}
-                id = {props.id}
-                value = {props.priority}/>
-            <SelectionMaintainingInput
+            <input
                 aria-label={getAriaTask()}
                 class='SideListElementTaskText'
                 type='text'
                 alt='task text'
-                id ={cssID}
+                id = 'completedSectionTaskText'
                 onChange= { (e) => handleTextEvent(props.id, props.sectionIdentifier,e)}
                 value={props.text}
             />

@@ -1,4 +1,5 @@
-﻿
+
+  
 # your design decisions, including their rationale (include images)
 
 -   We first designed our web app in Figma for it's ease of use and because it allowed us to examine our iterative changes. Once we were confident in our final design, we then started creating our html pages using our Figma frames as reference.
@@ -56,6 +57,14 @@ The undo button was moved to the corner, and I am so happy it's there instead of
 I initially wanted window sizes that weren't constrained to portrait phone sizes to have two different sections: A scrollable div on two sides, with one listing the sections and the other the tasks. I wanted the plus button in the corner to only add tasks, with options for adding folders or clearing them elsewhere. While I was able to implement separate scrollable divs, determining the scroll position to determine which section was being viewed and then being able to add a task to that was very very difficult, and would most likely have removed compatibility with some browsers. I was determined to get it working, but I simply did not have enough time to explore all the libraries that could possibly work and try to get them to work. I went for consistency instead, adding a add task button for each section in the sidebar, and getting rid of the added folders button under the To Do.
 The final thing I wanted to add in wider viewports was a third div on the right side to see completed tasks. However, I ultimately abandoned this as I thought the added space for text would be worth more than constantly seeing completed tasks take up half the screen.
 
+**Lab 3 update:** Lab 3 required making a lot of changes to the design that I worried, would add lots of noise or clutter. While it does look a bit more cluttered, I'm happy to say it wasn't nearly as bad as I thought it would be.
+I had a general idea of what I wanted when creating sketches in figma for the app, as seen here
+![figma prototyping.](https://i.imgur.com/WqDL9jj.png) 
+I wasn't sure how to approach indicating priority and where the buttons to change that would be, or what additional things I should sort, like sections.
+Eventually, the app turned out like this: 
+![Hey new design!](https://i.imgur.com/BjWeNWL.png)
+There's another button in the section bar's to open a menu to sort by priority. On top of that, there's a button in the tasks themselves to sort by priority. I also changed the colors of the section bars to all be a light green hue. In the future I hope to be able to create a list of colors that could be looped through to change sections automatically.
+I also made the colors in the tasks a similar orange hue to what was originally in the to do section. It adds a bit of color, and contrasts nicely with the background, as opposed to what it normally was, which was a white background.
 
 # any user testing you did
 
@@ -73,6 +82,8 @@ The final thing I wanted to add in wider viewports was a third div on the right 
 - **Lab 2 Update:** While we performed user testing once again, the results were largely the same as our design hadn't changed much. Thus, we decided to follow lab1's outline. 
 
 - **Lab 4 Update:** I would like to say that while some user testing was done, a bulk of the feedback was obtained through Professor Rhodes, which was greatly appreciated in getting the design back on track. User testing from others showed the design to largely be accepted, with some changes to elements' sizes and font size.
+- **Lab 3 Update:** More user testing! While this identified some things that I wasn't sure how I could fix, like the priority button not clearly indicating priority, it did lead to some css fixes, like text being centered better and icons being spaced properly. 
+![Cool new icons as well!](https://i.imgur.com/VXKVvih.png)
 
 
 # the final design, including screen images and the flow for each task.
@@ -118,6 +129,8 @@ The final thing I wanted to add in wider viewports was a third div on the right 
 
 - **Lab 4 update:** a github pages link can be found here: [github Pages link](https://rmitchellpitzer.github.io/cs124-1/), and the video for showing it being used with a screenreader and keyboard can be viewed here: [youtube video link](https://youtu.be/IwgU1hz7_Fc). There's also an image linked here to view the design in landscape mode: ![the app!](https://i.imgur.com/PDqmLJ0.png)
 
+**Lab 3 update:**  a github pages link can be found here: [github Pages link](https://rmitchellpitzer.github.io/cs124-1/)
+
 # Challenges you faced
 
 -   Some challenges we faced includes everything described above in alternative designs, but also setting up the html webapp. Originally we wanted to create the html pages using a React application, but React would not work. When designing the webapp we also found ourselves getting into the, as described in don’t make me think, “religious debates” about which design choice was better. When this would occur, we’d generally fallback on what convention says, and this helped us greatly.
@@ -133,6 +146,12 @@ The final thing I wanted to add in wider viewports was a third div on the right 
 But it completely paid off. I am much more comfortable with React and I've really warmed up to javascript, I've learned about more packages and feel way more comfortable with designing a webpage and then creating it.
 Beyond catching up, some of the challenges faced were trying to determine when sections were visible on screen (this was immensely difficult and I had to forgoe this), altering css already written to fit into my design, understanding redux and how state changes work, making sure the design of the mobile view was consistent with the view of the portrait and desktop view, and finally, right before I was set to submit my project, I had to troubleshoot github pages for hours, and once that was done, figure out why items had vanished on github pages, but not on the local copy.
 
+**Lab 3 Update:** Once again, This lab was very very difficult, and I am very proud of how this turned out. Finals are approaching, and I have spent a lot of time working on this, but less time than Lab 4 and I had gotten this lab done much faster than I did lab 4. 
+I think the hardest part of this lab was definitely adapting to firestore. Coming from Redux, I expected some syntax or some similar abilities in altering documents or collections, but it could be frustrating at times, which required lots of learning and troubleshooting. This could include sections being deleted but their tasks still being present, or getting the wrong datarefs, or wrestling with useCollection to work,  or maps not working for whatever reason.
+There was also the problem of design, as I did not want the app's design to be too cluttered. I think I did a good job at not having it be as cluttered, but it still does look more cluttered than lab4.
+I also made the decision to axe renaming the completed section. While I am a huge fan of how much this app can be altered or changed to fit a specific need, I think the implementation would be a bit clunky, as you'd need to store it in another document or collection in Firestore to keep track of the completed section text. it can definitely be done, I'm just worried about complications that might introduce to firestore data. I'll probably try to add it back in in Lab5.
+I also struggled with trying to fix some tasks' text being altered as you type through it and it being sorted, but the Piazza post showed exactly how to fix this.  
+
 # Parts of the design you're most proud of
 
 
@@ -142,5 +161,6 @@ Beyond catching up, some of the challenges faced were trying to determine when s
 - **Lab 2 update** I think the parts of the design we're most proud of is the undo button we implemented. While  we didn't necessarily need an undo button and the app worked fine without it, it does add user forgiveness. This meant implementing a stack to keep track of our cleared tasks which could be re added to our taskList. I'm also very happy it just works, and I think I'm most proud of that as well. 
 
 - **Lab 4 update** Honestly, there's so much more I wish I could have put into this and wish I could have learned how to do. I wish I could have figured out how to tell when things are on screen, and to add more styling to the sidebar in a way that didn't conflict with flexboxes, but I have spent so much time on this lab that I am so proud to finally turn this in. This has been so much work, and while I know there will be so much more work in getting firebase and user log in working, I can not wait to finally get that finished as well. 
-also I'm very proud of the way it looks in landscape mode. it just seems to fill the viewport way more, and I'm also very proud of the customizability of it. I feel that being able to add sections and change all section names makes it more versatile in what it can be used for instead of just a tasks app. 
+also I'm very proud of the way it looks in landscape mode. it just seems to fill the viewport way more, and I'm also very proud of the customizability of it. I feel that being able to add sections and change all section names makes it more versatile in what it can be used for instead of just a tasks app.
 
+**Lab 3 Update:** I think I'm really proud of the whole design. I really really like how the priority menu looks now, with options for sorting having icons showing whether it will be sorted descending or ascending. I also like the new colors in the priority task button. 

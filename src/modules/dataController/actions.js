@@ -19,6 +19,27 @@ export const TOGGLE_SECTION = "toggleSection"
 
 export const CLEAR_ALL = "clearAllSectionsAndTasks"
 
+export const GET_TOGGLED = "getToggledStatus"
+
+
+export const PUSH_COMPLETED_TASK = "pushCompletedTask"
+
+export const TOGGLE_COMPLETED_SECTION_BUTTON = "toggleCompletedSection"
+
+export const SET_SECTION_TO_STACK = "setSectionToStack"
+
+export const SET_TASKS_TO_STACK = "setTasksToStack"
+
+export const UPDATE_TASK_PRIORITY = "updateTaskPriority"
+
+export const PUSH_SELECTED_SECTION_ACTION = "pushSelectedSectionAction"
+
+export const SHOW_PRIORITY_MENU = "showPriorityMenu"
+
+export const HIDE_PRIORITY_MENU = "hidePriorityMenu"
+
+export const SET_SECTION_PRIORITY = "setSectionPriority"
+
 export const showUndoAction = () => ({type:SHOW_UNDO})
 export const hideUndoAction = () => ({type:HIDE_UNDO})
 export const undoTaskAction = () => ({type:UNDO_TASK})
@@ -27,7 +48,7 @@ export const hideMenuAction = () => ({type:HIDE_MENU})
 export const createTaskAction = (sectionIdentifier) => ({type:CREATE_TASK, payload:{sectionIdentifier}})
 export const deleteTaskAction = (id) => ({type:DELETE_TASK, payload:{id}})
 export const updateTaskTextAction = (id, identifier, text) => ({type: UPDATE_TASK_TEXT,payload: {id, identifier, text}})
-export const toggleTaskCompletionAction = (id, identifier) => ({type: TOGGLE_TASK_COMPLETION,payload:{id, identifier}})
+export const toggleTaskCompletionAction = (id, identifier, isToggled) => ({type: TOGGLE_TASK_COMPLETION,payload:{id, identifier, isToggled}})
 export const deleteAllCompletedTasksAction = () => ({type: DELETE_ALL_COMPLETED_TASK})
 export const toggleCompletedListAction = () => ({type:TOGGLE_COMPLETED_LIST})
 export const toggleToDoListAction = () => ({type:TOGGLE_TODO_LIST})
@@ -45,3 +66,29 @@ export const toggleSectionAction = (sectionIdentifier) => ({type: TOGGLE_SECTION
 // function for clearing all sections and resetting all
 
 export const clearAllSectionsAndTasksAction = () => ({type: CLEAR_ALL})
+
+// functions for showing tasks stored in firestore or getting section/task properties.
+
+export const getToggledStatusAction = (sectionIdentifier) => ({type: GET_TOGGLED, payload: {sectionIdentifier}})
+
+export const pushCompletedTaskAction = (Task) => ({type: PUSH_COMPLETED_TASK, payload:{Task}})
+
+export const toggleCompletedSectionAction = () => ({type: TOGGLE_COMPLETED_SECTION_BUTTON})
+
+// functions for pushing tasks or sections to the state
+
+export const setSectionToStackAction = (stackList) => ({type: SET_SECTION_TO_STACK, payload:{stackList}})
+
+export const setTasksToStackAction = (taskList) => ({type: SET_TASKS_TO_STACK, payload:{taskList}})
+
+// functions for showing priority menu/hiding it/setting the priority/getting the current selected section
+
+export const showPriorityMenuAction = () => ({type: SHOW_PRIORITY_MENU})
+
+export const hidePriorityMenuAction = () => ({type: HIDE_PRIORITY_MENU})
+
+export const pushSelectedSectionAction = (sectionIdentifier, sortType ) => ({type: PUSH_SELECTED_SECTION_ACTION, payload:{sectionIdentifier, sortType}})
+
+export const updateTaskPriorityAction = (id, sectionIdentifier, value) => ({type: UPDATE_TASK_PRIORITY, payload:{id, sectionIdentifier, value}})
+
+export const setSectionPriorityAction = (value) => ({type: SET_SECTION_PRIORITY, payload:{value}})
