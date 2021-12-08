@@ -1,16 +1,10 @@
-import store from "../../modules/dataController/store";
-import {connect} from "react-redux";
 import "../../css/bar.css"
-import SectionButton from "./SectionButton";
-import SectionAddTaskButton from "./sectionAddTask";
-import TaskDataController from "../../modules/dataController/TaskDataController";
-import AppDataController from "../../modules/dataController/AppDataController";
 import CompletedSectionButton from "./completedSectionButton";
 
 
 
 function CompletedSection(props) {
-    let cssID = "completed";
+    let cssID = "completedSectionText";
     return (
         <div class={"barCompleted"} id={"bar" + cssID}>
             <CompletedSectionButton text = {props.sectionTitle}/>
@@ -25,14 +19,5 @@ function CompletedSection(props) {
         </div>)
 }
 
-// function mapToState(state, ownProps) {
-//     console.log("Getting all the completedTasks")
-//     console.log(store.getState().completedTasks)
-//     return {
-//         completedTasks: store.getState().completedTasks
-//     }
-// }
-//
-// export default connect(mapToState)(CompletedSection)
 
 export default CompletedSection

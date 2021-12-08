@@ -34,7 +34,8 @@ function handleOnClick(identifier) {
     // handles scrolling to the element, uses scrollIntoView to acomplish this.
     // this should work on all popular platforms minus internet explorer, and
     // safari won't support the options like smooth, block, and inline.
-
+    console.log("This is What the completed section's id should be.")
+    console.log(identifier + "list")
     let sectionToScrollTo = document.getElementById(identifier+"list");
     sectionToScrollTo.scrollIntoView({behavior: "smooth", block: "start", inline: "start"})
 }

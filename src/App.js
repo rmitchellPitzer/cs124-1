@@ -24,10 +24,12 @@ import store from "./modules/dataController/store";
 import PriorityMenu from "./components/newSection/priorityMenu";
 
 
-function App({menuIsActive,showUndo, priorityMenuIsActive}) {
-    // contains a header, a background for the sidebar,and a div for displaying the
-    // sidebar and sidelist in desktop view next to eachother.
+function App({menuIsActive, priorityMenuIsActive}) {
+    // gets different menu's status's from the redux state
+    // Undo is not used at all.
 
+
+    // Get the sections information from firestore
     const query = database.collection(collectionName);
     const [value, loading, error] = useCollection(query);
     let fireStoreList = null;
@@ -37,7 +39,8 @@ function App({menuIsActive,showUndo, priorityMenuIsActive}) {
     }
 
 
-
+// Returns both a widescreen format for tablets/desktops/landscape mode and a portrait mode
+    // depending on screen orientation.
   return (
     <div class='hello'>
       <Header/>
@@ -49,14 +52,13 @@ function App({menuIsActive,showUndo, priorityMenuIsActive}) {
         </div>
         <SectionList sections = {fireStoreList}/>
       { menuIsActive && <ActionMenu/> }
-        { showUndo && <UndoButton/> }
         { priorityMenuIsActive && <PriorityMenu/>}
       <ActionButton/>
     </div>
   );
 }
 
-
+// Getting those stuffs.
 function mapToState(state) {
 
         return {

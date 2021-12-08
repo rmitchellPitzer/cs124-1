@@ -4,7 +4,7 @@
 .action-container {
     position: fixed;
     width: 400px;
-    top: calc(100vh - 265px);
+    top: calc(100vh - 245px);
     left: calc(100vw - 450px);
     background: #e1e1e1;
     padding: 20px;
@@ -57,6 +57,10 @@
     font-family: "Roboto";
     margin-bottom: 20px;
 
+}
+
+.ActionIcon{
+    margin-right: 5px;
 }
 
 .action-item:focus{

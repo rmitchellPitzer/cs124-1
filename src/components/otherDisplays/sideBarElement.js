@@ -44,12 +44,18 @@ export default function SideBarElement(props) {
                 // alt='Section text'
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.title}/>
-            {checkIfTypeIsCompleted && <PrioritySortButton
+            <PrioritySortButton
                 identifier = {props.identifier}
                 sectionTitle = {props.title}
-                sortType = {props.sortType}/>}
-            {checkIfTypeIsCompleted && <SectionAddTaskButton
-                identifier = {props.identifier}/>}
+                sortType = {props.sortType}/>
+            <SectionAddTaskButton
+                identifier = {props.identifier}/>
+            {/*{checkIfTypeIsCompleted && <PrioritySortButton*/}
+            {/*    identifier = {props.identifier}*/}
+            {/*    sectionTitle = {props.title}*/}
+            {/*    sortType = {props.sortType}/>}*/}
+            {/*{checkIfTypeIsCompleted && <SectionAddTaskButton*/}
+            {/*    identifier = {props.identifier}/>}*/}
 
         </div>
     )

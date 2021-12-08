@@ -12,7 +12,9 @@ props: {
 
 // this is the sidelistelementtask, which creates the tasks inside the sidelist.
 
-export default function sideListCompletedSectionTask(props) {
+export default function SideListCompletedSectionTask(props) {
+    console.log("PLEASE RENDER")
+    console.log(props)
 
 
     //I felt that, as messy as this code is, I needed to account for any variables when running a screenReader.
@@ -113,7 +115,7 @@ export default function sideListCompletedSectionTask(props) {
                 class='sideListCheckbox'
                 type="checkbox"
                 value={ props.isCompleted}
-                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
+                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier, props.isCompleted)}
                 checked= {props.isCompleted}
             />
             <input
@@ -121,7 +123,7 @@ export default function sideListCompletedSectionTask(props) {
                 class='SideListElementTaskText'
                 type='text'
                 alt='task text'
-                id = ''
+                id = 'completedSectionTaskText'
                 onChange= { (e) => handleTextEvent(props.id, props.sectionIdentifier,e)}
                 value={props.text}
             />

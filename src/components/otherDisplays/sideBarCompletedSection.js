@@ -24,12 +24,12 @@ export default function SideBarCompletedSection(props) {
             class="sideBarElement"
             id={cssID}>
             <SideBarButton
-                identifier = {cssID}
+                identifier = "completedSectionHeader"
                 title = "Completed"/>
             <div
                 aria-label="This is the Completed Section Text"
                 class="bar-title"
-                id={cssID}
+                id="completedsideBar1"
                 // class="bar-title"
                 type='text'
                 alt='task text'

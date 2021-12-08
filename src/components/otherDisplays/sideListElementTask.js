@@ -1,6 +1,7 @@
 import TaskDataController from "../../modules/dataController/TaskDataController"
 import "../../css/sideList.css"
 import store from "../../modules/dataController/store";
+import TaskPriorityButton from "../newSection/taskPriorityButton";
 
 /*
 props: {
@@ -117,6 +118,11 @@ export default function SideListElementTask(props) {
                 onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
                 checked= {props.isCompleted}
             />
+            <TaskPriorityButton
+                sectionTitle = {props.text}
+                sectionIdentifier = {props.sectionIdentifier}
+                identifier = {props.id}
+                value = {props.priority}/>
             <input
                 aria-label={getAriaTask()}
                 class='SideListElementTaskText'

@@ -53,9 +53,10 @@
     font-weight: 400;
     font-size: 35px;
     visibility: visible;
+    margin-left: 3vw;
     content-visibility: visible;
     display: block;
-    width: 50vw;
+    width: 46vw;
     border-radius: 10px;
 }
 
@@ -78,6 +79,13 @@
     content-visibility: visible;
     display: block;
 }
+
+
+#completedSectionTaskText{
+    margin-left: 1vw;
+    width: 49.5vw;
+}
+
 
 @media screen and (max-width: 600px) and (max-height: 1000px) {
     .SideListContainer{

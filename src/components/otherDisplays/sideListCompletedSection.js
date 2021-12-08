@@ -6,7 +6,7 @@ import {useCollection} from "react-firebase-hooks/firestore";
 import store from "../../modules/dataController/store";
 import CompletedSectionTask from "../newSection/completedSectionTask";
 import {connect} from "react-redux";
-import sideListCompletedSectionTask from "./sideListCompletedSectionTask";
+import SideListCompletedSectionTask from "./sideListCompletedSectionTask";
 
 
 
@@ -14,36 +14,89 @@ import sideListCompletedSectionTask from "./sideListCompletedSectionTask";
 // task, which is basically a task but in desktop view.
 
 function SideListCompletedSection(props) {
-    console.log(props.completedTasks)
-    console.log("Completed tasks above!")
-    return(
+
+        return (
             <div
                 class="SideListElement"
-                aria-label="This is the completed section"
-                id = "completedlist">
+                aria-label="This is a Completed Section Header"
+                id = "completedSectionHeaderlist">
                 <div
-                    aria-label={props.title ? "Edit the title for section " + props.title : "edit the title for a section without a title."}
+                    aria-label="This is the completed Section Header"
                     className="sideListTitle"
                     // class="bar-title"
                     type='text'
-                    alt='Completed text'
+                    alt='task text'
                     // alt='Section text'
                     value="Completed"
                 >Completed</div>
-                <div class='sideListTask'>{
-                    props.completedTasks.map(task => {
-                        console.log(task)
-                        return <sideListCompletedSectionTask
-                            {...task}
-                            key={task.id}
-                        />
-                    })
-                }
-
+                <div>{
+                props.completedTasks.map(task => {
+                    return <SideListCompletedSectionTask
+                        {...task}
+                        key={task.id}
+                    />
+                })}
                 </div>
             </div>
-    )
+        )
+    // else{
+    //     return null
+    // }
 }
+// return (
+//     <div> Completed
+//         <SideListCompletedSectionTask
+//             isCompleted={props.completedTasks[0].isCompleted}
+//             sectionIdentifier={props.completedTasks[0].sectionIdentifier}
+//             id={props.completedTasks[0].id}
+//             priority={props.completedTasks[0].priority}
+//             text={props.completedTasks[0].text}
+//             timeMade={props.completedTasks[0].timeMade}
+//
+//         />
+//     </div>
+// )
+
+
+
+// function SideListCompletedSection(props) {
+//     console.log(props.completedTasks)
+//     console.log("Completed tasks above!")
+//     return(
+//         <div
+//             class="SideListElement"
+//             aria-label="This is the completed section"
+//             id = "completedlist">
+//             <input
+//                 aria-label={props.title ? "Edit the title for section " + props.title : "edit the title for a section without a title."}
+//                 className="sideListTitle"
+//                 // class="bar-title"
+//                 type='text'
+//                 alt='Completed text'
+//                 // alt='Section text'
+//                 value="Completed"
+//             />
+//             {/*<div class='sideListTask'>{*/}
+//             <div>{
+//                 props.completedTasks.map(task => {
+//                     return <SideListCompletedSectionTask
+//                         {...task}
+//                         key={task.id}
+//                     />
+//                 })
+//             }
+//
+//             </div>
+//         </div>
+//     )
+// }
+
+
+
+
+
+
+
 
 function mapStateToProps(state){
     return{

@@ -29,11 +29,9 @@ function deleteAll() {
 }
 
 function ClearAll() {
+    // Resets all sections and tasks, gives an empty section
     TaskDataController.clearAllSectionsAndTasks()
-    // AppDataController.showUndo()
-    // setTimeout( () => {
-    //     AppDataController.hideUndo()
-    // },3000)
+
 }
 
 
