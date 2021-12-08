@@ -21,9 +21,10 @@ import {useCollection} from "react-firebase-hooks/firestore";
 import {database} from "./modules/dataController/firestore"
 import {collectionName} from "./modules/dataController/firestore";
 import store from "./modules/dataController/store";
+import PriorityMenu from "./components/newSection/priorityMenu";
 
 
-function App({menuIsActive,showUndo}) {
+function App({menuIsActive,showUndo, priorityMenuIsActive}) {
     // contains a header, a background for the sidebar,and a div for displaying the
     // sidebar and sidelist in desktop view next to eachother.
 
@@ -41,14 +42,15 @@ function App({menuIsActive,showUndo}) {
     <div class='hello'>
       <Header/>
       <SideBarBackground/>
-        {/*<div className="wideScreenDisplay">*/}
-        {/*    <div className="Sidebar"><Sidebar/></div>*/}
-        {/*    <div className="Sidelist"><SideList/></div>*/}
+        <div className="wideScreenDisplay">
+            <div className="Sidebar"><Sidebar sections = {fireStoreList}/></div>
+            <div className="Sidelist"><SideList sections = {fireStoreList}/></div>
 
-        {/*</div>*/}
+        </div>
         <SectionList sections = {fireStoreList}/>
       { menuIsActive && <ActionMenu/> }
         { showUndo && <UndoButton/> }
+        { priorityMenuIsActive && <PriorityMenu/>}
       <ActionButton/>
     </div>
   );
@@ -59,7 +61,9 @@ function mapToState(state) {
 
         return {
             menuIsActive: AppDataController.menuIsActive(),
-            showUndo: AppDataController.undoIsActive()
+            showUndo: AppDataController.undoIsActive(),
+            priorityMenuIsActive: AppDataController.priorityMenuIsActive(),
+
         }
 }
 

@@ -23,7 +23,9 @@ import {
     PUSH_COMPLETED_TASK,
     TOGGLE_COMPLETED_SECTION_BUTTON,
     SET_SECTION_TO_STACK,
-    SET_TASKS_TO_STACK
+    SET_TASKS_TO_STACK,
+    UPDATE_TASK_PRIORITY,
+    PUSH_SELECTED_SECTION_ACTION, SHOW_PRIORITY_MENU, HIDE_PRIORITY_MENU, SET_SECTION_PRIORITY
 } from './actions';
 
 import {database} from "./firestore";
@@ -63,7 +65,9 @@ const initialState = {
     completedTasks: [],
     showUndo: false,
     showMenu: false,
-    showCompletedTasks: false
+    showPriorityMenu: false,
+    showCompletedTasks: false,
+    selectedSection: []
 }
 
 
@@ -81,7 +85,7 @@ function createTask(state, sectionIdentifier) {
         isCompleted: false,
         text: "",
         timeMade: new Date(),
-        priority: 0
+        priority: 2
     })
     return{
         ...state
@@ -249,6 +253,7 @@ function createSection(state) {
     sectionRef.set({
         identifier: identifier,
         title: "",
+        sortType: 7
     })
 
     const newToggledSections = state.sectionsToggled.map(x => x)
@@ -471,6 +476,61 @@ function setTasksToStack(state, taskList){
     }
 }
 
+function updateTaskPriority(state, {id, sectionIdentifier, value}){
+    let newValue = 0
+    if(value > 2){
+        newValue = 1
+    }
+    else{
+        newValue = value + 1
+    }
+    const TaskRef = database.collection(collectionName).doc(sectionIdentifier).collection('tasks').doc(id)
+    TaskRef.update({
+        priority: newValue
+    })
+    return{
+        ...state
+    }
+}
+
+function pushSelectedSection(state, {sectionIdentifier, sortType}){
+    return{
+        ...state,
+        selectedSection: {sectionIdentifier, sortType}
+    }
+}
+
+function showPriorityMenu(state){
+    return {
+        ...state,
+        showPriorityMenu: true
+    }
+}
+
+function hidePriorityMenu(state){
+    console.log("This is the selected section")
+    console.log(state.selectedSection)
+    return {
+        ...state,
+        selectedSection: [],
+        showPriorityMenu: false
+    }
+}
+
+function setSectionPriority(state, value){
+    console.log(value)
+    console.log("setting the section priority")
+    console.log(state.selectedSection)
+    const sectionRef = database.collection(collectionName).doc(state.selectedSection.sectionIdentifier)
+    sectionRef.update({
+        sortType: value
+    })
+    return{
+        ...state,
+        selectedSection: [],
+        showPriorityMenu: false
+    }
+}
 
 
 
@@ -498,6 +558,11 @@ export default function toDoReducer(state = initialState, action){
         case TOGGLE_COMPLETED_SECTION_BUTTON: return toggleCompletedSection(state)
         case SET_SECTION_TO_STACK: return setSectionToStack(state, action.payload.stackList)
         case SET_TASKS_TO_STACK: return setTasksToStack(state, action.payload.taskList)
+        case UPDATE_TASK_PRIORITY: return updateTaskPriority(state, action.payload)
+        case PUSH_SELECTED_SECTION_ACTION: return pushSelectedSection(state, action.payload)
+        case SHOW_PRIORITY_MENU: return showPriorityMenu(state)
+        case HIDE_PRIORITY_MENU: return hidePriorityMenu(state)
+        case SET_SECTION_PRIORITY: return setSectionPriority(state, action.payload.value)
         default:
             return state 
     }

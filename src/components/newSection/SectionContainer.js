@@ -24,6 +24,7 @@ props:
 
 function SectionContainer(props) {
 
+    console.log(props)
     const isToggled = (props.isToggledList.includes(props.identifier))
 
     const taskRef = database.collection(collectionName).doc(props.identifier).collection('tasks')
@@ -43,64 +44,55 @@ function SectionContainer(props) {
         const fireStoreCompletedList = fireStoreList.map(x => x).filter(task => task.isCompleted === true)
         stateCompletedList = store.getState().completedTasks.map(x => x).filter(task => task.sectionIdentifier !== props.identifier).concat(fireStoreCompletedList)
         TaskDataController.pushCompletedTask(stateCompletedList)
+
+        if(props.sortType < 7){
+            if(props.sortType === 1){
+                fireStoreList.sort(function(task1, task2) {
+                    let task1Text = task1.text.toUpperCase();
+                    let task2Text = task2.text.toUpperCase();
+                    return (task1Text < task2Text) ? -1 : (task1Text > task2Text) ? 1 : 0;
+                });
+            }
+            else if(props.sortType === 2){
+                fireStoreList.sort(function(task1, task2) {
+                    let task1Text = task1.text.toUpperCase();
+                    let task2Text = task2.text.toUpperCase();
+                    return (task1Text > task2Text) ? -1 : (task1Text > task2Text) ? 1 : 0;
+                });
+            }
+            else if(props.sortType === 3) {
+                    fireStoreList.sort(function(task1, task2) {
+                        let task1date = task1.timeMade;
+                        let task2date = task2.timeMade;
+                        return (task1date < task2date) ? -1 : (task1date > task2date) ? 1 : 0;
+                    });
+                }
+            else if(props.sortType === 4){
+                fireStoreList.sort(function(task1, task2) {
+                    let task1date = task1.timeMade;
+                    let task2date = task2.timeMade;
+                    return (task1date > task2date) ? -1 : (task1date > task2date) ? 1 : 0;
+                });
+            }
+            else if(props.sortType === 5){
+                fireStoreList.sort(function(task1, task2) {
+                    let task1priority = task1.priority;
+                    let task2priority = task2.priority;
+                    return (task1priority > task2priority) ? -1 : (task1priority > task2priority) ? 1 : 0;
+                });
+            }
+            else if(props.sortType === 6){
+                fireStoreList.sort(function(task1, task2) {
+                    let task1priority = task1.priority;
+                    let task2priority = task2.priority;
+                    return (task1priority < task2priority) ? -1 : (task1priority > task2priority) ? 1 : 0;
+                });
+            }
+        }
+
+
+
     }
-
-
-        // kill me.
-
-        // let completedTaskList = [];
-        // for (let index = 0; index < fireStoreList.length; index++) {
-        //     console.log("Here's all the section tasks")
-        //     console.log(fireStoreList[index])
-        //     if (fireStoreList[index].isCompleted) {
-        //         completedTaskList.push(fireStoreList[index])}}
-        // let stateTasks = store.getState().completedTasks
-        //
-        // for (let Taskindex = 0; Taskindex < completedTaskList.length; Taskindex++) {
-        //     console.log(stateTasks)
-        //     if (stateTasks.length === 0){
-        //         console.log("Pushed 1")
-        //         console.log(completedTaskList[Taskindex])
-        //         TaskDataController.pushCompletedTask(completedTaskList[Taskindex])
-        //     }
-        //     else{
-        //         console.log("pushed 2")
-        //         for (let stateIndex = 0; stateIndex < stateTasks.length; stateIndex++) {
-        //             console.log("Pushed 3")
-        //             if (!(stateTasks[stateIndex].id === completedTaskList[Taskindex].id)){
-        //                 console.log("Pushed 4")
-        //                 TaskDataController.pushCompletedTask(completedTaskList[Taskindex])
-        //             }
-        //         }
-        //     }
-        //
-        //
-        //         console.log("Here's all the completed tasks")
-        //
-        //         console.log(stateTasks)
-
-
-
-                // for (let stateIndex = 0; stateIndex < stateTasks.length; stateIndex++) {
-                //     if (!(stateTasks[stateIndex].id === fireStoreList[index].id)) {
-                //         TaskDataController.pushCompletedTask(fireStoreList[index])
-                //     }
-                // }
-                // if(!store.getState().completedTasks.includes(fireStoreList[index])){
-                //     console.log((!store.getState().completedTasks.includes(fireStoreList[index])))
-                //     console.log("This is the state.")
-                //     console.log(store.getState().completedTasks)
-                //     console.log("This is the task.")
-                //     console.log(fireStoreList[index])
-                //     TaskDataController.pushCompletedTask(fireStoreList[index])
-
-
-    //
-    //
-    // console.log("Here's the completed tasks!")
-    // console.log(store.getState().completedTasks)
-
-
 
 
     return (
@@ -109,6 +101,7 @@ function SectionContainer(props) {
                 sectionTitle = {props.title}
                 className={props.identifier}
                 identifier ={props.identifier}
+                sortType = {props.sortType}
                 isToggled ={isToggled}
                 />}
             { isToggled && fireStoreList &&
@@ -126,53 +119,4 @@ function mapToState(state, ownProps) {
 //
 export default connect(mapToState)(SectionContainer)
 
-// const getPromise = taskRef.get()
-// const snapshot = await getPromise;
-// console.log(snapshot)
-
-
-// console.log(props)
-// const sectionRef = database.collection(collectionName)
-// const [value, loading, error] = useCollection(sectionRef);
-// console.log(sectionRef.onSnapshot())
-//
-// console.log(loading)
-// console.log(error)
-//
-// console.log("Hello gamers,")
-// console.log(value)
-// let fireStoreTaskList = null;
-// if (value) {
-//     fireStoreTaskList = sectionRef.docs.map((doc) => {
-//         return {...doc.data()}});
-// }
-// console.log("Figuring stuff out ")
-// console.log(fireStoreTaskList)
-//
-//
-//
-// const queryTasks = database.collection(collectionName).doc(props.identifier).collection('tasks');
-// const [value, loading, error] = useCollection(queryTasks);
-//
-// console.log(value)
-//
-//
-// let fireStoreTaskList = null;
-// if (value) {
-//     fireStoreTaskList = value.docs.map((doc) => {
-//         return {...doc.data()}});
-// }
-//
-//
-// console.log(fireStoreTaskList)
-// console.log("Trying to see somethign")
-
-
-
-
-
-
-
-
-// export default SectionContainer
 

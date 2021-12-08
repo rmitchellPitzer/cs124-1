@@ -2,6 +2,7 @@ import "../../css/bar.css"
 import SectionButton from "./SectionButton"
 import TaskDataController from "../../modules/dataController/TaskDataController";
 import SectionAddTaskButton from "./sectionAddTask";
+import PrioritySortButton from "./priorityButton";
 
 
 
@@ -39,6 +40,10 @@ export default function SectionBar(props) {
                 value={props.sectionTitle}
             />
             {/*The code below determines whether the section is completed, and will hide the addTaskButton if it is.*/}
+            <PrioritySortButton
+                identifier = {props.identifier}
+                sectionTitle = {props.sectionTitle}
+                sortType = {props.sortType}/>
             {<SectionAddTaskButton
                 identifier = {props.identifier}
                 sectionTitle = {props.sectionTitle}/>}

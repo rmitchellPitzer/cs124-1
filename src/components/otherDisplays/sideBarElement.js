@@ -2,6 +2,7 @@ import "../../css/sidebar.css"
 import SideBarButton from "./sideBarButton";
 import TaskDataController from "../../modules/dataController/TaskDataController";
 import SectionAddTaskButton from "../newSection/sectionAddTask";
+import PrioritySortButton from "../newSection/priorityButton";
 
 
 
@@ -9,7 +10,8 @@ import SectionAddTaskButton from "../newSection/sectionAddTask";
 // contains a sideBarButton, an input field for the section title, and a add task button for the section
 
 export default function SideBarElement(props) {
-
+    console.log("This is a sidebar!")
+    console.log(props)
     // cssID determines whether the sidebar is todo, completed, or a added section.
 
     let cssID;
@@ -30,9 +32,10 @@ export default function SideBarElement(props) {
             class="sideBarElement"
             id={cssID}>
             <SideBarButton
-                identifier = {props.identifier}/>
+                identifier = {props.identifier}
+                title = {props.title}/>
             <input
-                aria-label={props.text ? "edit the title for the section " + props.text : "edit the title for a section with an empty title"}
+                aria-label={props.title ? "edit the title for the section " + props.title : "edit the title for a section with an empty title"}
                 class="bar-title"
                 id={cssID}
                 // class="bar-title"
@@ -40,7 +43,11 @@ export default function SideBarElement(props) {
                 alt='task text'
                 // alt='Section text'
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
-                value={props.text}/>
+                value={props.title}/>
+            {checkIfTypeIsCompleted && <PrioritySortButton
+                identifier = {props.identifier}
+                sectionTitle = {props.title}
+                sortType = {props.sortType}/>}
             {checkIfTypeIsCompleted && <SectionAddTaskButton
                 identifier = {props.identifier}/>}
 

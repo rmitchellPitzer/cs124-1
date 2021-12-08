@@ -13,8 +13,8 @@ function SideBarButton(props) {
     // Sidebar button is treated similarly to SectionButton in newSection,  but does not rotate and will instead
     // scroll to the Section element in sideList
 
-    const currentSectionText = store.getState().sections.find(section => section.identifier === props.identifier).text
-    // another currentSectionText for aria-label!!!
+    const currentSectionText = props.title
+        //another currentSectionText for aria-label!!!
 
     const icon = faAngleRight
 

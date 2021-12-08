@@ -24,7 +24,7 @@ export default function SideListElementTask(props) {
     function getAriaCheckbox(){
         // returns what should be said in the screenReader when the checkbox is focused.
 
-        const currentSectionText = store.getState().sections.find(section => section.identifier === props.sectionID).text
+        const currentSectionText = props.text
         if (currentSectionText){
             if (props.text){
                 if (props.isCompleted){
@@ -66,7 +66,7 @@ export default function SideListElementTask(props) {
     function getAriaTask(){
         // returns what should be said in the screenReader when the task input text is focused.
 
-        const currentSectionText = store.getState().sections.find(section => section.identifier === props.sectionID).text
+        const currentSectionText = props.text
         if (currentSectionText){
             if (props.text){
                 if (props.isCompleted){
@@ -105,16 +105,16 @@ export default function SideListElementTask(props) {
         }
     }
 
-
+    console.log(props)
     return (
-        <div class="SideListElementTask">
+        <div class="SideListElementTask" id = {cssID+"markedCompleted"}>
             <input
                 aria-label= {getAriaCheckbox()}
                 alt='task completion status'
                 class='sideListCheckbox'
                 type="checkbox"
                 value={ props.isCompleted}
-                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionID)}
+                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
                 checked= {props.isCompleted}
             />
             <input
@@ -123,7 +123,7 @@ export default function SideListElementTask(props) {
                 type='text'
                 alt='task text'
                 id ={cssID}
-                onChange= { (e) => handleTextEvent(props.id, props.sectionID,e)}
+                onChange= { (e) => handleTextEvent(props.id, props.sectionIdentifier,e)}
                 value={props.text}
             />
         </div>
@@ -136,6 +136,6 @@ function handleTextEvent(id, identifier, event) {
     TaskDataController.updateTaskText(id, identifier, text)
 }
 
-function handleCheckBoxEvent(id, identifier) {
-    TaskDataController.toggleTaskCompletion(id, identifier)
+function handleCheckBoxEvent(id, identifier, isToggled) {
+    TaskDataController.toggleTaskCompletion(id, identifier, isToggled)
 }

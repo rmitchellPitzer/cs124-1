@@ -1,32 +1,28 @@
-import "../../css/task.css"
 import TaskDataController from "../../modules/dataController/TaskDataController"
+import "../../css/sideList.css"
 import store from "../../modules/dataController/store";
-import TaskPriorityButton from "../newSection/taskPriorityButton";
-
+console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA")
 /*
 props: {
     text:string;
     isCompleted:boolean
-    id:string 
+    id:string
 }
 */
 
-// This creates the individual task for use on mobile displays. It contains a checkbox, and a input text
+// this is the sidelistelementtask, which creates the tasks inside the sidelist.
 
-export default function Task(props) {
-
-
-
-    const classes = `task-item`
-    const cssID = props.isCompleted ? 'completedTask' : ''
+export default function sideListCompletedSectionTask(props) {
 
 
-
-    // Why hello ugly getAria functions that are 80 lines long! I would love to make these cleaner, but currently
-    // they do what they need to with getting what needs to be returned to the screenReader, and I have one hour
-    // left to turn this in so there it is!
+    //I felt that, as messy as this code is, I needed to account for any variables when running a screenReader.
+    // For instance, if a task was empty, was there another way to identify it? Shouldn't the section name also
+    // be returned when using a screen reader?
+    // While very ugly, this means that almost all possible cases have been accounted for.
 
     function getAriaCheckbox(){
+        // returns what should be said in the screenReader when the checkbox is focused.
+
         const currentSectionText = props.text
         if (currentSectionText){
             if (props.text){
@@ -64,9 +60,11 @@ export default function Task(props) {
                 }
             }
         }
-        }
+    }
 
     function getAriaTask(){
+        // returns what should be said in the screenReader when the task input text is focused.
+
         const currentSectionText = props.text
         if (currentSectionText){
             if (props.text){
@@ -105,48 +103,36 @@ export default function Task(props) {
             }
         }
     }
-
-
+    console.log("This is a completed section's task")
+    console.log(props)
     return (
-        <div class={classes} id = {cssID+"markedCompleted"}>
+        <div class="SideListElementTask">
             <input
                 aria-label= {getAriaCheckbox()}
-                alt='task completion status' 
-                class='checkbox' 
+                alt='task completion status'
+                class='sideListCheckbox'
                 type="checkbox"
                 value={ props.isCompleted}
-                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier, props.isCompleted)}
+                onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier)}
                 checked= {props.isCompleted}
             />
             <input
                 aria-label={getAriaTask()}
-                class='task-text' 
-                type='text' 
+                class='SideListElementTaskText'
+                type='text'
                 alt='task text'
-
-                id ={cssID}
+                id = ''
                 onChange= { (e) => handleTextEvent(props.id, props.sectionIdentifier,e)}
                 value={props.text}
-                onFocus={(e)=>e.currentTarget.value = props.text}
             />
-            {/*<TaskPriorityButton*/}
-            {/*    sectionTitle = {props.text}*/}
-            {/*    identifier = {props.id}/>*/}
-            <TaskPriorityButton
-                sectionTitle = {props.text}
-                sectionIdentifier = {props.sectionIdentifier}
-                identifier = {props.id}
-                value = {props.priority}/>
         </div>
     )
 
 }
 
-
-
 function handleTextEvent(id, identifier, event) {
-    const newText = event.currentTarget.value
-    TaskDataController.updateTaskText(id, identifier, newText)
+    const text = event.currentTarget.value
+    TaskDataController.updateTaskText(id, identifier, text)
 }
 
 function handleCheckBoxEvent(id, identifier, isToggled) {

@@ -30,6 +30,16 @@ export const SET_SECTION_TO_STACK = "setSectionToStack"
 
 export const SET_TASKS_TO_STACK = "setTasksToStack"
 
+export const UPDATE_TASK_PRIORITY = "updateTaskPriority"
+
+export const PUSH_SELECTED_SECTION_ACTION = "pushSelectedSectionAction"
+
+export const SHOW_PRIORITY_MENU = "showPriorityMenu"
+
+export const HIDE_PRIORITY_MENU = "hidePriorityMenu"
+
+export const SET_SECTION_PRIORITY = "setSectionPriority"
+
 export const showUndoAction = () => ({type:SHOW_UNDO})
 export const hideUndoAction = () => ({type:HIDE_UNDO})
 export const undoTaskAction = () => ({type:UNDO_TASK})
@@ -68,3 +78,14 @@ export const toggleCompletedSectionAction = () => ({type: TOGGLE_COMPLETED_SECTI
 export const setSectionToStackAction = (stackList) => ({type: SET_SECTION_TO_STACK, payload:{stackList}})
 
 export const setTasksToStackAction = (taskList) => ({type: SET_TASKS_TO_STACK, payload:{taskList}})
+
+export const updateTaskPriorityAction = (id, sectionIdentifier, value) => ({type: UPDATE_TASK_PRIORITY, payload:{id, sectionIdentifier, value}})
+
+
+export const pushSelectedSectionAction = (sectionIdentifier, sortType ) => ({type: PUSH_SELECTED_SECTION_ACTION, payload:{sectionIdentifier, sortType}})
+
+export const showPriorityMenuAction = () => ({type: SHOW_PRIORITY_MENU})
+
+export const hidePriorityMenuAction = () => ({type: HIDE_PRIORITY_MENU})
+
+export const setSectionPriorityAction = (value) => ({type: SET_SECTION_PRIORITY, payload:{value}})

@@ -1,4 +1,21 @@
-import { createTaskAction, deleteAllCompletedTasksAction, deleteTaskAction, toggleTaskCompletionAction, updateTaskTextAction, createSectionAction, deleteSectionAction, updateSectionTextAction, toggleSectionAction, clearAllSectionsAndTasksAction, getToggledStatusAction, pushCompletedTaskAction, setSectionToStackAction, setTasksToStackAction } from "./actions"
+import {
+    createTaskAction,
+    deleteAllCompletedTasksAction,
+    deleteTaskAction,
+    toggleTaskCompletionAction,
+    updateTaskTextAction,
+    createSectionAction,
+    deleteSectionAction,
+    updateSectionTextAction,
+    toggleSectionAction,
+    clearAllSectionsAndTasksAction,
+    getToggledStatusAction,
+    pushCompletedTaskAction,
+    setSectionToStackAction,
+    setTasksToStackAction,
+    updateTaskPriorityAction,
+    setSectionPriorityAction
+} from "./actions"
 import store from "./store.js"
 class TaskDataController {
     static updateTaskText(id, identifier, newText) {
@@ -93,6 +110,16 @@ class TaskDataController {
 
     static setTasksToStack(taskList){
         const action = setTasksToStackAction(taskList)
+        store.dispatch(action)
+    }
+
+    static updateTaskPriority(id, sectionIdentifier, value){
+        const action = updateTaskPriorityAction(id, sectionIdentifier, value)
+        store.dispatch(action)
+    }
+
+    static setSectionPriority(value){
+        const action = setSectionPriorityAction(value)
         store.dispatch(action)
     }
 
