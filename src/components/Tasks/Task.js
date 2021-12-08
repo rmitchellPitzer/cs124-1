@@ -2,6 +2,7 @@ import "../../css/task.css"
 import TaskDataController from "../../modules/dataController/TaskDataController"
 import store from "../../modules/dataController/store";
 import TaskPriorityButton from "../newSection/taskPriorityButton";
+import SelectionMaintainingInput from "../../modules/dataController/SelectionMaintainingInput";
 
 /*
 props: {
@@ -118,7 +119,7 @@ export default function Task(props) {
                 onChange= {(e) => handleCheckBoxEvent(props.id, props.sectionIdentifier, props.isCompleted)}
                 checked= {props.isCompleted}
             />
-            <input
+            <SelectionMaintainingInput
                 aria-label={getAriaTask()}
                 class='task-text' 
                 type='text' 

@@ -2,6 +2,7 @@ import TaskDataController from "../../modules/dataController/TaskDataController"
 import "../../css/sideList.css"
 import store from "../../modules/dataController/store";
 import TaskPriorityButton from "../newSection/taskPriorityButton";
+import SelectionMaintainingInput from "../../modules/dataController/SelectionMaintainingInput";
 
 /*
 props: {
@@ -121,8 +122,9 @@ export default function SideListElementTask(props) {
                 sectionTitle = {props.text}
                 sectionIdentifier = {props.sectionIdentifier}
                 identifier = {props.id}
+                id = {props.id}
                 value = {props.priority}/>
-            <input
+            <SelectionMaintainingInput
                 aria-label={getAriaTask()}
                 class='SideListElementTaskText'
                 type='text'
