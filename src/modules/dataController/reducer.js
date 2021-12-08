@@ -280,7 +280,8 @@ function clearAll(state){
             const sectionToModify = database.collection(collectionName).doc(stackList[index].identifier)
             sectionToModify.update({
 
-                title: ""}
+                title: "",
+                sortType: 7}
             )
         }
         else{
