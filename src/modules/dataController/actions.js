@@ -40,6 +40,13 @@ export const HIDE_PRIORITY_MENU = "hidePriorityMenu"
 
 export const SET_SECTION_PRIORITY = "setSectionPriority"
 
+export const SET_USER_ID = "setUserId"
+
+export const TOGGLE_SIGNUP_MENU = "toggleSignUpMenu"
+
+export const TOGGLE_SIGN_IN_MENU = "toggleSignInMenu"
+
+
 export const showUndoAction = () => ({type:SHOW_UNDO})
 export const hideUndoAction = () => ({type:HIDE_UNDO})
 export const undoTaskAction = () => ({type:UNDO_TASK})
@@ -92,3 +99,9 @@ export const pushSelectedSectionAction = (sectionIdentifier, sortType ) => ({typ
 export const updateTaskPriorityAction = (id, sectionIdentifier, value) => ({type: UPDATE_TASK_PRIORITY, payload:{id, sectionIdentifier, value}})
 
 export const setSectionPriorityAction = (value) => ({type: SET_SECTION_PRIORITY, payload:{value}})
+
+export const setUserIdAction = (userId) => ({type: SET_USER_ID, payload:{userId}})
+
+export const toggleSignUpMenuAction = () => ({type: TOGGLE_SIGNUP_MENU})
+
+export const toggleSignInMenuAction = () => ({type: TOGGLE_SIGN_IN_MENU})
