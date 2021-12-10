@@ -10,7 +10,12 @@ import {
     toggleCompletedSectionAction,
     pushSelectedSectionAction,
     showPriorityMenuAction,
-    hidePriorityMenuAction
+    hidePriorityMenuAction,
+    setUserIdAction,
+    toggleSignUpMenuAction,
+    toggleSignInMenuAction,
+    setUserEmailAction,
+    toggleShareMenuAction
 } from "./actions.js"
 import store from "./store.js"
 
@@ -88,6 +93,31 @@ export default class AppDataController {
 
     static hidePriorityMenu() {
         const action = hidePriorityMenuAction()
+        store.dispatch(action)
+    }
+
+    static setUserId(userId) {
+        const action = setUserIdAction(userId)
+        store.dispatch(action)
+    }
+
+    static setUserEmail(userEmail) {
+        const action = setUserEmailAction(userEmail)
+        store.dispatch(action)
+    }
+
+    static toggleSignUpMenu(){
+        const action = toggleSignUpMenuAction()
+        store.dispatch(action)
+    }
+
+    static toggleSignInMenu(){
+        const action = toggleSignInMenuAction()
+        store.dispatch(action)
+    }
+
+    static toggleShareMenu(){
+        const action = toggleShareMenuAction()
         store.dispatch(action)
     }
 

@@ -3,6 +3,9 @@ import SideBarButton from "./sideBarButton";
 import TaskDataController from "../../modules/dataController/TaskDataController";
 import SectionAddTaskButton from "../newSection/sectionAddTask";
 import PrioritySortButton from "../newSection/priorityButton";
+import store from "../../modules/dataController/store";
+import ShareSectionButton from "../newSection/shareSectionButton";
+import RemoveSectionSharedButton from "../newSection/removeSharedButton";
 
 
 
@@ -10,20 +13,30 @@ import PrioritySortButton from "../newSection/priorityButton";
 // contains a sideBarButton, an input field for the section title, and a add task button for the section
 
 export default function SideBarElement(props) {
-
+    console.log(props)
+    console.log("PLEASE OWNER")
     // cssID determines whether the sidebar is todo, completed, or a added section.
 
-    let cssID;
+    let cssID
+    let classes = "sideBarElement"
     if (props.identifier !== 'toDo' && props.identifier !== 'completed'){
         cssID = "otherSectionssideBar";
     }
-    else{
-        cssID = props.identifier + "sideBar";
+    // else{
+    //     cssID = props.identifier + "sideBar";
+    // }
+
+    console.log(cssID)
+
+
+
+    const isOwned  = props.owner === store.getState().userID
+
+    if(!isOwned){
+        cssID = 'sideBarElementSHARED'
     }
-
-
-
-
+    console.log("THE CLASS NAME")
+    console.log("sideBarElement"+!isOwned)
 
     return(
         <div
@@ -42,6 +55,14 @@ export default function SideBarElement(props) {
                 // alt='Section text'
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.title}/>
+
+            {isOwned && <ShareSectionButton
+                sharedWith = {props.sharedWith}
+                identifier = {props.identifier}/>}
+            {!isOwned && <RemoveSectionSharedButton
+                sharedWith = {props.sharedWith}
+                identifier = {props.identifier}/>}
+
             <PrioritySortButton
                 identifier = {props.identifier}
                 sectionTitle = {props.title}

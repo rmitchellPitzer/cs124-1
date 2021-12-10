@@ -25,12 +25,14 @@ import {
     SET_SECTION_TO_STACK,
     SET_TASKS_TO_STACK,
     UPDATE_TASK_PRIORITY,
-    PUSH_SELECTED_SECTION_ACTION, SHOW_PRIORITY_MENU, HIDE_PRIORITY_MENU, SET_SECTION_PRIORITY
+    PUSH_SELECTED_SECTION_ACTION, SHOW_PRIORITY_MENU, HIDE_PRIORITY_MENU, SET_SECTION_PRIORITY,
+    SET_USER_ID, TOGGLE_SIGNUP_MENU, TOGGLE_SIGN_IN_MENU, SET_USER_EMAIL, TOGGLE_SHARE_MENU, SHARE_TASK, REMOVE_TASK,
 } from './actions';
 
 import {database} from "./firestore";
 import {collectionName} from "./firestore";
 import TaskDataController from "./TaskDataController";
+import store from "./store";
 
 
 
@@ -52,7 +54,12 @@ const initialState = {
     showMenu: false,
     showPriorityMenu: false,
     showCompletedTasks: false,
-    selectedSection: []
+    selectedSection: [],
+    userID: "",
+    userEmail: "",
+    showSignUpMenu: false,
+    showSignInMenu: false,
+    showShareMenu: false
 }
 
 
@@ -195,13 +202,20 @@ function hideUndo(state) {
 // function for creating a section, this will push a new empty section onto the state's sections.
 
 function createSection(state) {
+    console.log("Trying to create a section")
+    console.log(state.userID)
     // first part creates a new section in firestore.
     const identifier = uuidv4()
     const sectionRef = database.collection(collectionName).doc(identifier)
+    console.log(identifier)
+    console.log(state.userID)
+    console.log(state.userEmail)
     sectionRef.set({
         identifier: identifier,
         title: "",
-        sortType: 7
+        sortType: 7,
+        owner: state.userID,
+        sharedWith: [state.userEmail]
     })
 
 
@@ -209,7 +223,6 @@ function createSection(state) {
         ...state
     }
 }
-
 
 
 // it's unneccessary code again.
@@ -275,13 +288,18 @@ function clearAll(state){
         taskToDelete.delete()
     }
     for (const index in stackList){
+        console.log(stackList)
         if(index == (stackList.length - 1)){
+
+
 
             const sectionToModify = database.collection(collectionName).doc(stackList[index].identifier)
             sectionToModify.update({
 
                 title: "",
-                sortType: 7}
+                sortType: 7,
+                owner: state.userID,
+                sharedWith: [state.userEmail]}
             )
         }
         else{
@@ -398,6 +416,75 @@ function setSectionPriority(state, value){
     }
 }
 
+function setUserId(state, userId){
+    return{
+        ...state,
+        userID: userId
+    }
+}
+
+function setUserEmail(state, newuserEmail){
+    return{
+        ...state,
+        userEmail: newuserEmail
+    }
+}
+
+
+function toggleSignUpMenu(state){
+    return{
+        ...state,
+        showSignUpMenu: !(state.showSignUpMenu)
+    }
+}
+
+function toggleSignInMenu(state){
+    return{
+        ...state,
+        showSignInMenu: !(state.showSignInMenu)
+    }
+}
+
+function toggleShareMenu(state){
+    return{
+        ...state,
+        showShareMenu: !(state.showShareMenu)
+    }
+}
+
+function shareTask(state, inputEmail){
+    const sharedWithList = state.selectedSection.sortType.map(x => x)
+    sharedWithList.push(inputEmail)
+    console.log(sharedWithList)
+    console.log("The shared list!")
+    console.log(state.selectedSection.sectionIdentifier)
+    const sectionRef = database.collection(collectionName).doc(state.selectedSection.sectionIdentifier)
+    sectionRef.update({
+            sharedWith: sharedWithList
+        }
+    )
+    return{
+        ...state
+    }
+}
+
+
+function removeTask(state){
+    const sharedWithList = state.selectedSection.sortType.map(x => x)
+    const newList = sharedWithList.filter(email => email !== state.userEmail)
+
+    const sectionRef = database.collection(collectionName).doc(state.selectedSection.sectionIdentifier)
+    sectionRef.update({
+            sharedWith: newList
+        }
+    )
+    return{
+        ...state
+    }
+}
+
+
+
 
 
 export default function toDoReducer(state = initialState, action){
@@ -429,6 +516,14 @@ export default function toDoReducer(state = initialState, action){
         case SHOW_PRIORITY_MENU: return showPriorityMenu(state)
         case HIDE_PRIORITY_MENU: return hidePriorityMenu(state)
         case SET_SECTION_PRIORITY: return setSectionPriority(state, action.payload.value)
+        case SET_USER_ID: return setUserId(state, action.payload.userId)
+        case SET_USER_EMAIL: return setUserEmail(state, action.payload.userEmail)
+        case TOGGLE_SIGNUP_MENU: return toggleSignUpMenu(state)
+        case TOGGLE_SIGN_IN_MENU: return toggleSignInMenu(state)
+        case TOGGLE_SHARE_MENU: return toggleShareMenu(state)
+        case SHARE_TASK: return shareTask(state, action.payload.inputEmail)
+        case REMOVE_TASK: return removeTask(state)
+
         default:
             return state 
     }

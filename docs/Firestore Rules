@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function checkSignedIn() {
+    return request.auth.uid != false && request.auth.uid != false;
+    }
+    
+    function isDocOwner() {
+      return request.auth.uid == resource.data.owner;
+    }
+  
+    
+    function updatedDocHasCorrectOwner() {
+      return request.auth.uid == request.resource.data.owner;
+    }
+    
+    
+    function updatedDocHasSameOwner(document) {
+      return resource.data.owner == get(/databases/$(database)/documents/rmitchellPitzer-hmc-tasks-sectionList/$(document)).data.owner
+    }
+    
+    
+    function updatedDocHasSameSharing(document) {
+  	return resource.data.sharedWith == get(/databases/$(database)/documents/rmitchellPitzer-hmc-tasks-sectionList/$(document)).data.sharedWith;}
+    
+    function isSharedWithMe() {
+  	return request.auth.token.email in resource.data.sharedWith;}
+    
+    
+    match /rmitchellPitzer-hmc-tasks-sectionList/{document} {
+  	allow read: if checkSignedIn() && isSharedWithMe();
+  	allow create: if checkSignedIn() && updatedDocHasCorrectOwner();
+  	allow update: if checkSignedIn() && isSharedWithMe() &&
+    updatedDocHasSameOwner(document) && updatedDocHasSameSharing(document);
+  	allow delete: if checkSignedIn() && isDocOwner(); 
+    
+  	match /tasks/{tasks} {
+    allow create, read, update, delete: if checkSignedIn() ;
+    }
+    
+    
+    
+    }
+    
+    
+    
+    }
+    }

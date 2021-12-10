@@ -16,6 +16,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+
 export const database = firebase.firestore();
 export const collectionName = "rmitchellPitzer-hmc-tasks-sectionList";
 
