@@ -42,6 +42,13 @@ function App(props) {
     const [user, loading, error] = useAuthState(auth);
 
 
+    
+
+
+
+
+
+
 
     function SignUpMenu(){
         return(
@@ -220,7 +227,8 @@ function AppSignedIn(props) {
     // gets different menu's status's from the redux state
     // Undo is not used at all.
 
-
+    console.log("This is the userID")
+    console.log(props.user.uid)
     // Get the sections information from firestore
     const query = database.collection(collectionName).where('owner', "==", props.user.uid);
     const [value, loading, error] = useCollection(query);
