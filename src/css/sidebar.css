@@ -48,6 +48,13 @@
     content-visibility: visible;
 }
 
+#sideBarElementSHARED{
+    background: #afe5e4;
+    color: #4d624e;
+    visibility: visible;
+    content-visibility: visible;
+}
+
 #toDosideBar {
     background: #FEC89A;
     color: #796555;
@@ -67,7 +74,10 @@
     color: #4d624e;
     visibility: visible;
     content-visibility: visible;
+
 }
+
+
 
 .SideBarcontainer{
     width: 37vw;

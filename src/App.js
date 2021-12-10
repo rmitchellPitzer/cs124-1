@@ -29,6 +29,7 @@ import {
 } from 'react-firebase-hooks/auth';
 import store from "./modules/dataController/store";
 import SignUpMenu from "./modules/dataController/signUpMenu";
+import ShareMenu from "./components/newSection/shareMenu";
 
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -283,6 +284,7 @@ function AppSignedIn(props) {
                 <SectionList sections={sharedFireStoreList}/>
                 {props.menuIsActive && <ActionMenu/>}
                 {props.priorityMenuIsActive && <PriorityMenu/>}
+                {props.shareMenuStatus && <ShareMenu/>}
                 <ActionButton/>
             </div>
         </div>);
@@ -292,6 +294,7 @@ function AppSignedIn(props) {
 function mapToState(state) {
 
         return {
+            shareMenuStatus: store.getState().showShareMenu,
             signInMenuStatus: store.getState().showSignInMenu,
             signUpMenuStatus: store.getState().showSignUpMenu,
             menuIsActive: AppDataController.menuIsActive(),

@@ -26,7 +26,7 @@ import {
     SET_TASKS_TO_STACK,
     UPDATE_TASK_PRIORITY,
     PUSH_SELECTED_SECTION_ACTION, SHOW_PRIORITY_MENU, HIDE_PRIORITY_MENU, SET_SECTION_PRIORITY,
-    SET_USER_ID, TOGGLE_SIGNUP_MENU, TOGGLE_SIGN_IN_MENU, SET_USER_EMAIL,
+    SET_USER_ID, TOGGLE_SIGNUP_MENU, TOGGLE_SIGN_IN_MENU, SET_USER_EMAIL, TOGGLE_SHARE_MENU, SHARE_TASK, REMOVE_TASK,
 } from './actions';
 
 import {database} from "./firestore";
@@ -58,7 +58,8 @@ const initialState = {
     userID: "",
     userEmail: "",
     showSignUpMenu: false,
-    showSignInMenu: false
+    showSignInMenu: false,
+    showShareMenu: false
 }
 
 
@@ -444,6 +445,47 @@ function toggleSignInMenu(state){
     }
 }
 
+function toggleShareMenu(state){
+    return{
+        ...state,
+        showShareMenu: !(state.showShareMenu)
+    }
+}
+
+function shareTask(state, inputEmail){
+    const sharedWithList = state.selectedSection.sortType.map(x => x)
+    sharedWithList.push(inputEmail)
+    console.log(sharedWithList)
+    console.log("The shared list!")
+    console.log(state.selectedSection.sectionIdentifier)
+    const sectionRef = database.collection(collectionName).doc(state.selectedSection.sectionIdentifier)
+    sectionRef.update({
+            sharedWith: sharedWithList
+        }
+    )
+    return{
+        ...state
+    }
+}
+
+
+function removeTask(state){
+    const sharedWithList = state.selectedSection.sortType.map(x => x)
+    const newList = sharedWithList.filter(email => email !== state.userEmail)
+
+    const sectionRef = database.collection(collectionName).doc(state.selectedSection.sectionIdentifier)
+    sectionRef.update({
+            sharedWith: newList
+        }
+    )
+    return{
+        ...state
+    }
+}
+
+
+
+
 
 export default function toDoReducer(state = initialState, action){
     switch (action.type){
@@ -478,6 +520,9 @@ export default function toDoReducer(state = initialState, action){
         case SET_USER_EMAIL: return setUserEmail(state, action.payload.userEmail)
         case TOGGLE_SIGNUP_MENU: return toggleSignUpMenu(state)
         case TOGGLE_SIGN_IN_MENU: return toggleSignInMenu(state)
+        case TOGGLE_SHARE_MENU: return toggleShareMenu(state)
+        case SHARE_TASK: return shareTask(state, action.payload.inputEmail)
+        case REMOVE_TASK: return removeTask(state)
 
         default:
             return state 

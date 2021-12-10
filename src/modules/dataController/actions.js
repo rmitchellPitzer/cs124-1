@@ -48,6 +48,14 @@ export const TOGGLE_SIGNUP_MENU = "toggleSignUpMenu"
 
 export const TOGGLE_SIGN_IN_MENU = "toggleSignInMenu"
 
+export const TOGGLE_SHARE_MENU = "showShareMenu"
+
+export const SHARE_TASK = "shareTask"
+
+export const REMOVE_TASK = "removeTask"
+
+
+
 
 export const showUndoAction = () => ({type:SHOW_UNDO})
 export const hideUndoAction = () => ({type:HIDE_UNDO})
@@ -109,3 +117,11 @@ export const setUserEmailAction = (userEmail) => ({type: SET_USER_EMAIL, payload
 export const toggleSignUpMenuAction = () => ({type: TOGGLE_SIGNUP_MENU})
 
 export const toggleSignInMenuAction = () => ({type: TOGGLE_SIGN_IN_MENU})
+
+export const toggleShareMenuAction = () => ({type: TOGGLE_SHARE_MENU})
+
+export const shareTaskAction = (inputEmail) => ({type: SHARE_TASK, payload:{inputEmail}})
+
+export const removeTaskAction = () => ({type: REMOVE_TASK})
+
+

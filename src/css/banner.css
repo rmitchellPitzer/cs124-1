@@ -43,7 +43,7 @@
         color: lightblue;
         position: fixed;
         margin-top: -12vh;
-        z-index: 120;
+        z-index: 99;
     }
 
     .title {

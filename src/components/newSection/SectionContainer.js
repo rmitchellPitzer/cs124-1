@@ -39,6 +39,9 @@ function SectionContainer(props) {
     let fireStoreCompletedList = null;
     let stateCompletedList = null;
 
+    console.log("Hopefully this shows the owner!")
+    console.log(props.owner)
+
     if (value) {
         fireStoreList = value.docs.map((doc) => {
             return {...doc.data()}
@@ -100,7 +103,8 @@ function SectionContainer(props) {
 
     }
 
-
+    console.log("Is owned")
+    console.log(props.owner === store.getState().userID)
     return (
         <div>
             {fireStoreList && <SectionBar
@@ -109,6 +113,8 @@ function SectionContainer(props) {
                 identifier ={props.identifier}
                 sortType = {props.sortType}
                 isToggled ={isToggled}
+                sharedWith ={props.sharedWith}
+                isOwned = {props.owner === store.getState().userID}
                 />}
             { isToggled && fireStoreList &&
                 <TaskList tasks={fireStoreList}/>}
