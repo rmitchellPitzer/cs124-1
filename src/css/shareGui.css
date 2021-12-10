@@ -23,14 +23,11 @@
     position: fixed;
     width: 250px;
     height: 150px;
-    align-self: center;
-    margin-top: 20vh;
-    left: 50%;
-    transform: translate(-50%, 0);
     background: #e1e1e1;
     padding: 20px;
     z-index: 180;
     border-radius: 20px;
+    margin-top: -50vh;
 }
 
 .sharedEmailInput{
@@ -207,7 +204,7 @@
         margin-top: 22vh;
         color: #7a7a7a;
         font-family: Roboto;
-        font-size: 1.8em;
+        font-size: 1.5em;
         font-weight: 400;
         width: 250px;
         pointer-events: none;
@@ -220,7 +217,7 @@
         align-self: center;
         left: 50%;
         transform: translate(-50%, 0);
-        margin-top: 33vh;
+        margin-top: 31.5vmax;
         color: #394438;
         font-family: Roboto;
         font-size: 1em;
@@ -236,10 +233,10 @@
         text-align: center;
         align-self: center;
         z-index: 200;
-        margin-top: 37vh;
+        margin-top: 35.5vmax;
         margin-left: 35vw;
         width: 30vw;
-        height: 8vh;
+        height: 60px;
         border-radius: 15px;
         border: none;
         outline: none;

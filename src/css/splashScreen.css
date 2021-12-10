@@ -4,72 +4,14 @@
     width: 100vw;
     background-image: linear-gradient(#a9daab 40%, #f7ecea, #f7ecea);
     margin-top: -12vh;
-}
-
-
-.SplashScreenDescription{
     text-align: center;
-    margin-top: 10vh;
-    color: #414f3a;
-    font-family: Roboto;
-    font-size: 1.3em;
-    font-weight: 400;
 }
 
-.SplashScreenButtons{
-    align-content: center;
-}
 
-.SplashScreenGoogle{
-    align-content: center;
-    text-align: center;
-    margin-left: 12.5vw;
-    margin-top: 10vh;
-    border: none;
-    outline: none;
-    font-family: Roboto;
-    font-size: 1.1em;
-    background-color: #FFDABF;
-    border-radius: 25px;
-    width: 75vw;
-    height: 5vh;
-    min-height: 30px;
-}
-.SplashScreenTitle{
-    margin-top: 15vh;
-    text-align: center;
-    font-size: 3em;
-    font-weight: 400;
-    padding-top: .5vh;
-    color: #414f3a;
-    font-family: Roboto;
-}
 
-.SplashScreenEmailSignIn{
-    margin-top: 7vh;
-    align-content: center;
-    text-align: center;
-    outline: none;
-    border: none;
-    background-color: transparent;
-    width: 100vw;
-}
 
-.SplashScreenEmailSignUp{
-    align-content: center;
-    text-align: center;
-    margin-left: 12.5vw;
-    margin-top: 2vh;
-    border: none;
-    outline: none;
-    font-family: Roboto;
-    font-size: 1.1em;
-    background-color: #FEC5BB;
-    border-radius: 25px;
-    width: 75vw;
-    height: 7vh;
-    min-height: 30px;
-}
+
+
 
 .SplashScreenBlurredBackground{
     width: 100vw;
@@ -110,15 +52,16 @@
     text-align: center;
     z-index: 6;
     align-self: center;
-    left: 50%;
+    left: 50vw;
     transform: translate(-50%, 0);
-    margin-top: 22vh;
+    margin-top: 12vh;
     color: #394438;
     font-family: Roboto;
-    font-size: 2em;
+    font-size: 6vmax;
     font-weight: 400;
-    width: 80vw;
+    width: 90vw;
     pointer-events: none;
+
 }
 
 .SignUpTitleDescription{
@@ -144,13 +87,14 @@
     align-self: center;
     left: 50%;
     transform: translate(-50%, 0);
-    margin-top: 44vh;
+    margin-top: 35vh;
     color: #394438;
     font-family: Roboto;
-    font-size: 1em;
+    font-size: 3vmax;
     font-weight: 400;
-    width: 80vw;
-    border-radius: 15px;
+    width: 75vw;
+    height: 10vh;
+    border-radius: 20px;
     border: none;
     outline: none;
 }
@@ -177,18 +121,18 @@
     align-self: center;
     left: 50%;
     transform: translate(-50%, 0);
-    margin-top: 74vh;
+    margin-top: 67vh;
     color: #394438;
     font-family: Roboto;
-    font-size: 1.5em;
+    font-size: 3vmax;
     font-weight: 400;
 
     text-align: center;
     border: none;
     outline: none;
-    border-radius: 10px;
-    width: 150px;
-    height: 60px;
+    border-radius: 20px;
+    width: 20vmax;
+    height: 8vmax;
 }
 
 
@@ -205,18 +149,120 @@
     align-self: center;
     left: 50%;
     transform: translate(-50%, 0);
-    margin-top: 94vh;
+    margin-top: 85vh;
     font-family: Roboto;
     font-weight: 400;
     width: 80vw;
     pointer-events: none;
     color: #394438;
-    font-size: .6em;
+    font-size: 2.8vmax;
 }
 
 #PasswordValue{
-    margin-top: 63vh;
+    margin-top: 52vh;
 }
+
+
+
+
+
+
+.titleAndSignInButtons{
+    margin-top: 20vh;
+    display: inline-flex;;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    gap: 5vw;
+}
+
+.titleAndDescription{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.SplashScreenTitle{
+    text-align: center;
+    font-size: 10vw;
+    font-weight: 400;
+    color: #414f3a;
+    font-family: Roboto;
+}
+
+
+
+.SplashScreenButtons{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+
+.SplashScreenDescription{
+    text-align: center;
+    color: #414f3a;
+    font-family: Roboto;
+    font-size: 2.3vw;
+    width: 43vw;
+    font-weight: 400;
+}
+
+.SplashScreenGoogle{
+    text-align: center;
+    border: none;
+    outline: none;
+    font-family: Roboto;
+    font-size: 3vw;
+    font-max-size: 30px;
+    background-color: #FFDABF;
+    border-radius: 25px;
+    width: 40vw;
+    height: 8vw;
+    min-height: 30px;
+}
+
+.SplashScreenEmailSignUp{
+    text-align: center;
+    border: none;
+    outline: none;
+    font-family: Roboto;
+    font-size: 3vw;
+    font-max-size: 30px;
+    background-color: #FEC5BB;
+    border-radius: 25px;
+    width: 40vw;
+    font-weight: 400;
+    height: 8vw;
+    min-height: 30px;
+}
+
+.SplashScreenEmailSignIn{
+    margin-top: 9vh;
+    align-content: center;
+    text-align: center;
+    outline: none;
+    border: none;
+    font-family: Roboto;
+    font-weight: 400;
+    background-color: transparent;
+    width: 65vw;
+    height: 8vw;
+    color: #1d3b39;
+    border-radius: 23px;
+    font-size: 2.5vw;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -234,6 +280,8 @@
         width: 100vw;
         background-image: linear-gradient(#a9daab 40%, #f7ecea, #f7ecea);
         margin-top: -12vh;
+        align-items: center;
+        text-align: center;
     }
 
 
@@ -246,9 +294,6 @@
         font-weight: 400;
     }
 
-    .SplashScreenButtons{
-        align-content: center;
-    }
 
     .SplashScreenGoogle{
         align-content: center;
@@ -262,7 +307,7 @@
         background-color: #FFDABF;
         border-radius: 25px;
         width: 75vw;
-        height: 5vh;
+        height: 8vh;
         min-height: 30px;
     }
     .SplashScreenTitle{
@@ -275,15 +320,6 @@
         font-family: Roboto;
     }
 
-    .SplashScreenEmailSignIn{
-        margin-top: 7vh;
-        align-content: center;
-        text-align: center;
-        outline: none;
-        border: none;
-        background-color: transparent;
-        width: 100vw;
-    }
 
     .SplashScreenEmailSignUp{
         align-content: center;
@@ -297,7 +333,7 @@
         background-color: #FEC5BB;
         border-radius: 25px;
         width: 75vw;
-        height: 7vh;
+        height: 8vh;
         min-height: 30px;
     }
 
@@ -335,55 +371,6 @@
     }
 
 
-    .SignUpTitle{
-        position: fixed;
-        text-align: center;
-        z-index: 6;
-        align-self: center;
-        left: 50%;
-        transform: translate(-50%, 0);
-        margin-top: 28vh;
-        color: #394438;
-        font-family: Roboto;
-        font-size: 2em;
-        font-weight: 400;
-        width: 80vw;
-        pointer-events: none;
-    }
-
-    .SignUpTitleDescription{
-        position: fixed;
-        text-align: center;
-        z-index: 6;
-        align-self: center;
-        left: 50%;
-        transform: translate(-50%, 0);
-        margin-top: 38vh;
-        color: #394438;
-        font-family: Roboto;
-        font-size: 1.5em;
-        font-weight: 400;
-        width: 80vw;
-        pointer-events: none;
-    }
-
-    .EmailInput{
-        position: fixed;
-        text-align: center;
-        z-index: 6;
-        align-self: center;
-        left: 50%;
-        transform: translate(-50%, 0);
-        margin-top: 49vh;
-        color: #394438;
-        font-family: Roboto;
-        font-size: 1em;
-        font-weight: 400;
-        width: 80vw;
-        border-radius: 15px;
-        border: none;
-        outline: none;
-    }
 
     .SignUpPasswordDescription{
         position: fixed;
@@ -401,13 +388,105 @@
         pointer-events: none;
     }
 
+
+
+    .IExistToCenterItems{
+        align-content: center;
+        align-items: center;
+        align-self: center;
+    }
+
+
+
+
+
+
+
+
+    .titleAndSignInButtons{
+        margin-top: 0vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        gap: 1vw;
+    }
+
+    .titleAndDescription{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0vh;
+    }
+
+    .SplashScreenDescription{
+        text-align: center;
+        color: #414f3a;
+        font-family: Roboto;
+        font-size: 5.5vw;
+        width: 80vw;
+        font-weight: 400;
+    }
+
+    .SplashScreenButtons{
+        align-items: center;
+        justify-content: center;
+        margin-right: 12vw;
+    }
+
+
+
+
+
+    .EmailInput{
+        position: fixed;
+        text-align: center;
+        z-index: 6;
+        align-self: center;
+        left: 50%;
+        transform: translate(-50%, 0);
+        margin-top: 40vh;
+        color: #394438;
+        font-family: Roboto;
+        font-size: 2.5vh;
+        font-weight: 400;
+        width: 80vw;
+        height: 5vh;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+    }
+
+    #PasswordValue{
+        margin-top: 50vh;
+    }
+
+
+    .SignUpTitle{
+        position: fixed;
+        text-align: center;
+        z-index: 6;
+        align-self: center;
+        transform: translate(-50%, 0);
+        margin-top: 28vh;
+        color: #394438;
+        font-family: Roboto;
+        font-size: 5vh;
+        font-weight: 400;
+        width: 90vw;
+        pointer-events: none;
+
+    }
+
     .SignUpButton{
         position: fixed;
         z-index: 6;
         align-self: center;
         left: 50%;
         transform: translate(-50%, 0);
-        margin-top: 80vh;
+        margin-top: 60vh;
         color: #394438;
         font-family: Roboto;
         font-size: 1.5em;
@@ -421,13 +500,6 @@
         height: 60px;
     }
 
-
-    .IExistToCenterItems{
-        align-content: center;
-        align-items: center;
-        align-self: center;
-    }
-
     .ErrorMessage{
         position: fixed;
         text-align: center;
@@ -435,18 +507,63 @@
         align-self: center;
         left: 50%;
         transform: translate(-50%, 0);
-        margin-top: 92vh;
+        margin-top: 80vh;
         font-family: Roboto;
         font-weight: 400;
         width: 80vw;
         pointer-events: none;
         color: #394438;
-        font-size: .6em;
+        font-size: 3vh;
     }
 
-    #PasswordValue{
-        margin-top: 66vh;
+    .SplashScreenEmailSignIn{
+        margin-top: 6vh;
+        align-content: center;
+        text-align: center;
+        outline: none;
+        border: none;
+        font-family: Roboto;
+        font-weight: 400;
+        background-color: transparent;
+        width: 65vw;
+        height: 8vw;
+        color: #1d3b39;
+        border-radius: 23px;
+        font-size: 4.5vw;
     }
+
+    .SignUpTitleDescription{
+        position: fixed;
+        text-align: center;
+        z-index: 6;
+        align-self: center;
+        left: 50%;
+        transform: translate(-50%, 0);
+        margin-top: 38vh;
+        color: #394438;
+        font-family: Roboto;
+        font-size: 3.5vh;
+        font-weight: 400;
+        width: 70vw;
+        pointer-events: none;
+    }
+
+    #EmailValue1{
+        margin-top: 50vh;
+    }
+
+    #PasswordValue1{
+        margin-top: 65vh;
+    }
+
+
+
+
+
+
+
+
+
 
 
 }

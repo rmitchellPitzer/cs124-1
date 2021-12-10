@@ -13,13 +13,12 @@ import PriorityMenuItem from "./priorityMenuItem";
 
 function ShareMenu(props, selectedSection) {
 
-
     return (
 
     <div>
         <div className="shareTitle">Share a section with a user</div>
         <div className="shareMenuContainer"></div>
-        <div className="sharedMenuOverlay"
+        <div className="overlay"
              onClick={() => AppDataController.toggleShareMenu()}></div>
         <input type="email" placeholder="Recipient's email" className="ShareInput" id="EmailValue3"/>
         <button className="ShareButton"

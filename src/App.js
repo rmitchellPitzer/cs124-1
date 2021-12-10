@@ -30,12 +30,14 @@ import {
 import store from "./modules/dataController/store";
 import SignUpMenu from "./modules/dataController/signUpMenu";
 import ShareMenu from "./components/newSection/shareMenu";
+import VerifyYourEmail from "./components/newSection/verifyEmail";
 
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 function verifyEmail() {
-    auth.currentUser.sendEmailVerification();
+    console.log("This doesn't work yet, don't want to break fireStore")
+    // auth.currentUser.sendEmailVerification();
 }
 
 
@@ -54,20 +56,13 @@ function App(props) {
     function SignUpMenu(){
         return(
             <div>
-            <div className="SignUpTitle">Let's Get Started!</div>
-        <div className="SplashScreenBlurredBackground"
-                  onClick={() => AppDataController.toggleSignUpMenu()}></div>
-                <div className="SignUpTitleDescription">
-                    We'll send you an email to confirm your account
-                </div>
+                <div className="SignUpTitle">Let's Get Started!</div>
+                <div className="SplashScreenBlurredBackground"
+                     onClick={() => AppDataController.toggleSignUpMenu()}></div>
                 <input type="email" placeholder="Your email" className="EmailInput" id="EmailValue"/>
-                <div className="SignUpPasswordDescription">
-                                              Remember to choose a secure password
-                                          </div>
                 <input type="password" placeholder="Your password" className="EmailInput" id="PasswordValue"/>
                 <SignUp></SignUp>
             </div>)
-
     }
 
     function SignInMenu(){
@@ -84,6 +79,24 @@ function App(props) {
     }
 
 
+    function VerifyYourEmail(props) {
+        return (
+            <div className="verifyEmailBanner">
+                <button
+                    className="verifyEmailBanner"
+                    onClick={verifyEmail}>
+                    You need to verify your email before accessing app features. Click here to send a verification email!
+                </button>
+            </div>
+
+        )
+    }
+
+
+
+
+
+
 
 
     if (loading) {
@@ -94,7 +107,7 @@ function App(props) {
             {/*{user.displayName || user.email}*/}
             <AppSignedIn {...props} user={user}/>
             <button type="button" onClick={() => auth.signOut()}>Logout</button>
-            {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
+            {!user.emailVerified && <VerifyYourEmail/>}
         </div>
     }
 
@@ -129,11 +142,12 @@ function App(props) {
 
                 {props.signInMenuStatus && <SignInMenu></SignInMenu>}
 
-
-
-            <div className="SplashScreenTitle" id={cssTransparencyID}>Todoiz.IO</div>
-            <div className="SplashScreenDescription" id={cssTransparencyID}>The British Indian Ocean Territory note taking app
-                meant for you and your devices</div>
+        <div className="titleAndSignInButtons">
+            <div className="titleAndDescription">
+                <div className="SplashScreenTitle" id={cssTransparencyID}>Todoiz.IO</div>
+                <div className="SplashScreenDescription" id={cssTransparencyID}>The British Indian Ocean Territory note taking app
+                    meant for you and your devices</div>
+            </div>
 
             <div className="SplashScreenButtons" id={cssTransparencyID}>
                 <button className="SplashScreenGoogle" onClick={() =>
@@ -143,19 +157,18 @@ function App(props) {
                 <button className="SplashScreenEmailSignUp" onClick={() =>
                     AppDataController.toggleSignUpMenu()}>Sign up with email and password!
                 </button>
+            </div>
 
-                <button className="SplashScreenEmailSignIn" onClick={() =>
+            </div>
+                <button className="SplashScreenEmailSignIn" id={cssTransparencyID} onClick={() =>
                     AppDataController.toggleSignInMenu()}>Already have an account? Sign in here with Email and Password
                 </button>
-            </div>
+
         </div>
         </div>
     }
 }
 
-
-const FAKE_EMAIL = 'foo@bar.com';
-const FAKE_PASSWORD = 'xyzzyxx';
 
 
 function SignIn() {
