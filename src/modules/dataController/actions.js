@@ -42,6 +42,8 @@ export const SET_SECTION_PRIORITY = "setSectionPriority"
 
 export const SET_USER_ID = "setUserId"
 
+export const SET_USER_EMAIL = "setUserEmail"
+
 export const TOGGLE_SIGNUP_MENU = "toggleSignUpMenu"
 
 export const TOGGLE_SIGN_IN_MENU = "toggleSignInMenu"
@@ -101,6 +103,8 @@ export const updateTaskPriorityAction = (id, sectionIdentifier, value) => ({type
 export const setSectionPriorityAction = (value) => ({type: SET_SECTION_PRIORITY, payload:{value}})
 
 export const setUserIdAction = (userId) => ({type: SET_USER_ID, payload:{userId}})
+
+export const setUserEmailAction = (userEmail) => ({type: SET_USER_EMAIL, payload:{userEmail}})
 
 export const toggleSignUpMenuAction = () => ({type: TOGGLE_SIGNUP_MENU})
 

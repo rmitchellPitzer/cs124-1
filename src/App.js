@@ -224,39 +224,68 @@ function SignUp() {
 
 function AppSignedIn(props) {
     AppDataController.setUserId(props.user.uid)
+    console.log("HELLO EMAIL")
+    console.log(props.user.email)
+    AppDataController.setUserEmail(props.user.email)
     // gets different menu's status's from the redux state
     // Undo is not used at all.
 
     console.log("This is the userID")
     console.log(props.user.uid)
     // Get the sections information from firestore
-    const query = database.collection(collectionName).where('owner', "==", props.user.uid);
-    const [value, loading, error] = useCollection(query);
+    // const query = database.collection(collectionName).where('owner', "==", props.user.uid);
+    // const [value, loading, error] = useCollection(query);
+    // console.log("This is the value of value")
+    // console.log(value)
+
+    const sharedQuery = database.collection(collectionName).where('sharedWith', "array-contains", props.user.email);
+    console.log(props.user.email)
+    const [valueShared, loadingShared, errorShared] = useCollection(sharedQuery);
+    console.log("This is the value of value shared")
+    console.log(valueShared)
+        console.log(loadingShared)
+        console.log(errorShared)
+
     let fireStoreList = null;
-    if (value) {
-        fireStoreList = value.docs.map((doc) => {
-            return {...doc.data()}});
+    let sharedFireStoreList = null;
+    // if (value) {
+    //         fireStoreList = value.docs.map((doc) => {
+    //             return {...doc.data()}
+    //         });
+    //         console.log("This is the firestoreList")
+    //         console.log(fireStoreList)
+    //     }
+    // console.log(value, loading, error)
+    // console.log(fireStoreList)
 
+    if (valueShared) {
+        console.log("This is the shared list")
+        sharedFireStoreList = valueShared.docs.map((doc) => {
+            return {...doc.data()}
+        });
+        console.log(sharedFireStoreList)
     }
+    console.log(sharedFireStoreList)
 
+    console.log("user id")
+    console.log(props.user.uid)
 
-// Returns both a widescreen format for tablets/desktops/landscape mode and a portrait mode
-    // depending on screen orientation.
-  return (
-    <div class='hello'>
-      <Header/>
-      <SideBarBackground/>
-        <div className="wideScreenDisplay">
-            <div className="Sidebar"><Sidebar sections = {fireStoreList}/></div>
-            <div className="Sidelist"><SideList sections = {fireStoreList}/></div>
+    return (
+        <div>
+            <div class='hello'>
+                <Header/>
+                <SideBarBackground/>
+                <div className="wideScreenDisplay">
+                    <div className="Sidebar"><Sidebar sections={sharedFireStoreList}/></div>
+                    <div className="Sidelist"><SideList sections={sharedFireStoreList}/></div>
 
-        </div>
-        <SectionList sections = {fireStoreList}/>
-      { props.menuIsActive && <ActionMenu/> }
-        { props.priorityMenuIsActive && <PriorityMenu/>}
-      <ActionButton/>
-    </div>
-  );
+                </div>
+                <SectionList sections={sharedFireStoreList}/>
+                {props.menuIsActive && <ActionMenu/>}
+                {props.priorityMenuIsActive && <PriorityMenu/>}
+                <ActionButton/>
+            </div>
+        </div>);
 }
 
 // Getting those stuffs.

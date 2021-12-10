@@ -26,7 +26,7 @@ import {
     SET_TASKS_TO_STACK,
     UPDATE_TASK_PRIORITY,
     PUSH_SELECTED_SECTION_ACTION, SHOW_PRIORITY_MENU, HIDE_PRIORITY_MENU, SET_SECTION_PRIORITY,
-    SET_USER_ID, TOGGLE_SIGNUP_MENU, TOGGLE_SIGN_IN_MENU,
+    SET_USER_ID, TOGGLE_SIGNUP_MENU, TOGGLE_SIGN_IN_MENU, SET_USER_EMAIL,
 } from './actions';
 
 import {database} from "./firestore";
@@ -56,6 +56,7 @@ const initialState = {
     showCompletedTasks: false,
     selectedSection: [],
     userID: "",
+    userEmail: "",
     showSignUpMenu: false,
     showSignInMenu: false
 }
@@ -205,11 +206,15 @@ function createSection(state) {
     // first part creates a new section in firestore.
     const identifier = uuidv4()
     const sectionRef = database.collection(collectionName).doc(identifier)
+    console.log(identifier)
+    console.log(state.userID)
+    console.log(state.userEmail)
     sectionRef.set({
         identifier: identifier,
         title: "",
         sortType: 7,
-        owner: state.userID
+        owner: state.userID,
+        sharedWith: [state.userEmail]
     })
 
 
@@ -282,13 +287,18 @@ function clearAll(state){
         taskToDelete.delete()
     }
     for (const index in stackList){
+        console.log(stackList)
         if(index == (stackList.length - 1)){
+
+
 
             const sectionToModify = database.collection(collectionName).doc(stackList[index].identifier)
             sectionToModify.update({
 
                 title: "",
-                sortType: 7}
+                sortType: 7,
+                owner: state.userID,
+                sharedWith: [state.userEmail]}
             )
         }
         else{
@@ -412,6 +422,14 @@ function setUserId(state, userId){
     }
 }
 
+function setUserEmail(state, newuserEmail){
+    return{
+        ...state,
+        userEmail: newuserEmail
+    }
+}
+
+
 function toggleSignUpMenu(state){
     return{
         ...state,
@@ -457,6 +475,7 @@ export default function toDoReducer(state = initialState, action){
         case HIDE_PRIORITY_MENU: return hidePriorityMenu(state)
         case SET_SECTION_PRIORITY: return setSectionPriority(state, action.payload.value)
         case SET_USER_ID: return setUserId(state, action.payload.userId)
+        case SET_USER_EMAIL: return setUserEmail(state, action.payload.userEmail)
         case TOGGLE_SIGNUP_MENU: return toggleSignUpMenu(state)
         case TOGGLE_SIGN_IN_MENU: return toggleSignInMenu(state)
 
