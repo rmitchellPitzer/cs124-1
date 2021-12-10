@@ -1,5 +1,6 @@
 
   
+  
 # your design decisions, including their rationale (include images)
 
 -   We first designed our web app in Figma for it's ease of use and because it allowed us to examine our iterative changes. Once we were confident in our final design, we then started creating our html pages using our Figma frames as reference.
@@ -66,6 +67,10 @@ Eventually, the app turned out like this:
 There's another button in the section bar's to open a menu to sort by priority. On top of that, there's a button in the tasks themselves to sort by priority. I also changed the colors of the section bars to all be a light green hue. In the future I hope to be able to create a list of colors that could be looped through to change sections automatically.
 I also made the colors in the tasks a similar orange hue to what was originally in the to do section. It adds a bit of color, and contrasts nicely with the background, as opposed to what it normally was, which was a white background.
 
+**Lab 5 update:** There were so many designs I wanted to use, and, with enough time I probably could have gotten to them, but with the time constraints I'm still happy with what I was able to put out. Here's some of the alternative designs
+
+![enter image description here](https://i.imgur.com/e7fS1k8.png)
+
 # any user testing you did
 
 -   We performed a round of user testing during the design process. The feedback we received was very helpful in helping us improve our application. Some of the improvements made using this feedback were…
@@ -85,6 +90,7 @@ I also made the colors in the tasks a similar orange hue to what was originally 
 - **Lab 3 Update:** More user testing! While this identified some things that I wasn't sure how I could fix, like the priority button not clearly indicating priority, it did lead to some css fixes, like text being centered better and icons being spaced properly. 
 ![Cool new icons as well!](https://i.imgur.com/VXKVvih.png)
 
+**Lab 5 Update:** User testing was done, I was able to improve the way sharing is handled as well as the indicating whether a section is shared.
 
 # the final design, including screen images and the flow for each task.
 - The designs previously have been the figma prototypes we created. The final design for the website as well as the flow per each task can be seen below:
@@ -131,6 +137,8 @@ I also made the colors in the tasks a similar orange hue to what was originally 
 
 **Lab 3 update:**  a github pages link can be found here: [github Pages link](https://rmitchellpitzer.github.io/cs124-1/)
 
+**Lab 5 Update:** [github Pages link](https://rmitchellpitzer.github.io/cs124-1/)
+
 # Challenges you faced
 
 -   Some challenges we faced includes everything described above in alternative designs, but also setting up the html webapp. Originally we wanted to create the html pages using a React application, but React would not work. When designing the webapp we also found ourselves getting into the, as described in don’t make me think, “religious debates” about which design choice was better. When this would occur, we’d generally fallback on what convention says, and this helped us greatly.
@@ -152,6 +160,8 @@ There was also the problem of design, as I did not want the app's design to be t
 I also made the decision to axe renaming the completed section. While I am a huge fan of how much this app can be altered or changed to fit a specific need, I think the implementation would be a bit clunky, as you'd need to store it in another document or collection in Firestore to keep track of the completed section text. it can definitely be done, I'm just worried about complications that might introduce to firestore data. I'll probably try to add it back in in Lab5.
 I also struggled with trying to fix some tasks' text being altered as you type through it and it being sorted, but the Piazza post showed exactly how to fix this.  
 
+**Lab 5 Update:** Oh boy this was not fun. While I'm proud of how much I was able to get done in a day, I did not finish this, and  the design doesn't work in landscape mode. It sucks a lot. After I write this I'm going to make a new branch to finish it just because of how ugly it is right now. I think I struggled most with firestore rules and understanding them, as well as trying to figure out how to make the app secure.
+
 # Parts of the design you're most proud of
 
 
@@ -163,4 +173,6 @@ I also struggled with trying to fix some tasks' text being altered as you type t
 - **Lab 4 update** Honestly, there's so much more I wish I could have put into this and wish I could have learned how to do. I wish I could have figured out how to tell when things are on screen, and to add more styling to the sidebar in a way that didn't conflict with flexboxes, but I have spent so much time on this lab that I am so proud to finally turn this in. This has been so much work, and while I know there will be so much more work in getting firebase and user log in working, I can not wait to finally get that finished as well. 
 also I'm very proud of the way it looks in landscape mode. it just seems to fill the viewport way more, and I'm also very proud of the customizability of it. I feel that being able to add sections and change all section names makes it more versatile in what it can be used for instead of just a tasks app.
 
-**Lab 3 Update:** I think I'm really proud of the whole design. I really really like how the priority menu looks now, with options for sorting having icons showing whether it will be sorted descending or ascending. I also like the new colors in the priority task button. 
+**Lab 3 Update:** I think I'm really proud of the whole design. I really really like how the priority menu looks now, with options for sorting having icons showing whether it will be sorted descending or ascending. I also like the new colors in the priority task button.
+
+**Lab 5 Update:** It is my baby, and i am proud of it, and I especially like the splash screen. 
