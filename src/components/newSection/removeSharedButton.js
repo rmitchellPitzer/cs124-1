@@ -8,8 +8,6 @@ import TaskDataController from "../../modules/dataController/TaskDataController"
 
 // This is a button that opens the priority sort menu to sort a list of tasks in mobile view.
 function RemoveSectionSharedButton(props) {
-    console.log("These are the props!")
-    console.log(props)
     const sectionText = props.sectionTitle
 
     return (

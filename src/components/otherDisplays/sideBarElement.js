@@ -13,8 +13,6 @@ import RemoveSectionSharedButton from "../newSection/removeSharedButton";
 // contains a sideBarButton, an input field for the section title, and a add task button for the section
 
 export default function SideBarElement(props) {
-    console.log(props)
-    console.log("PLEASE OWNER")
     // cssID determines whether the sidebar is todo, completed, or a added section.
 
     let cssID
@@ -26,8 +24,6 @@ export default function SideBarElement(props) {
     //     cssID = props.identifier + "sideBar";
     // }
 
-    console.log(cssID)
-
 
 
     const isOwned  = props.owner === store.getState().userID
@@ -35,8 +31,6 @@ export default function SideBarElement(props) {
     if(!isOwned){
         cssID = 'sideBarElementSHARED'
     }
-    console.log("THE CLASS NAME")
-    console.log("sideBarElement"+!isOwned)
 
     return(
         <div

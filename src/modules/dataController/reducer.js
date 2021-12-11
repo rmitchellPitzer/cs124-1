@@ -202,14 +202,9 @@ function hideUndo(state) {
 // function for creating a section, this will push a new empty section onto the state's sections.
 
 function createSection(state) {
-    console.log("Trying to create a section")
-    console.log(state.userID)
     // first part creates a new section in firestore.
     const identifier = uuidv4()
     const sectionRef = database.collection(collectionName).doc(identifier)
-    console.log(identifier)
-    console.log(state.userID)
-    console.log(state.userEmail)
     sectionRef.set({
         identifier: identifier,
         title: "",
@@ -288,7 +283,6 @@ function clearAll(state){
         taskToDelete.delete()
     }
     for (const index in stackList){
-        console.log(stackList)
         if(index == (stackList.length - 1)){
 
 
@@ -455,9 +449,6 @@ function toggleShareMenu(state){
 function shareTask(state, inputEmail){
     const sharedWithList = state.selectedSection.sortType.map(x => x)
     sharedWithList.push(inputEmail)
-    console.log(sharedWithList)
-    console.log("The shared list!")
-    console.log(state.selectedSection.sectionIdentifier)
     const sectionRef = database.collection(collectionName).doc(state.selectedSection.sectionIdentifier)
     sectionRef.update({
             sharedWith: sharedWithList

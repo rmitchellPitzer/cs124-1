@@ -50,6 +50,10 @@ body,.task-text {
     visibility: visible;
 }
 
+.sectionsContainer{
+    display: none;
+}
+
 @media screen and (max-width: 600px) and (max-height: 1000px) {
     .wideScreenDisplay{
         display: none;}
@@ -61,5 +65,11 @@ body,.task-text {
     }
     .container {
         display: block;
+    }
+
+    .sectionsContainer{
+        display: block;
+        margin-top: -12vh;
+        padding-top: 70px;
     }
 }

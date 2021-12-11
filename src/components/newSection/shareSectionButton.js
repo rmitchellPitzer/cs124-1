@@ -7,8 +7,6 @@ import AppDataController from "../../modules/dataController/AppDataController";
 
 // This is a button that opens the priority sort menu to sort a list of tasks in mobile view.
 function ShareSectionButton(props) {
-    console.log("These are the props!")
-    console.log(props)
     const sectionText = props.sectionTitle
 
     return (

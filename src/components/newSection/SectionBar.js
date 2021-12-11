@@ -35,10 +35,6 @@ export default function SectionBar(props) {
         classes = 'barotherSectionsSHARED'
     }
 
-    console.log("The cssID")
-    console.log(cssID)
-    console.log("bar"+cssID)
-
 
 
     // This will return a section bar, containing a button to open and close the tasks,
@@ -59,6 +55,7 @@ export default function SectionBar(props) {
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.sectionTitle}
             />
+            <div className="sectionBarButtons">
             {props.isOwned && <ShareSectionButton
                 sharedWith = {props.sharedWith}
                 identifier = {props.identifier}/>}
@@ -75,7 +72,8 @@ export default function SectionBar(props) {
             {<SectionAddTaskButton
                 identifier = {props.identifier}
                 sectionTitle = {props.sectionTitle}/>}
-        </div>  
+        </div>
+        </div>
     )
 }
 

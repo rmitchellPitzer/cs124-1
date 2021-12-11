@@ -39,8 +39,6 @@ function SectionContainer(props) {
     let fireStoreCompletedList = null;
     let stateCompletedList = null;
 
-    console.log("Hopefully this shows the owner!")
-    console.log(props.owner)
 
     if (value) {
         fireStoreList = value.docs.map((doc) => {
@@ -103,8 +101,8 @@ function SectionContainer(props) {
 
     }
 
-    console.log("Is owned")
-    console.log(props.owner === store.getState().userID)
+
+
     return (
         <div>
             {fireStoreList && <SectionBar

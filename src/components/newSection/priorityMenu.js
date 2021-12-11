@@ -53,7 +53,6 @@ function prioritySort() {
 
 // Resets sorting, in case you do not want any sorting.
 function resetSort() {
-    console.log(sortType())
     TaskDataController.setSectionPriority(7)
 }
 

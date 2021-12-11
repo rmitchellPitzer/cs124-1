@@ -14,7 +14,7 @@ props:{
 function SectionList(props){
     if (props.sections){
         return(
-            <div class='container'>
+            <div class='sectionsContainer'>
                 {
                     props.sections.map(section => {
                         return <SectionContainer

@@ -36,7 +36,6 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 function verifyEmail() {
-    console.log("This doesn't work yet, don't want to break fireStore")
     // auth.currentUser.sendEmailVerification();
 }
 
@@ -106,7 +105,6 @@ function App(props) {
         return <div>
             {/*{user.displayName || user.email}*/}
             <AppSignedIn {...props} user={user}/>
-            <button type="button" onClick={() => auth.signOut()}>Logout</button>
             {!user.emailVerified && <VerifyYourEmail/>}
         </div>
     }
@@ -238,52 +236,24 @@ function SignUp() {
 
 function AppSignedIn(props) {
     AppDataController.setUserId(props.user.uid)
-    console.log("HELLO EMAIL")
-    console.log(props.user.email)
     AppDataController.setUserEmail(props.user.email)
     // gets different menu's status's from the redux state
     // Undo is not used at all.
 
-    console.log("This is the userID")
-    console.log(props.user.uid)
-    // Get the sections information from firestore
-    // const query = database.collection(collectionName).where('owner', "==", props.user.uid);
-    // const [value, loading, error] = useCollection(query);
-    // console.log("This is the value of value")
-    // console.log(value)
+
 
     const sharedQuery = database.collection(collectionName).where('sharedWith', "array-contains", props.user.email);
-    console.log(props.user.email)
     const [valueShared, loadingShared, errorShared] = useCollection(sharedQuery);
-    console.log("This is the value of value shared")
-    console.log(valueShared)
-        console.log(loadingShared)
-        console.log(errorShared)
+
 
     let fireStoreList = null;
     let sharedFireStoreList = null;
-    // if (value) {
-    //         fireStoreList = value.docs.map((doc) => {
-    //             return {...doc.data()}
-    //         });
-    //         console.log("This is the firestoreList")
-    //         console.log(fireStoreList)
-    //     }
-    // console.log(value, loading, error)
-    // console.log(fireStoreList)
 
     if (valueShared) {
-        console.log("This is the shared list")
         sharedFireStoreList = valueShared.docs.map((doc) => {
             return {...doc.data()}
         });
-        console.log(sharedFireStoreList)
     }
-    console.log(sharedFireStoreList)
-
-    console.log("user id")
-    console.log(props.user.uid)
-
     return (
         <div>
             <div class='hello'>
@@ -318,3 +288,5 @@ function mapToState(state) {
 }
 
 export default connect(mapToState)(App)
+
+export {auth}

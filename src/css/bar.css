@@ -110,7 +110,7 @@
 
 
 .drop-down i {
-    font-size: 4vh;
+    font-size: 2px;
     margin-top: 10px;
     margin-left: -5px;
     visibility: hidden;
@@ -158,20 +158,26 @@
         margin-bottom: 0;
         display: flex;
         justify-content: left;
-        height: 6.25vh;
+        height: 50px;
         background: #FEC5BB;
         width: 100vw;
         visibility: visible;
         content-visibility: visible;
     }
 
+    .sectionBarButtons{
+        align-self: last;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        gap: 5px;
+    }
 
     .bar {
         margin-top: 0;
         margin-bottom: 0;
         display: flex;
-        justify-content: left;
-        height: 6.25vh;
+        height: 50px;
         background: #bbe0bd;
         width: 100vw;
         visibility: visible;
@@ -184,13 +190,12 @@
 
     .bar-title {
         margin-left: -5px;
-        font-size: 2em;
-        width: 50vw;
+        font-size: 1.7em;
+        width: calc(98vw - 160px);
         outline: none;
         border: none;
         font-family: Roboto;
         font-weight: 400;
-        font-size: 1.85em;
         visibility: visible;
         content-visibility: visible;
     }
@@ -219,7 +224,7 @@
     .drop-down {
         height: 2em;
         width: 2em;
-        font-size: 1.5em;
+        margin-top: 3px;
         background: transparent;
         border-radius: 100%;
         color: #796555;
@@ -265,7 +270,7 @@
         margin-bottom: 0;
         display: flex;
         justify-content: left;
-        height: 6.25vh;
+        height: 50px;
         background: #afe5e4;
         width: 100vw;
         visibility: visible;
