@@ -31,6 +31,7 @@ import store from "./modules/dataController/store";
 import SignUpMenu from "./modules/dataController/signUpMenu";
 import ShareMenu from "./components/newSection/shareMenu";
 import VerifyYourEmail from "./components/newSection/verifyEmail";
+import RemoveSharedMenu from "./components/newSection/removeSharedMenu";
 
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -268,6 +269,7 @@ function AppSignedIn(props) {
                 {props.menuIsActive && <ActionMenu/>}
                 {props.priorityMenuIsActive && <PriorityMenu/>}
                 {props.shareMenuStatus && <ShareMenu/>}
+                {props.removeMenuStatus && <RemoveSharedMenu/>}
                 <ActionButton/>
             </div>
         </div>);
@@ -277,6 +279,7 @@ function AppSignedIn(props) {
 function mapToState(state) {
 
         return {
+            removeMenuStatus: store.getState().showRemove,
             shareMenuStatus: store.getState().showShareMenu,
             signInMenuStatus: store.getState().showSignInMenu,
             signUpMenuStatus: store.getState().showSignUpMenu,

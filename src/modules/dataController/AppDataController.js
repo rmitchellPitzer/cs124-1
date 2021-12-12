@@ -15,7 +15,7 @@ import {
     toggleSignUpMenuAction,
     toggleSignInMenuAction,
     setUserEmailAction,
-    toggleShareMenuAction
+    toggleShareMenuAction, setValidShareEmailAction, setSharedWithEmailAction, toggleShowRemoveAction
 } from "./actions.js"
 import store from "./store.js"
 
@@ -118,6 +118,22 @@ export default class AppDataController {
 
     static toggleShareMenu(){
         const action = toggleShareMenuAction()
+        store.dispatch(action)
+    }
+
+    static setValidShareEmail(value){
+        const action = setValidShareEmailAction(value)
+        store.dispatch(action)
+    }
+
+    static setSharedWithEmail(value){
+        const action = setSharedWithEmailAction(value)
+        store.dispatch(action)
+
+    }
+
+    static toggleShowRemove(){
+        const action = toggleShowRemoveAction()
         store.dispatch(action)
     }
 

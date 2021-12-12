@@ -54,6 +54,13 @@ export const SHARE_TASK = "shareTask"
 
 export const REMOVE_TASK = "removeTask"
 
+export const SET_VALID_SHARE_EMAIL = "setValidShareEmail"
+
+export const SET_SHARED_WITH_EMAIL = "setSharedWithEmail"
+
+export const TOGGLE_SHOW_REMOVE = "toggleShowRemove"
+
+
 
 
 
@@ -123,6 +130,12 @@ export const toggleShareMenuAction = () => ({type: TOGGLE_SHARE_MENU})
 export const shareTaskAction = (inputEmail) => ({type: SHARE_TASK, payload:{inputEmail}})
 
 export const removeTaskAction = () => ({type: REMOVE_TASK})
+
+export const setValidShareEmailAction = (value) => ({type: SET_VALID_SHARE_EMAIL, payload: {value}})
+
+export const setSharedWithEmailAction = (value) => ({type: SET_SHARED_WITH_EMAIL, payload: {value}})
+
+export const toggleShowRemoveAction = () => ({type: TOGGLE_SHOW_REMOVE})
 
 
 

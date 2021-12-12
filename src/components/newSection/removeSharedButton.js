@@ -23,7 +23,7 @@ function RemoveSectionSharedButton(props) {
 
 function handleOnClick(identifier, sharedWith) {
     AppDataController.pushSelectedSection(identifier, sharedWith)
-    TaskDataController.removeTask()
+    AppDataController.toggleShowRemove()
 }
 
 export default RemoveSectionSharedButton

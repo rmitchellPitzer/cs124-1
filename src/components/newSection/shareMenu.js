@@ -10,96 +10,68 @@ import PriorityMenuItem from "./priorityMenuItem";
 
 // Creates the priority sort menu, includes a list of options to choose from
 // includes a title as well to show what sorting is being used.
-var clicked
 
-var validEmail
+
 function ShareMenu(props, selectedSection) {
 
+    return (
+        <div className="shareMenuOrientation">
+            <div className="shareMenuContainer">
+                {props.isValidEmail &&
+                !props.isPressed &&
+                <div className="shareTitle">Share this section with another user!</div>}
+
+                {!props.isValidEmail &&
+                props.isPressed &&
+                <div className="shareTitle">Please enter a valid email address!</div>}
+
+                {props.isValidEmail &&
+                props.isPressed &&
+                <div className="shareTitle">The section has been shared with the user!</div>}
+
+
+                <input type="email" placeholder="Recipient's email" className="ShareInput" id="EmailValue3"/>
+                <button className="ShareButton"
+                        onClick={() =>
+                            handleOnClick((document.getElementById('EmailValue3').value))}>
+                    Share!</button>
+            </div>
+            <div className="overlay"
+                 onClick={() => AppDataController.toggleShareMenu()}></div>
+
+        </div>)
+
+
+
+
     function handleOnClick(email) {
-        window.clicked = true
-        if (ValidateEmail(email) === true) {
+        AppDataController.setValidShareEmail(email)
+        AppDataController.setSharedWithEmail(true)
+
+        if (store.getState().validShareEmail) {
             TaskDataController.shareTask(email)
             setTimeout(() => {
-                window.clicked = false
-                window.validEmail = true
+                AppDataController.setValidShareEmail("ryderm123456@gmail.com")
+                AppDataController.setSharedWithEmail(false)
             }, 3000)
         }
         else{
-            window.validEmail = false
             setTimeout(() => {
-                window.validEmail = true
+                AppDataController.setValidShareEmail("example@gmail.com")
+                AppDataController.setSharedWithEmail(false)
             }, 3000)
         }
     }
 
-    if (clicked === true){
-        if (window.validEmail === true) {
-            return (
-                <div className="shareMenuOrientation">
-                    <div className="shareMenuContainer">
-                        <div className="shareTitle">Shared the section with the user provided!</div>
-                        <input type="email" placeholder="Recipient's email" className="ShareInput" id="EmailValue3"/>
-                        <button className="ShareButton"
-                                onClick={() =>
-                                    handleOnClick((document.getElementById('EmailValue3').value))}>
-                            Share!</button>
-                    </div>
-                    <div className="overlay"
-                         onClick={() => AppDataController.toggleShareMenu()}></div>
-
-                </div>)
-        }
-        else{
-            return (
-                <div className="shareMenuOrientation">
-                    <div className="shareMenuContainer">
-                        <div className="shareTitle">Please provide a valid email!</div>
-                        <input type="email" placeholder="Recipient's email" className="ShareInput" id="EmailValue3"/>
-                        <button className="ShareButton"
-                                onClick={() =>
-                                    handleOnClick((document.getElementById('EmailValue3').value))}>
-                            Share!</button>
-                    </div>
-                    <div className="overlay"
-                         onClick={() => AppDataController.toggleShareMenu()}></div>
-
-                </div>)
-        }
-
-    }
-    else{
-        return (
-
-            <div className="shareMenuOrientation">
-                <div className="shareMenuContainer">
-                    <div className="shareTitle">Share this section with a user</div>
-                    <input type="email" placeholder="Recipient's email" className="ShareInput" id="EmailValue3"/>
-                    <button className="ShareButton"
-                            onClick={() =>
-                                handleOnClick((document.getElementById('EmailValue3').value))}>
-                        Share!</button>
-                </div>
-                <div className="overlay"
-                     onClick={() => AppDataController.toggleShareMenu()}></div>
-
-            </div>)
-    }
 
 }
 
-function ValidateEmail(input) {
-    // used code from https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
-    let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (input.match(validRegex)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+function mapStateToProps(state){
+    return{
+        isValidEmail: store.getState().validShareEmail,
+        isPressed: store.getState().shareEmailPressed}
 }
 
 
 
-
-
-export default ShareMenu
+export default connect(mapStateToProps)(ShareMenu)

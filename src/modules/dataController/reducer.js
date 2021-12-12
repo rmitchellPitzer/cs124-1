@@ -25,8 +25,20 @@ import {
     SET_SECTION_TO_STACK,
     SET_TASKS_TO_STACK,
     UPDATE_TASK_PRIORITY,
-    PUSH_SELECTED_SECTION_ACTION, SHOW_PRIORITY_MENU, HIDE_PRIORITY_MENU, SET_SECTION_PRIORITY,
-    SET_USER_ID, TOGGLE_SIGNUP_MENU, TOGGLE_SIGN_IN_MENU, SET_USER_EMAIL, TOGGLE_SHARE_MENU, SHARE_TASK, REMOVE_TASK,
+    PUSH_SELECTED_SECTION_ACTION,
+    SHOW_PRIORITY_MENU,
+    HIDE_PRIORITY_MENU,
+    SET_SECTION_PRIORITY,
+    SET_USER_ID,
+    TOGGLE_SIGNUP_MENU,
+    TOGGLE_SIGN_IN_MENU,
+    SET_USER_EMAIL,
+    TOGGLE_SHARE_MENU,
+    SHARE_TASK,
+    REMOVE_TASK,
+    SET_VALID_SHARE_EMAIL, SET_SHARED_WITH_EMAIL,
+    TOGGLE_SHOW_REMOVE
+
 } from './actions';
 
 import {database} from "./firestore";
@@ -59,7 +71,10 @@ const initialState = {
     userEmail: "",
     showSignUpMenu: false,
     showSignInMenu: false,
-    showShareMenu: false
+    showShareMenu: false,
+    validShareEmail: true,
+    shareEmailPressed: false,
+    showRemove: false
 }
 
 
@@ -474,8 +489,35 @@ function removeTask(state){
     }
 }
 
+function setValidShareEmail(state, value){
+    let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (value.match(validRegex)) {
+        return{
+            ...state,
+            validShareEmail: true
+        }
+    }
+    else{
+        return{
+            ...state,
+            validShareEmail: false
+        }
+    }
 
+}
 
+function setSharedWithEmail(state, value){
+    return{
+        ...state,
+        shareEmailPressed: value
+}}
+
+function toggleShowRemove(state){
+    return{
+        ...state,
+        showRemove: !state.showRemove
+    }
+}
 
 
 export default function toDoReducer(state = initialState, action){
@@ -514,6 +556,9 @@ export default function toDoReducer(state = initialState, action){
         case TOGGLE_SHARE_MENU: return toggleShareMenu(state)
         case SHARE_TASK: return shareTask(state, action.payload.inputEmail)
         case REMOVE_TASK: return removeTask(state)
+        case SET_VALID_SHARE_EMAIL: return setValidShareEmail(state, action.payload.value)
+        case SET_SHARED_WITH_EMAIL: return setSharedWithEmail(state, action.payload.value)
+        case TOGGLE_SHOW_REMOVE: return toggleShowRemove(state)
 
         default:
             return state 
