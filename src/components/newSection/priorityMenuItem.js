@@ -15,7 +15,7 @@ props: {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function PriorityMenuItem(props) {
-    // creates a button in the action menu with a command from props.
+    // creates a button in the priority menu with a command from props.
     return (
         <button onClick={() => props.command(props)} class="action-item"
                 aria-label={"This is the" + props.text + "button in the action menu, Press to perform the action." }>

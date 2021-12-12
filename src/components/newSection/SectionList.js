@@ -11,6 +11,9 @@ props:{
 
  */
 // Returns a list of sections
+
+// CompletedSectionsTaskList and completed section is also returned, as the two are
+// separate from normal sections
 function SectionList(props){
     if (props.sections){
         return(

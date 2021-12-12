@@ -3,10 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMinus } from "@fortawesome/free-solid-svg-icons"
 import "../../css/SectionAddTaskButton.css"
 import AppDataController from "../../modules/dataController/AppDataController";
-import TaskDataController from "../../modules/dataController/TaskDataController";
 
-
-// This is a button that opens the priority sort menu to sort a list of tasks in mobile view.
+// This is a button that opens the remove Section menu to remove your access to a section.
 function RemoveSectionSharedButton(props) {
     const sectionText = props.sectionTitle
 

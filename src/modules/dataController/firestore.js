@@ -1,7 +1,4 @@
 import firebase from "firebase/compat";
-import {useCollection} from "react-firebase-hooks/firestore";
-
-// lab 3 work:
 
 // stuff for the firebase config
 

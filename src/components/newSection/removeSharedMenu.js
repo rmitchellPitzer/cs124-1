@@ -1,14 +1,11 @@
 import "../../css/prioritySortButton.css"
 import "../../css/shareGui.css"
 import TaskDataController from "../../modules/dataController/TaskDataController.js"
-import { faMinus, faSortAmountUpAlt, faSortAmountDownAlt } from "@fortawesome/free-solid-svg-icons"
 import AppDataController from "../../modules/dataController/AppDataController.js"
-import store from "../../modules/dataController/store";
-import {connect} from "react-redux";
-import PriorityMenuItem from "./priorityMenuItem";
 
 
-// Creates the priority sort menu, includes a list of options to choose from
+
+// Creates the remove section menu, includes a list of options to choose from
 // includes a title as well to show what sorting is being used.
 
 

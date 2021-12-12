@@ -12,7 +12,8 @@ props: {
 }
 */
 
-// This creates the individual task for use on mobile displays. It contains a checkbox, and a input text
+// This creates the individual task for use on mobile displays. It contains a checkbox, a input text, and priority
+// button to change priority levels.
 
 export default function Task(props) {
 

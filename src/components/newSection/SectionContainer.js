@@ -1,12 +1,10 @@
 import TaskList from "../Tasks/TaskList.js"
 import SectionBar from "./SectionBar.js"
-import AppDataController from "../../modules/dataController/AppDataController";
 import {connect} from "react-redux";
 import TaskDataController from "../../modules/dataController/TaskDataController";
 import {collectionName, database} from "../../modules/dataController/firestore";
 import {useCollection} from "react-firebase-hooks/firestore";
 import store from "../../modules/dataController/store";
-import CompletedSection from "./completedSection";
 
 
 
@@ -30,7 +28,9 @@ props:
 // many queries, we already have all tasks and sections we need to clear in
 // the state.
 // And then, once that's done, this will return a given section
+
 function SectionContainer(props) {
+
     const isToggled = (props.isToggledList.includes(props.identifier))
 
     const taskRef = database.collection(collectionName).doc(props.identifier).collection('tasks')
@@ -39,6 +39,7 @@ function SectionContainer(props) {
     let fireStoreCompletedList = null;
     let stateCompletedList = null;
 
+    // The code above gets the data from firestore for the section's tasks.
 
     if (value) {
         fireStoreList = value.docs.map((doc) => {
@@ -51,6 +52,18 @@ function SectionContainer(props) {
         const fireStoreCompletedList = fireStoreList.map(x => x).filter(task => task.isCompleted === true)
         stateCompletedList = store.getState().completedTasks.map(x => x).filter(task => task.sectionIdentifier !== props.identifier).concat(fireStoreCompletedList)
         TaskDataController.pushCompletedTask(stateCompletedList)
+
+        // The code above will push tasks to state. This allows for showing copmpleted tasks, as well as clearing all tasks without any bugs or duplicate tasks.
+
+
+        //This handles sorting tasks by sort type.
+        // 7: No sorting
+        // 6: sort by priority descending
+        //  5: sort by priority ascending
+        // 4: sort by time made descending
+        //  3: sort by time made ascending
+        // 2: sort alphabetically descending
+        //  1: sort by alphabetically ascending
 
         if(props.sortType < 7){
             if(props.sortType === 1){

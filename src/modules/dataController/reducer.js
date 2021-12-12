@@ -43,20 +43,31 @@ import {
 
 import {database} from "./firestore";
 import {collectionName} from "./firestore";
-import TaskDataController from "./TaskDataController";
-import store from "./store";
 
 
 
 // Initial state,
-// sectionStack is used to keep track of sections
-// taskStack is used for deleting tasks instead of querying
-// sections toggled, keeps track of which sections in mobile view are
-// currently being shown
-// show undo, show menu, show... just show what their name is.
-// selectedSection: will contain a section's identifier and name when
-// the priority sort button is pressed, pushing it to the stack so it
-// can be read by other components and altered.
+
+// Initial state contains a lot of information and stat variables, so I'll go over each one:
+
+// sectionStack contains a stack of all sections, when a section is added it's pushed to the stack. This ensures that
+    // more calls to query aren't needed as they can be done through the state.
+// taskStack is similar to sectionStack, but is used to keep track of tasks in order to delete all tasks.
+// sectionsToggled contains a list of sections toggled, or that when the sections are toggled, their tasks are
+    // viewable in mobile view.
+// showUndo: Isn't really needed anymore, but would show the undo menu before it was removed.
+// showMenu, showPriorityMenu, ShowCompletedTasks, all exist to toggle on/off menu's associated with altering
+// tasks or sections.
+// selectedSection: keeps track of a section that's selected when a button is pressed in that section. This means
+    // any action can apply the action to the item in the selectedSection state variable, which can be used by
+    // different functions such as share section or sort section or remove section.
+//show signUpMenu, showSignInMenu: show the menus needed in the splashScreen.
+// showShareMenu: Shows the share section menu
+// validShareEmail, shareEmailPressed: Keeps track in the share menu if the email being passed through is a valid
+    // email, and if the button has been pressed. This is to return whether or not emails are valid, if they are, and
+    // if the button has not been pressed yet, so no need to return email validity.
+// showRemove: Keeps track of the remove section button,
+
 const initialState = {
     sectionStack:[],
     taskStack: [],
@@ -97,20 +108,6 @@ function createTask(state, sectionIdentifier) {
     }
 }
 
-// Deletes a task with the given id, although I don't think this is used at all.
-// Don't want to delete it yet out of fear of messing up the reducer
-function deleteTask(state,id) {
-    const tasks = state.tasks.filter(task => task.id !== id)
-    return {
-        ...state,
-        tasks
-    }
-}
-
-
-
-
-
 
 // Updates a task's text given it's id, section identifier, and text to update it to.
 // uses firestore.
@@ -141,6 +138,10 @@ function toggleTaskCompletion(state,{id, identifier, isToggled}) {
 // deletes all tasks that are marked completed.
 // updates firestore
 
+
+// from line 142 - line 215 are funcitons that are no longer used.
+// I am worried removing them might break the app with an undefined
+// function, so I'm going to leave them
 function deleteAllCompletedTasks(state) {
     const completedTasks = state.completedTasks.map(x => x)
     for (const index in completedTasks){
@@ -152,24 +153,6 @@ function deleteAllCompletedTasks(state) {
        ...state
    }
 }
-
-// it do not exist.
-// We will no longer be afraid of commitment. What ever happened to
-// pressing an action button, and meaning it, knowing there was no
-// going back? Today, well tonight, well today it's 7 am I need to sleep,
-// Today, we conquer our fears of commitment that have held us back,
-// and proudly remove a requested feature from our app: The undo button.
-
-function undoTask(state) {
-    const stack = state.stack.map(x => x)
-    const newSections = stack.pop()
-    return {
-        ...state,
-        sections: newSections,
-        stack
-    }
-}
-
 
 function toggleCompletedList(state) {
     return {
@@ -213,8 +196,24 @@ function hideUndo(state) {
     }
 }
 
+function deleteSection(state, sectionIdentifier) {
+    const sections = state.sections.filter(sections => sections.identifier !== sectionIdentifier)
+    return {
+        ...state,
+        sections
+    }
+}
 
-// function for creating a section, this will push a new empty section onto the state's sections.
+function getToggledStatus(state, sectionIdentifier){
+    const newSections = state.sections.map(x => x)
+    const sectionWithId = newSections.find(section => section.identifier === sectionIdentifier)
+    if (!sectionWithId){
+        return null
+    }
+    return sectionWithId.isToggled
+}
+
+// function for creating a section.
 
 function createSection(state) {
     // first part creates a new section in firestore.
@@ -233,21 +232,6 @@ function createSection(state) {
         ...state
     }
 }
-
-
-// it's unneccessary code again.
-// pushing removing a lot of this to lab5 due to time constraints.
-// I would rather have a working app than an app that doesn't work, but has cleaner
-// code.
-
-function deleteSection(state, sectionIdentifier) {
-    const sections = state.sections.filter(sections => sections.identifier !== sectionIdentifier)
-    return {
-        ...state,
-        sections
-    }
-}
-
 
 // Similar to updating a task's text, updates a section's text with help from it's sectionIdentifier.
 
@@ -290,6 +274,7 @@ function toggleSection(state, sectionIdentifier) {
 // Clears all tasks and sections except one, which it will reset the text and tasks of.
 // This is to avoid a weird thing where sections show up after a short delay.
 
+// Clears all tasks and sections, including shared tasks but not shared sections.
 function clearAll(state){
     const stackList = state.sectionStack
     const taskList = state.taskStack
@@ -321,18 +306,6 @@ function clearAll(state){
         ...state,
         sectionsToggled: []
     }
-}
-
-
-// it do not matter.
-
-function getToggledStatus(state, sectionIdentifier){
-    const newSections = state.sections.map(x => x)
-    const sectionWithId = newSections.find(section => section.identifier === sectionIdentifier)
-    if (!sectionWithId){
-        return null
-    }
-    return sectionWithId.isToggled
 }
 
 // Pushes a task to the state, this command will only be used if the task is marked completed.
@@ -425,6 +398,7 @@ function setSectionPriority(state, value){
     }
 }
 
+// pushes the userID to the state at appSignedIn render
 function setUserId(state, userId){
     return{
         ...state,
@@ -432,6 +406,7 @@ function setUserId(state, userId){
     }
 }
 
+// pushes the user's email to the state at appSignedIn render
 function setUserEmail(state, newuserEmail){
     return{
         ...state,
@@ -439,14 +414,14 @@ function setUserEmail(state, newuserEmail){
     }
 }
 
-
+// toggles the signUpmenu in the splashScreen to on/off
 function toggleSignUpMenu(state){
     return{
         ...state,
         showSignUpMenu: !(state.showSignUpMenu)
     }
 }
-
+// toggles the signInmenu in the splashScreen to on/off
 function toggleSignInMenu(state){
     return{
         ...state,
@@ -454,6 +429,7 @@ function toggleSignInMenu(state){
     }
 }
 
+// toggles the shareSection Menu in the App to on/off
 function toggleShareMenu(state){
     return{
         ...state,
@@ -461,6 +437,9 @@ function toggleShareMenu(state){
     }
 }
 
+// allows for sharing sections.
+// I don't know why I called it shareTask and not shareSection.
+// I was very tired when I wrote this please forgive me.
 function shareTask(state, inputEmail){
     const sharedWithList = state.selectedSection.sortType.map(x => x)
     sharedWithList.push(inputEmail)
@@ -474,7 +453,7 @@ function shareTask(state, inputEmail){
     }
 }
 
-
+// allows for... removing access to a section not a task again I messed up the naming.
 function removeTask(state){
     const sharedWithList = state.selectedSection.sortType.map(x => x)
     const newList = sharedWithList.filter(email => email !== state.userEmail)
@@ -489,6 +468,7 @@ function removeTask(state){
     }
 }
 
+// checks if the email passed through is actually in email format, updates the state
 function setValidShareEmail(state, value){
     let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (value.match(validRegex)) {
@@ -506,12 +486,14 @@ function setValidShareEmail(state, value){
 
 }
 
+// function to set whether the share Email Button is pressed and update the state.
 function setSharedWithEmail(state, value){
     return{
         ...state,
         shareEmailPressed: value
 }}
 
+// function to toggle the show remove menu.
 function toggleShowRemove(state){
     return{
         ...state,
@@ -519,11 +501,10 @@ function toggleShowRemove(state){
     }
 }
 
-
+// Reducer!
 export default function toDoReducer(state = initialState, action){
     switch (action.type){
         case CREATE_TASK: return createTask(state, action.payload.sectionIdentifier)
-        case DELETE_TASK: return deleteTask(state,action.payload.id)
         case UPDATE_TASK_TEXT: return updateTaskText(state,action.payload)
         case TOGGLE_TASK_COMPLETION: return toggleTaskCompletion(state,action.payload)
         case DELETE_ALL_COMPLETED_TASK: return deleteAllCompletedTasks(state)
@@ -531,7 +512,6 @@ export default function toDoReducer(state = initialState, action){
         case TOGGLE_COMPLETED_LIST: return toggleCompletedList(state)
         case SHOW_MENU: return showMenu(state)
         case HIDE_MENU: return hideMenu(state)
-        case UNDO_TASK: return undoTask(state)
         case SHOW_UNDO: return showUndo(state)
         case HIDE_UNDO: return hideUndo(state)
         case CREATE_SECTION: return createSection(state)

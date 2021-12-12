@@ -10,19 +10,6 @@ import {useCollection} from "react-firebase-hooks/firestore";
 
 let fireStoreList = null;
 
-/*
-props: {
-    menuItems: MenuItem[]
-}
-
-menuItem {
-    text: string;
-
-    command: Function
-}
-*/
-
-
 function deleteAll() {
     // deletes all completed Tasks
     TaskDataController.deleteAllCompleted()

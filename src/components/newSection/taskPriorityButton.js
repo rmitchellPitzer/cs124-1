@@ -7,7 +7,6 @@ import "../../css/SectionAddTaskButton.css"
 
 // The button to change a task's priority level.
 function TaskPriorityButton(props) {
-    //
     const sectionText = props.sectionTitle
     let priorityIcon
     if(props.value == 1){

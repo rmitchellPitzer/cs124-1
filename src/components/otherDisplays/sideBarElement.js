@@ -7,22 +7,19 @@ import store from "../../modules/dataController/store";
 import ShareSectionButton from "../newSection/shareSectionButton";
 import RemoveSectionSharedButton from "../newSection/removeSharedButton";
 
-
-
 // Will create the Individual elements inside the sideBarlist.
-// contains a sideBarButton, an input field for the section title, and a add task button for the section
+// contains a sideBarButton, an input field for the section title, a share or remove section button,
+// a sort button, and a add task button for the section
 
 export default function SideBarElement(props) {
-    // cssID determines whether the sidebar is todo, completed, or a added section.
+    // cssID determines whether the sidebar is shared or owned by the user.
 
     let cssID
     let classes = "sideBarElement"
     if (props.identifier !== 'toDo' && props.identifier !== 'completed'){
         cssID = "otherSectionssideBar";
     }
-    // else{
-    //     cssID = props.identifier + "sideBar";
-    // }
+
 
 
 

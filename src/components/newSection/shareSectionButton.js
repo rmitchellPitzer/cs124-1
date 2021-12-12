@@ -5,7 +5,7 @@ import "../../css/SectionAddTaskButton.css"
 import AppDataController from "../../modules/dataController/AppDataController";
 
 
-// This is a button that opens the priority sort menu to sort a list of tasks in mobile view.
+// This is a button that opens the share section menu to share a section.
 function ShareSectionButton(props) {
     const sectionText = props.sectionTitle
 

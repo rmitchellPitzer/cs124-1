@@ -1,19 +1,16 @@
 import "../../css/prioritySortButton.css"
 import "../../css/shareGui.css"
 import TaskDataController from "../../modules/dataController/TaskDataController.js"
-import { faMinus, faSortAmountUpAlt, faSortAmountDownAlt } from "@fortawesome/free-solid-svg-icons"
 import AppDataController from "../../modules/dataController/AppDataController.js"
 import store from "../../modules/dataController/store";
 import {connect} from "react-redux";
-import PriorityMenuItem from "./priorityMenuItem";
 
-
-// Creates the priority sort menu, includes a list of options to choose from
-// includes a title as well to show what sorting is being used.
-
+// Creates the share menu, which gives some text, an input box,
+// and a button to share sections with an email.
 
 function ShareMenu(props, selectedSection) {
-
+    // Validation for emails are done in the reducer, checks if the email provided is a email and not some
+    // weird text.
     return (
         <div className="shareMenuOrientation">
             <div className="shareMenuContainer">
