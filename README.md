@@ -1,4 +1,4 @@
-# Lab 3 Project
+# Lab 5.1 Project, a updated version of Lab 5
 
 
 Welcome to the React app called Todoiz.IO!
