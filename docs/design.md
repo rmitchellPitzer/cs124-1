@@ -1,4 +1,5 @@
-
+﻿
+  
   
 # your design decisions, including their rationale (include images)
 
@@ -66,6 +67,29 @@ Eventually, the app turned out like this:
 There's another button in the section bar's to open a menu to sort by priority. On top of that, there's a button in the tasks themselves to sort by priority. I also changed the colors of the section bars to all be a light green hue. In the future I hope to be able to create a list of colors that could be looped through to change sections automatically.
 I also made the colors in the tasks a similar orange hue to what was originally in the to do section. It adds a bit of color, and contrasts nicely with the background, as opposed to what it normally was, which was a white background.
 
+**Lab 5 update:** There were so many designs I wanted to use, and, with enough time I probably could have gotten to them, but with the time constraints I'm still happy with what I was able to put out. Here's some of the alternative designs
+
+![enter image description here](https://i.imgur.com/e7fS1k8.png)
+
+
+**Lab 5.1 update:** Lab 5 was the result of me trying to finish an entire lab assignment in roughly 24 hours. I didn't really do Lab 5 for the extra points or grade I would receive, but for the fact that I worked hours and days and weeks on this growing project, and I was really happy with how lab 3 and lab 4 turned out. I felt really disappointed that, an entire semester's effort resulted in something so borked that you can't effectively use it in desktop mode, can't be used on a phone sideways, there were plenty of css glitches, so, for the sake of just wanting this project to work, I added in more functionality from some of the designs I didn't get the chance to add.
+
+![initial splash screen designs](https://i.imgur.com/M0aIxjb.png)
+These show the splash screen designs I initially wanted. These were done in a rush due to, well, 24 hours to learn and work out firestore authentication and rules.
+Currently, the splash screen looks like this:
+| ![enter image description here](https://i.imgur.com/lObJHi1.png)![enter image description here](https://i.imgur.com/KtYNMIO.png)
+![enter image description here](https://i.imgur.com/7Mnmtpk.png)
+
+I also added a dedicated log out button to the banner, allowing the user to return to the splash screen whenever they would like.
+I sure hope I am using splash screen correctly. 
+![Log out button in the top right corner](https://i.imgur.com/TJuLvxq.png)
+
+While I unfortunately did not get to the more complicated designs in my figma file (being able to block users from sharing tasks with you, checking if the email belongs to a user already, notifications to accept tasks from users) I was able to add menus for removing access to sections and sharing tasks with users. Sharing tasks with users will warn you if you input a incorrectly formatted email. This was done with a regular expression in the reducer. The result of these additions is shown here: 
+![asdf is not a valid email address.](https://i.imgur.com/IGIwqxk.png)
+![yes!](https://i.imgur.com/851ejSX.png)
+
+On top of these changes, I also reworked a lot of the css files for this project. The css files are still very messy and contain lots of unused classes/ids, but there aren't any problems anymore depending on viewport sizes and shifting components.
+Depending on if you're viewing this project on a phone in portrait mode, landscape mode, or on a tablet/desktop, the style will be changed accordingly. I also changed alignment of section text, task text, menus, opacity of buttons, and more to make these more aligned and easier to view and distinguish. This was the part where I felt I didn't meet expectations in lab 5, as desktop view was just unusable. I also added comments, but I don't feel that's really design language stuff.
 # any user testing you did
 
 -   We performed a round of user testing during the design process. The feedback we received was very helpful in helping us improve our application. Some of the improvements made using this feedback were…
@@ -85,6 +109,9 @@ I also made the colors in the tasks a similar orange hue to what was originally 
 - **Lab 3 Update:** More user testing! While this identified some things that I wasn't sure how I could fix, like the priority button not clearly indicating priority, it did lead to some css fixes, like text being centered better and icons being spaced properly. 
 ![Cool new icons as well!](https://i.imgur.com/VXKVvih.png)
 
+**Lab 5 Update:** User testing was done, I was able to improve the way sharing is handled as well as the indicating whether a section is shared.
+
+**Lab 5.1 Update:** I also did user testing on this lab, and the results of this created better alignment of icons, font size changes, and general usability improvements. 
 
 # the final design, including screen images and the flow for each task.
 - The designs previously have been the figma prototypes we created. The final design for the website as well as the flow per each task can be seen below:
@@ -131,6 +158,10 @@ I also made the colors in the tasks a similar orange hue to what was originally 
 
 **Lab 3 update:**  a github pages link can be found here: [github Pages link](https://rmitchellpitzer.github.io/cs124-1/)
 
+**Lab 5 Update:** [github Pages link](https://rmitchellpitzer.github.io/cs124-1/)
+
+**Lab 5.1 Update:** The final project isn't on github pages yet, as I'm worried I will get slapped with an academic dishonesty charge if I upload this without notifying Professor Rhodes, Instead, I'll either clone the repo and upload to pages there or wait for the project to be graded and then upload to github pages.
+
 # Challenges you faced
 
 -   Some challenges we faced includes everything described above in alternative designs, but also setting up the html webapp. Originally we wanted to create the html pages using a React application, but React would not work. When designing the webapp we also found ourselves getting into the, as described in don’t make me think, “religious debates” about which design choice was better. When this would occur, we’d generally fallback on what convention says, and this helped us greatly.
@@ -152,6 +183,11 @@ There was also the problem of design, as I did not want the app's design to be t
 I also made the decision to axe renaming the completed section. While I am a huge fan of how much this app can be altered or changed to fit a specific need, I think the implementation would be a bit clunky, as you'd need to store it in another document or collection in Firestore to keep track of the completed section text. it can definitely be done, I'm just worried about complications that might introduce to firestore data. I'll probably try to add it back in in Lab5.
 I also struggled with trying to fix some tasks' text being altered as you type through it and it being sorted, but the Piazza post showed exactly how to fix this.  
 
+**Lab 5 Update:** Oh boy this was not fun. While I'm proud of how much I was able to get done in a day, I did not finish this, and  the design doesn't work in landscape mode. It sucks a lot. After I write this I'm going to make a new branch to finish it just because of how ugly it is right now. I think I struggled most with firestore rules and understanding them, as well as trying to figure out how to make the app secure.
+
+**Lab 5.1 Update:** While I greatly improved on lab 5 in just a couple days, there are some parts I still am unsatisfied with due to how fast this needed to be done, and the fact that finals are less than a week away.
+I really struggled with fixing some css problems that had been ingrained in the entire project, and I did struggle with firestore rules, some of which are still not updated. Tasks can be edited by anyone that has the path and are signed in, email verification isn't implemented, and sections can be edited by anyone that is in the owner's sharedWith array. This would mean that someone could share a section with another user, then that user could delete all tasks in that section, but not delete the section itself. I could handle this client side, or by adding a list of sections not to have access to in firestore database, but it's too late now. 
+
 # Parts of the design you're most proud of
 
 
@@ -163,4 +199,10 @@ I also struggled with trying to fix some tasks' text being altered as you type t
 - **Lab 4 update** Honestly, there's so much more I wish I could have put into this and wish I could have learned how to do. I wish I could have figured out how to tell when things are on screen, and to add more styling to the sidebar in a way that didn't conflict with flexboxes, but I have spent so much time on this lab that I am so proud to finally turn this in. This has been so much work, and while I know there will be so much more work in getting firebase and user log in working, I can not wait to finally get that finished as well. 
 also I'm very proud of the way it looks in landscape mode. it just seems to fill the viewport way more, and I'm also very proud of the customizability of it. I feel that being able to add sections and change all section names makes it more versatile in what it can be used for instead of just a tasks app.
 
-**Lab 3 Update:** I think I'm really proud of the whole design. I really really like how the priority menu looks now, with options for sorting having icons showing whether it will be sorted descending or ascending. I also like the new colors in the priority task button. 
+**Lab 3 Update:** I think I'm really proud of the whole design. I really really like how the priority menu looks now, with options for sorting having icons showing whether it will be sorted descending or ascending. I also like the new colors in the priority task button.
+
+**Lab 5 Update:** It is my baby, and i am proud of it, and I especially like the splash screen. 
+
+**Lab 5.1 Update:** As critical as I am of this lab, and this project as a whole, I am so proud of this. I really enjoyed working on this and building something over the course of the semester, while learning about React, Javascript, redux, authentication, databases, and design principles. I may not have finished this lab, and I may have spent hours nearly every night working on these lab assignments, but it was so much fun to work on this. I'm also really proud of the layout of the splash screen and the design in landscape mode there's also a dumb joke in it about how, .IO means input output, but the top-level domain .IO is indian ocean.
+
+Now to hopefully start lab6!
