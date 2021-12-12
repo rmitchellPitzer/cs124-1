@@ -24,8 +24,8 @@
     justify-content: left;
     background: #FBE2DD;
     width: 38vw;
-    height: 100vh;
-    top: 65px;
+    height: 200vh;
+    top: 0px;
     z-index: -5;
     visibility: visible;
 }
