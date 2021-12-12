@@ -1,4 +1,5 @@
 .SideListContainer{
+
     margin-left: 1vw;
     visibility: visible;
     content-visibility: visible;
@@ -6,7 +7,7 @@
 }
 
 .SideListElement{
-    min-height: 92vh;
+    min-height: calc(100vh - 65px);
     visibility: visible;
     content-visibility: visible;
     display: block;
@@ -20,7 +21,7 @@
     text-align: left;
     font-family: Roboto;
     font-weight: 500;
-    font-size: 50px;
+    font-size: 4em;
     width: 57vw;
     visibility: visible;
     content-visibility: visible;
@@ -41,7 +42,7 @@
 
 .SideListElementTaskText:focus{
     background-color: #FBE2DD;
-    font-size: 36px;
+    font-size: .62em;
 }
 
 .SideListElementTaskText{
@@ -51,12 +52,12 @@
     background: transparent;
     font-family: Arial;
     font-weight: 400;
-    font-size: 35px;
+    font-size: .6em;
     visibility: visible;
     margin-left: 3vw;
     content-visibility: visible;
     display: block;
-    width: 46vw;
+    width: calc(55vw - 70px);
     border-radius: 10px;
 }
 
@@ -74,17 +75,36 @@
 }
 
 .sideListTask{
-    font-size: 10vh;
+    font-size: 4em;
     visibility: visible;
     content-visibility: visible;
     display: block;
 }
 
 
+
+
 #completedSectionTaskText{
     margin-left: 1vw;
     width: 49.5vw;
 }
+
+
+
+@media screen and (max-width: 900px) and (max-height: 500px) {
+    .sideListTitle{
+        font-size: 2.5em;
+        width: 57vw;
+        visibility: visible;
+        content-visibility: visible;
+        display: block;
+        border-radius: 10px;
+    }
+
+}
+
+
+
 
 
 @media screen and (max-width: 600px) and (max-height: 1000px) {

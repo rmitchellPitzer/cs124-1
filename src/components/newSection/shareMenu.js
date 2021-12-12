@@ -10,29 +10,30 @@ import PriorityMenuItem from "./priorityMenuItem";
 
 // Creates the priority sort menu, includes a list of options to choose from
 // includes a title as well to show what sorting is being used.
-let clicked
-let validEmail
+var clicked
+
+var validEmail
 function ShareMenu(props, selectedSection) {
 
     function handleOnClick(email) {
-        clicked = true
+        window.clicked = true
         if (ValidateEmail(email) === true) {
             TaskDataController.shareTask(email)
             setTimeout(() => {
-                clicked = false
-                validEmail = true
+                window.clicked = false
+                window.validEmail = true
             }, 3000)
         }
         else{
-            validEmail = false
+            window.validEmail = false
             setTimeout(() => {
-                validEmail = true
+                window.validEmail = true
             }, 3000)
         }
     }
 
     if (clicked === true){
-        if (validEmail === true) {
+        if (window.validEmail === true) {
             return (
                 <div className="shareMenuOrientation">
                     <div className="shareMenuContainer">

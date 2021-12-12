@@ -41,7 +41,7 @@ export default function SideBarElement(props) {
                 title = {props.title}/>
             <input
                 aria-label={props.title ? "edit the title for the section " + props.title : "edit the title for a section with an empty title"}
-                class="bar-title"
+                class="side-bar-title"
                 id={cssID}
                 // class="bar-title"
                 type='text'
@@ -49,7 +49,7 @@ export default function SideBarElement(props) {
                 // alt='Section text'
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.title}/>
-
+            <div className="sideBarButtons">
             {isOwned && <ShareSectionButton
                 sharedWith = {props.sharedWith}
                 identifier = {props.identifier}/>}
@@ -63,7 +63,7 @@ export default function SideBarElement(props) {
                 sortType = {props.sortType}/>
             <SectionAddTaskButton
                 identifier = {props.identifier}/>
-
+            </div>
 
         </div>
     )

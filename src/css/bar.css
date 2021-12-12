@@ -45,8 +45,7 @@
 }
 
 .bar-title {
-    margin-left: -.2vw;
-    margin-right: -2vw;
+    margin-left: 40px;
     font-size: 30px;
     width: 23vw;
     outline: none;
@@ -140,8 +139,6 @@
 }
 
 
-
-
 @media screen and (max-width: 600px) and (max-height: 1000px) {
 
     #bartoDo {
@@ -166,7 +163,6 @@
     }
 
     .sectionBarButtons{
-        align-self: last;
         display: flex;
         flex-direction: row;
         position: relative;
