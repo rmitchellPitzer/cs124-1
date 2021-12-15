@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
+// function for maintaining selection input, used with permission from
+// prof neil rhodes at hmc
+
 function SelectionMaintainingInput(props) {
     const { value, onChange, ...rest } = props;
     const [cursor, setCursor] = useState(null);

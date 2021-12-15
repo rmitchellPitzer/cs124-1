@@ -3,37 +3,44 @@ import SectionButton from "./SectionButton"
 import TaskDataController from "../../modules/dataController/TaskDataController";
 import SectionAddTaskButton from "./sectionAddTask";
 import PrioritySortButton from "./priorityButton";
-
+import ShareSectionButton from "./shareSectionButton";
+import "../../css/shareGui.css"
+import RemoveSectionSharedButton from "./removeSharedButton";
 
 
 // This is the section bar, it contains a button for showing tasklists, an input for editing the section title, and
 // a button to add tasks.
-// A task Add button was considered for the completed tasks section, but this turned out to be a logistical headache
+// A task Add button was considered for the completed tasks section, but this turned out to be a headache
 // as completed tasks when checked uncompleted would return to it's origin, the completed tasks section.
     // a uncompleted task in a completed task section.
 
 export default function SectionBar(props) {
     let cssID;
 
-    // cssID determines if the section is the To do section, completed section, or an added section.
-    // lab3 update: There is so much redundant code here and I have 2 days to finish lab5 and I am
-    // Worried I will not have time to clean this up later so, whatever!
+    //CssID will tell if the section is owned by the user.
 
-    const classes = `bar ${props.identifier}`
+    let classes = `bar ${props.identifier}`
     if (props.identifier !== 'toDo' && props.identifier !== 'completed'){
         cssID = "otherSections";
     }
     else{
-        cssID = props.identifier; // props.identifier contains either "toDo", "completed", or some uuid string.
+        cssID = props.identifier;
     }
+
+    if(!props.isOwned){
+        cssID = "otherSectionsSHARED"
+        classes = 'barotherSectionsSHARED'
+    }
+
 
 
     // This will return a section bar, containing a button to open and close the tasks,
     // the section's input box itself.
+    // The share or remove section button,
     // The priority sort button to sort tasks by priority
     // the add task button to add tasks to the section
     return (
-        <div class={classes} id={"bar" + props.identifier}>
+        <div class={classes} id={"bar"+cssID + props.identifier}>
             <SectionButton identifier = {props.identifier}
                            toggledState = {props.isToggled}
                             text = {props.sectionTitle}/>
@@ -46,15 +53,26 @@ export default function SectionBar(props) {
                 onChange= { (e) => handleTextEvent(props.identifier,e)}
                 value={props.sectionTitle}
             />
+            <div className="sectionBarButtons">
+            {props.isOwned && <ShareSectionButton
+                sharedWith = {props.sharedWith}
+                identifier = {props.identifier}/>}
+            {!props.isOwned && <RemoveSectionSharedButton
+                sharedWith = {props.sharedWith}
+                identifier = {props.identifier}/>}
+
+
             {/*The code below determines whether the section is completed, and will hide the addTaskButton if it is.*/}
             <PrioritySortButton
                 identifier = {props.identifier}
                 sectionTitle = {props.sectionTitle}
                 sortType = {props.sortType}/>
             {<SectionAddTaskButton
+                isOwned = {props.isOwned}
                 identifier = {props.identifier}
                 sectionTitle = {props.sectionTitle}/>}
-        </div>  
+        </div>
+        </div>
     )
 }
 

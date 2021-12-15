@@ -9,6 +9,7 @@ import "../../css/SectionAddTaskButton.css"
 
 
 function SectionAddTaskButton(props) {
+
     // This is a component inside a section's bar in mobile view that adds a task to the associated section.
 
 

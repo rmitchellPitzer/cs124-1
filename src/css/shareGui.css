@@ -1,0 +1,262 @@
+.shareSectionButton{
+    position: inherit;
+    width: 30px;
+    height: 30px;
+    margin-top: -3px;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    background: #e9e9e9;
+    margin-right: -.5vw;
+    opacity: .5;}
+
+.shareSectionButton:focus{
+    opacity: 1;
+}
+
+.shareSectionButton:hover{
+    opacity: 1;
+}
+
+
+.shareMenuOrientation{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    top: calc(100vh - 220px);
+    position: fixed;
+    z-index: 5000;
+}
+
+.shareMenuContainer{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: fixed;
+    width: 250px;
+    height: 150px;
+    top: calc(100vh - 220px);
+    right: 20px;
+    background: #e1e1e1;
+    padding: 20px;
+    z-index: 120;
+    border-radius: 20px;
+    align-self: center;
+}
+
+.sharedEmailInput{
+    position: fixed;
+    text-align: center;
+    align-self: center;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: #394438;
+    font-family: Roboto;
+    font-size: 1em;
+    font-weight: 400;
+    width: 150px;
+    z-index: 180;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+}
+
+.ShareButton{
+    position: fixed;
+    align-self: center;
+    z-index: 200;
+    margin-top: 100px;
+    width: 150px;
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+}
+
+.shareTitle{
+    z-index: 200;
+    align-self: center;
+    margin-top: 0vh;
+    color: #676767;
+    font-family: Roboto;
+    font-size: 1.5em;
+    font-weight: 400;
+    width: 250px;
+    pointer-events: none;
+}
+
+.ShareButton:active{
+    background-color: #d7d7d7;
+}
+
+.shareButton:hover{
+    background-color: #d7d7d7;
+}
+
+
+.shareSectionButton:focus{
+    opacity: 1;
+}
+
+
+.shareSectionButton:hover{
+    opacity: 1;
+}
+
+.ShareInput{
+    z-index: 220;
+    position: fixed;
+    text-align: center;
+    align-self: center;
+    margin-top: 65px;
+    color: #394438;
+    font-family: Roboto;
+    font-size: 1em;
+    font-weight: 400;
+    width: 230px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+}
+
+
+
+@media screen and (max-width: 600px) and (max-height: 1000px) {
+
+    .shareMenuOrientation{
+        display: flex;
+        width: 100vw;
+        flex-direction: column;
+        top: calc(100vh - 220px);
+        position: fixed;
+        z-index: 5000;
+    }
+
+    .shareMenuContainer{
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        position: fixed;
+        width: 250px;
+        height: 150px;
+        background: #e1e1e1;
+        padding: 20px;
+        z-index: 120;
+        border-radius: 20px;
+        align-self: center;
+        right: revert;
+    }
+
+    .sharedEmailInput{
+        position: fixed;
+        text-align: center;
+        align-self: center;
+        left: 50%;
+        transform: translate(-50%, 0);
+        color: #394438;
+        font-family: Roboto;
+        font-size: 1em;
+        font-weight: 400;
+        width: 150px;
+        z-index: 180;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+    }
+
+    .ShareButton{
+        position: fixed;
+        align-self: center;
+        z-index: 200;
+        margin-top: 100px;
+        width: 30vw;
+        height: 60px;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+    }
+
+    .shareTitle{
+        z-index: 200;
+        align-self: center;
+        margin-top: 0vh;
+        color: #676767;
+        font-family: Roboto;
+        font-size: 1.5em;
+        font-weight: 400;
+        width: 250px;
+        pointer-events: none;
+    }
+
+    .ShareButton:active{
+        background-color: #d7d7d7;
+    }
+
+    .shareButton:hover{
+        background-color: #d7d7d7;
+    }
+
+
+
+
+
+    .shareSectionButton{
+        position: relative;
+        width: 30px;
+        height: 30px;
+        margin-top: 9px;
+        opacity: .5;
+
+    }
+
+    .shareSectionButton:focus{
+        opacity: 1;
+    }
+
+
+    .shareSectionButton:hover{
+        opacity: 1;
+    }
+
+
+
+    .sharedMenuOverlay{
+        width: 100vw;
+        height: 100vh;
+        z-index: 100;
+        position: fixed;
+        background: #0000003b;
+        margin-top: -43.2vh;
+    }
+
+
+
+
+
+    .ShareInput{
+        z-index: 220;
+        position: fixed;
+        text-align: center;
+        align-self: center;
+        margin-top: 65px;
+        color: #394438;
+        font-family: Roboto;
+        font-size: 1em;
+        font-weight: 400;
+        width: 230px;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+    }
+
+    .ShareInput:focus{
+        background-color: #f5f5f5;
+        color: #313131;
+    }
+
+
+
+
+}

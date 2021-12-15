@@ -7,8 +7,8 @@ import store from "../../modules/dataController/store";
 
 
 // SectionButton refers to the arrow button to show taskslist when in mobile view.
-// This was considered for desktop and landscape view, but difficult would
-// be an understatement in trying to determine scroll length, so that was canned.
+// This was considered for desktop and landscape view, but was difficult to
+// determine scroll length, so that was canned.
 
 function SectionButton(props) {
 

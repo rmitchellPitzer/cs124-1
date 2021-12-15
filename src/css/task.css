@@ -32,6 +32,8 @@
         font-weight: 400;
         visibility: visible;
         content-visibility: visible;
+        position: relative;
+
     }
 
     #completedTask {
@@ -46,20 +48,19 @@
         position: relative;
         display: flex;
         padding: 10px;
-        justify-content: left;
         visibility: visible;
         content-visibility: visible;
     }
 
 
     .checkbox {
-        width: 2em;
-        height: 2em;
+        width: 30px;
+        height: 30px;
     }
 
     .task-item input[type="text"] {
         font-size: 1.5em;
-        width: 100%;
+        width: calc(100vw - 110px);
     }
 
     .hidden {

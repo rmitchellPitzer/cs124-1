@@ -14,7 +14,7 @@ import {
     setSectionToStackAction,
     setTasksToStackAction,
     updateTaskPriorityAction,
-    setSectionPriorityAction
+    setSectionPriorityAction, shareTaskAction, removeTaskAction
 } from "./actions"
 import store from "./store.js"
 class TaskDataController {
@@ -120,6 +120,16 @@ class TaskDataController {
 
     static setSectionPriority(value){
         const action = setSectionPriorityAction(value)
+        store.dispatch(action)
+    }
+
+    static shareTask(inputEmail){
+        const action = shareTaskAction(inputEmail)
+        store.dispatch(action)
+    }
+
+    static removeTask(){
+        const action = removeTaskAction()
         store.dispatch(action)
     }
 

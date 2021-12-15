@@ -1,5 +1,3 @@
-import { connect } from "react-redux"
-import TaskDataController from "../../modules/dataController/TaskDataController"
 import SideListElement from "./sideListElement";
 import React, { useEffect, useState } from 'react';
 import SideListCompletedSection from "./sideListCompletedSection";

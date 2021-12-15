@@ -24,7 +24,7 @@ body,.task-text {
 }
 
 .Sidebar{
-    height: 92vh;
+    height: calc(100vh - 70px);
     display: flex;
     flex-direction: column;
     width: 39vw;
@@ -33,22 +33,55 @@ body,.task-text {
 }
 
 .Sidelist{
-    height: 92vh;
+    height: calc(100vh - 65px);
     width: 60vw;
     overflow: auto;
     visibility: visible;
 }
 
 .wideScreenDisplay{
-    margin-top: -4vh;
-    flex-grow: 1;
     display: flex;
-    height: 92vh;
-    position: relative;
-    top: 0;
+    height: calc(100vh - 65px);
+    top: calc(65px);
+    position: fixed;
     overflow-y: auto;
     visibility: visible;
 }
+
+.sectionsContainer{
+    display: none;
+}
+
+
+
+@media screen and (max-width: 900px) and (max-height: 500px) {
+    .Sidelist{
+        height: calc(100vh - 45px);
+        overflow: auto;
+        visibility: visible;
+    }
+
+    .wideScreenDisplay{
+        display: flex;
+        height: calc(100vh - 45px);
+        top: calc(45px);
+        position: fixed;
+        overflow-y: auto;
+        visibility: visible;
+    }
+
+    .Sidebar{
+        height: calc(100vh - 45px);
+        visibility: visible;
+    }
+
+
+}
+
+
+
+
+
 
 @media screen and (max-width: 600px) and (max-height: 1000px) {
     .wideScreenDisplay{
@@ -61,5 +94,11 @@ body,.task-text {
     }
     .container {
         display: block;
+    }
+
+    .sectionsContainer{
+        display: block;
+        margin-top: -12vh;
+        padding-top: 70px;
     }
 }

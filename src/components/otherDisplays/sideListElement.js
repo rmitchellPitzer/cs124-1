@@ -20,6 +20,8 @@ export default function SideListElement(props) {
 
     const taskRef = database.collection(collectionName).doc(props.identifier).collection('tasks')
     const [value, loading, error] = useCollection(taskRef);
+
+
     let fireStoreList = null;
     let fireStoreCompletedList = null;
     let stateCompletedList = null;

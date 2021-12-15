@@ -1,7 +1,4 @@
 import firebase from "firebase/compat";
-import {useCollection} from "react-firebase-hooks/firestore";
-
-// lab 3 work:
 
 // stuff for the firebase config
 
@@ -15,6 +12,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 
 export const database = firebase.firestore();
 export const collectionName = "rmitchellPitzer-hmc-tasks-sectionList";

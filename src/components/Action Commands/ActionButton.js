@@ -8,7 +8,7 @@ function handleOnClick() {
 }
 
 // Action button in the bottom right corner, allows access to adding sections, clearing completed tasks, or
-    // resetting the sections and tasks.
+// resetting the sections and tasks.
 
 export default function ActionButton() {
     return (

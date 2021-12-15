@@ -11,10 +11,13 @@ props:{
 
  */
 // Returns a list of sections
+
+// CompletedSectionsTaskList and completed section is also returned, as the two are
+// separate from normal sections
 function SectionList(props){
     if (props.sections){
         return(
-            <div class='container'>
+            <div class='sectionsContainer'>
                 {
                     props.sections.map(section => {
                         return <SectionContainer

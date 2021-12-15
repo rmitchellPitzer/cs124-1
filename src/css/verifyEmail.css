@@ -1,0 +1,32 @@
+.verifyEmailBanner{
+    width: 40vw;
+    background-color: #ff7474;
+    position: fixed;
+    bottom: 0;
+    border-top-right-radius: 15px;
+    outline: none;
+    border: none;
+    text-align: left;
+    z-index: 400;
+    font-size: 1.3em;
+}
+
+.verifyEmailBanner:active{
+    background-color: #de6c6c;
+}
+
+@media screen and (max-width: 900px) and (max-height: 500px) {
+    .verifyEmailBanner{
+        font-size: 1.1em;
+        width: 50vw;
+    }
+}
+
+@media screen and (max-width: 600px) and (max-height: 1000px) {
+
+    .verifyEmailBanner{
+        font-size: 1em;
+        width: 70vw;
+    }
+
+}

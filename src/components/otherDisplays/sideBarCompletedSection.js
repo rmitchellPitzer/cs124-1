@@ -6,7 +6,7 @@ import SideBarButton from "./sideBarButton";
 // contains a sideBarButton.
 
 export default function SideBarCompletedSection(props) {
-    // cssID determines whether the sidebar is todo, completed, or a added section.
+    // cssID given to properly identify the section
 
     let cssID = "completedsideBar"
 

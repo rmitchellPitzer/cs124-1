@@ -15,9 +15,10 @@
 @media (max-width:600px) {
 
     .action-container {
-        top: calc(100vh - 450px);
+        top: calc(100vh - 365px);
         left: calc(100vw - 205px);
         width: 150px;
+        z-index: 10;
     }
     
 }
@@ -29,9 +30,9 @@
     background: #0000003b;
     position: fixed;
     top: 0;
-    z-index: 130;
     border: none;
     outline: none;
+    z-index: 100;
 }
 
 .show {
